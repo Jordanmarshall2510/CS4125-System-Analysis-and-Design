@@ -7,5 +7,10 @@ public_infrastructure:
 testing:
 transport:
 world:
-  time: 1900
+  environment:
+    delay: 1 #seconds it takes for one hour to pass in the simulation
+  clock:
+    date: '1.1.2100, 00:00:00' #stick to this exact format
   weather:
+    weather: 'rain' #sunny, cloudy, rain, snow
+    season: 'winter'  #summer, autumn, winter, spring
