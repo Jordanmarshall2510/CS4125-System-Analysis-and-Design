@@ -5,6 +5,7 @@ from World.weather import *
 
 class environment:
     delay=0
+    weather_change=0
     clock=clock()
     weather=weather()
     start=False
@@ -13,6 +14,7 @@ class environment:
         with open('config.yaml', 'r') as f:
             config = yaml.load(f, Loader = yaml.FullLoader)
             self.delay=config['world']['environment']['delay']
+            self.weather_change=config['world']['environment']['change']
 
     def getTime(self):
         return self.clock.getTime()
@@ -43,16 +45,16 @@ class environment:
         while (self.start == True):
             time.sleep(self.delay)
             date = time.localtime(self.clock.getTimeSeconds())
-            if ((date.tm_mon>=3 and date.tm_mday>=20)and(date.tm_mon<=6 and date.tm_mday<21)):#spring
+            if ((date.tm_mon>=3 and date.tm_mday>=20)or(date.tm_mon<=6 and date.tm_mday<21)):#spring
                self.weather.setSeason('spring')
-            elif ((date.tm_mon>=6 and date.tm_mday>=21)and(date.tm_mon<=9 and date.tm_mday<22)):#summer
+            elif ((date.tm_mon>=6 and date.tm_mday>=21)or(date.tm_mon<=9 and date.tm_mday<22)):#summer
                 self.weather.setSeason('summer')
-            elif ((date.tm_mon>=9 and date.tm_mday>=22)and(date.tm_mon<=12 and date.tm_mday<21)):#autumn
+            elif ((date.tm_mon>=9 and date.tm_mday>=22)or(date.tm_mon<=12 and date.tm_mday<21)):#autumn
                 self.weather.setSeason('autumn')
             elif ((date.tm_mon>=12 and date.tm_mday>=21)or(date.tm_mon<=3 and date.tm_mday<20)):#winter
                 self.weather.setSeason('winter')
             y=random.randint(0,100)
-            if (y<5):
+            if (y<self.weather_change):
                 x=random.randint(0,100)
                 if (self.weather.getSeason().lower()=='summer'):
                     if (x < 20):

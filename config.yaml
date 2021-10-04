@@ -9,6 +9,7 @@ transport:
 world:
   environment:
     delay: 1 #seconds it takes for one hour to pass in the simulation
+    change: 5 #percentage chance of weather change every hour
   clock:
     date: '1.1.2100, 00:00:00' #stick to this exact format
   weather:
