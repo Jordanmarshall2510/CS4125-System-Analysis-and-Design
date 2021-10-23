@@ -1,25 +1,3 @@
-########### Street Lights ###########
-# Coded by Eoin McDonough - 18241646
-
-import yaml
-
-class StreetLight():
-    totalElectricityUsage=0
-    def __init__(self):
-        with open('config.yaml', 'r') as f:
-            config = yaml.load(f, Loader = yaml.FullLoader)
-        self.time=config['world']['time']
-
-    def setLightID(self, newID):
-        self.sLightID = newID
-
-    def setTotalElectricityUsage(self,newValue):
-        self.totalElectricityUsage = newValue
-        
-    def calcElectricityUsage(self):
-        if (self.time<900 or 1800<self.time): self.totalElectricityUsage = 0.08
-
-########## roads ############
 # Coded by Eoin McDonough - 18241646
 
 
@@ -38,6 +16,7 @@ from street_lights import StreetLight
 from traffic_lights import TrafficLight
 
 AVERAGE_ELECTRICITY_USAGE = 30
+
 
 class Road():
     def __init__(self, roadID, totalElectricityUsage):
@@ -98,23 +77,3 @@ for i in roadArray:
     print(i.toString())
 
     
-######### Traffic Light ###########
-# Coded by Eoin McDonough - 18241646
-
-import random
-
-class TrafficLight():
-
-    
-    def __init__(self):
-        self.totalElectricityUsage =0
-
-    def setLightID(self, newID):
-        self.tLightID = newID
-
-    def setTotalElectricityUsage(self,newValue):
-        self.totalElectricityUsage = newValue
-
-    def calcElectricityUsage(self):
-       totalElectricityUsage = random.randrange(0.090, 0.160, 1)
-        
