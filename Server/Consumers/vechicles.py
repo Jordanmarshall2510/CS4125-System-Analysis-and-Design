@@ -20,7 +20,7 @@ AVERAGE_RANGE = 300
 # Average decrease in range per person. Units %
 AVERAGE_PASSANGER_RANGE_COST = 0.06
 
-class Private:
+class Vechicle():
 	def __init__(self, id, vehicleValue, batteryCapacity, range, numberOfPassanagers):
 		self.id = id
 		self.vehicleValue = vehicleValue
