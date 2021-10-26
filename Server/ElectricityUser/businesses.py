@@ -5,8 +5,9 @@
 
 import random
 import time
+import yaml
 
-# Average house value in Ireland. Units in €.
+# Average house value in Ireland. Units in euro.
 AVERAGE_PROPERTY_VALUE_PER_OCCUPANT= 32000
 
 # Electricity usage daily measured in kWh.
@@ -39,7 +40,7 @@ class Business():
         self.numberOfOccupants = newValue
 
     def toString(self):
-        return  "ID: " + str(self.businessID) + "\t\t\tTotal Electricity Usage: " + str(self.totalElectricityUsage) + "kWh" + "\t\t\tProperty Value: €" + str(self.propertyValue) + "\t\t\tProperty Size: " + str(self.propertySize) + "sqm" + "\t\t\tNumber of Occupants: " + str(self.numberOfOccupants)
+        return  "ID: " + str(self.businessID) + "\t\t\tTotal Electricity Usage: " + str(self.totalElectricityUsage) + "kWh" + "\t\t\tProperty Value: EURO" + str(self.propertyValue) + "\t\t\tProperty Size: " + str(self.propertySize) + "sqm" + "\t\t\tNumber of Occupants: " + str(self.numberOfOccupants)
 
 def generateBusinessData(numberOfBusinesses):
     businessData = []

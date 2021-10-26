@@ -20,7 +20,7 @@ AVERAGE_RANGE = 300
 # Average decrease in range per person. Units %
 AVERAGE_PASSANGER_RANGE_COST = 0.06
 
-class Vechicle():
+class Vehicle():
 	def __init__(self, id, vehicleValue, batteryCapacity, range, numberOfPassanagers):
 		self.id = id
 		self.vehicleValue = vehicleValue
@@ -63,7 +63,7 @@ def generateVehicle(numberOfVehicles):
 		passanagers = random.randint(0, 5)
 
 		# Generate Vehicle
-		vehicle = Private(id, vehicleValue, batteryCap, vehicleRange, passanagers)
+		vehicle = Vehicle(id, vehicleValue, batteryCap, vehicleRange, passanagers)
 		vehicleData.append(vehicle)
 	return vehicleData
 
