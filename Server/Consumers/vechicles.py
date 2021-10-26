@@ -1,11 +1,12 @@
+## Coded by Marcin Sek 18254187
+# TODO:
+#	Reduce range based on temperature
+#	NOTE: Winter / cold weather can cause a decrease of up to 25%
+#	Reduce battery performance overtime
+#	NOTE: Battery degredation on average is 1% SOH per 6 months
+
 # import time
 import random
-
-# TODO:
-#   Reduce range based on temperature
-#   NOTE: Winter / cold weather can cause a decrease of up to 25%
-#   Reduce battery performance overtime
-#   NOTE: Battery degredation on average is 1% SOH per 6 months
 
 # Average electric car value. Units in €
 AVERAGE_VEHICLE_VALUE = 45000
@@ -19,7 +20,7 @@ AVERAGE_RANGE = 300
 # Average decrease in range per person. Units %
 AVERAGE_PASSANGER_RANGE_COST = 0.06
 
-class Private:
+class Vechicle():
 	def __init__(self, id, vehicleValue, batteryCapacity, range, numberOfPassanagers):
 		self.id = id
 		self.vehicleValue = vehicleValue
