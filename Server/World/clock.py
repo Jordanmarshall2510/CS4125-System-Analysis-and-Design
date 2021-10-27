@@ -14,6 +14,9 @@ class clock:
     def getTime(self):
         return time.strftime("%A, %d.%m.%Y, %H:%M:%S",time.localtime(self.time))
 
+    def getTimeOnly(self):
+        return time.strftime("%H:%M:%S",time.localtime(self.time))
+
     def getTimeSeconds(self):
         return self.time
 
