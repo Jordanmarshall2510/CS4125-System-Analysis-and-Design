@@ -12,10 +12,16 @@
 #   Streetlights power output calculator is currently one hour, must make daily add up all hours in the night
 
 import random
-from World.clock import Clock
+from World.clock#Clock import Clock
 
-AVERAGE_ELECTRICITY_USAGE = 30
-STREET_LIGHT_USAGE = 0.08
+import json
+
+with open("config.json") as json_file:
+    conf = json.load(json_file)
+
+
+AVERAGE_ELECTRICITY_USAGE = ["electricityUser"]["infrastructure"]["averageElectricityUsage"]
+STREET_LIGHT_USAGE = ["electricityUser"]["infrastructure"]["streetLightUsage"]
 TRAFFIC_LIGHT_USAGE= random.randrange(90, 160, 1)/100
 
 class Road():
