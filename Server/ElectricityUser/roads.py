@@ -12,6 +12,7 @@
 #   Streetlights power output calculator is currently one hour, must make daily add up all hours in the night
 
 import random
+from World.clock import Clock
 
 AVERAGE_ELECTRICITY_USAGE = 30
 STREET_LIGHT_USAGE = 0.08
@@ -49,6 +50,7 @@ class Road():
             dailyAverageUsage += TRAFFIC_LIGHT_USAGE
         #Will be reliant on time
         if self.setStreetLight() == True:
+            Clock.getTimeOnly()
             dailyAverageUsage += STREET_LIGHT_USAGE
 
     def toString(self):
