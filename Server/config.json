@@ -28,9 +28,8 @@
             "averagePassangerRangeCost": 0.06
         },
         "infrastructure": {
-            "test1": 0,
-            "test2": 0,
-            "test3": 0
+           "averageElectricityUsage" : 30,
+           "streetLightUsage": 0.08
         }
     }
 }

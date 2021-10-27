@@ -13,16 +13,16 @@ with open("config.json") as json_file:
     conf = json.load(json_file)
 
 # Average electric car value. Units in €
-AVERAGE_VEHICLE_VALUE = conf["electricityUser"]["vehicles"]["averageVehicleValue"]
+AVERAGE_VEHICLE_VALUE = ["electricityUser"]["vehicles"]["averageVehicleValue"]
 
 # Average electric car battery capacity. Units in kWh
-AVERAGE_BATTERY_CAPACITY = conf["electricityUser"]["vehicles"]["averageBatteryCapacity"]
+AVERAGE_BATTERY_CAPACITY = ["electricityUser"]["vehicles"]["averageBatteryCapacity"]
 
 # Average electric car range. Units in KM
-AVERAGE_RANGE = conf["electricityUser"]["vehicles"]["averageRange"]
+AVERAGE_RANGE = ["electricityUser"]["vehicles"]["averageRange"]
 
 # Average decrease in range per person. Units %
-AVERAGE_PASSANGER_RANGE_COST = conf["electricityUser"]["vehicles"]["averagePassangerRangeCost"]
+AVERAGE_PASSANGER_RANGE_COST = ["electricityUser"]["vehicles"]["averagePassengerRangeCost"]
 
 class Vehicle():
 	def __init__(self, id, vehicleValue, batteryCapacity, range, numberOfPassanagers):
