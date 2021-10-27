@@ -40,3 +40,9 @@ class Clock():
 
     def setTimeSeconds(self, value):
             self.time=value
+
+    def CheckDaylight(self):
+        if(8<int(getTimeHours()<18)):
+            NIGHT_TIME = False
+        else:
+            NIGHT_TIME = True
