@@ -22,9 +22,10 @@
             "averageSQMPerOccupant": 18
         },
         "vehicles": {
-            "test1": 0,
-            "test2": 0,
-            "test3": 0
+            "averageVehicleValue": 45000,
+            "averageBatteryCapacity": 60,
+            "averageRange": 300,
+            "averagePassangerRangeCost": 0.06
         },
         "infrastructure": {
             "test1": 0,

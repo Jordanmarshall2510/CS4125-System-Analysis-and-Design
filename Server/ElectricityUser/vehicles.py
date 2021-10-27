@@ -7,18 +7,22 @@
 
 # import time
 import random
+import json
+
+with open("config.json") as json_file:
+    conf = json.load(json_file)
 
 # Average electric car value. Units in €
-AVERAGE_VEHICLE_VALUE = 45000
+AVERAGE_VEHICLE_VALUE = conf["electricityUser"]["vehicles"]["averageVehicleValue"]
 
 # Average electric car battery capacity. Units in kWh
-AVERAGE_BATTERY_CAPACITY = 60
+AVERAGE_BATTERY_CAPACITY = conf["electricityUser"]["vehicles"]["averageBatteryCapacity"]
 
 # Average electric car range. Units in KM
-AVERAGE_RANGE = 300
+AVERAGE_RANGE = conf["electricityUser"]["vehicles"]["averageRange"]
 
 # Average decrease in range per person. Units %
-AVERAGE_PASSANGER_RANGE_COST = 0.06
+AVERAGE_PASSANGER_RANGE_COST = conf["electricityUser"]["vehicles"]["averagePassangerRangeCost"]
 
 class Vehicle():
 	def __init__(self, id, vehicleValue, batteryCapacity, range, numberOfPassanagers):
