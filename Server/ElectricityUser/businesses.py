@@ -75,7 +75,10 @@ def getRandomElectrictyUsage(numberOfOccupants):
     electricityUsageTolerance = 8
     dailyAverageUsage = random.randint(AVERAGE_ELECTRICITY_USAGE - electricityUsageTolerance, AVERAGE_ELECTRICITY_USAGE + electricityUsageTolerance)/4
     dailyAverageUsagePerHousehold = dailyAverageUsage * numberOfOccupants
-    return dailyAverageUsagePerHousehold
+    if NIGHT_TIME == True:
+        return dailyAverageUsagePerHousehold*2
+    else:
+        return dailyAverageUsagePerHousehold
 
 # start = time.time()
 businessArray = generateBusinessData(10)
