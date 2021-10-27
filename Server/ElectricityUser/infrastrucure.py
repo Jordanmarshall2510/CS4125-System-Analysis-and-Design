@@ -12,7 +12,7 @@
 #   Streetlights power output calculator is currently one hour, must make daily add up all hours in the night
 
 import random
-from World.clock#Clock import Clock
+from World.Clock import Clock
 
 import json
 
@@ -24,15 +24,15 @@ AVERAGE_ELECTRICITY_USAGE = ["electricityUser"]["infrastructure"]["averageElectr
 STREET_LIGHT_USAGE = ["electricityUser"]["infrastructure"]["streetLightUsage"]
 TRAFFIC_LIGHT_USAGE= random.randrange(90, 160, 1)/100
 
-class Road():
-    def __init__(self, roadID):
-        self.roadID = roadID
+class Infrastructure():
+    def __init__(self, infrastructureID):
+        self.infrastructureID = infrastructureID
         self.hasTrafficLight = self.setTrafficLight
         self.hasStreetLight = self.setStreetLight
         self.sumElectricitityUsage
 
-    def setRoadID(self, newID):
-        self.roadID = newID
+    def setinfrastructureID(self, newID):
+        self.infrastructureID = newID
 
     def setTotalElectricityUsage(self, newValue):
         self.totalElectricityUsage = newValue
@@ -60,26 +60,26 @@ class Road():
             dailyAverageUsage += STREET_LIGHT_USAGE
 
     def toString(self):
-        return  "ID:" + self.roadID + "\t\t\tTotal Electricity Usage: " + str(self.totalElectricityUsage) + "kWh" + "\t\t\tStreetLight?: " + str(self.hasStreetLight) + "\t\t\tTrafficLight?: " + str(self.hasTrafficLight)
+        return  "ID:" + self.infrastructureID + "\t\t\tTotal Electricity Usage: " + str(self.totalElectricityUsage) + "kWh" + "\t\t\tStreetLight?: " + str(self.hasStreetLight) + "\t\t\tTrafficLight?: " + str(self.hasTrafficLight)
 
-def generateRoadData(numberOfRoads):    # NOTE: Will be dependent on number of houses in future
-    roadData = []
-    roadCounter = 0
+def generateInfrastructureData(numberOfInfrastructure):    # NOTE: Will be dependent on number of houses in future
+    infrastructureData = []
+    infrastructureCounter = 0
 
-    for i in range(numberOfRoads):
-        road = Road("R" + str(roadCounter))
-        roadData.append(road)
-        roadCounter += 1
+    for i in range(numberOfInfrastructure):
+        infrastructure = infrastructure("R" + str(infrastructureCounter))
+        infrastructureData.append(infrastructure)
+        infrastructureCounter += 1
     
-    return roadData
+    return infrastructureData
 
 def sumElectricitityUsage():
     electricityUsageTolerance = 10
     dailyAverageUsage = random.randint(AVERAGE_ELECTRICITY_USAGE, AVERAGE_ELECTRICITY_USAGE + electricityUsageTolerance)/4 
     return dailyAverageUsage
   
-roadArray = generateRoadData(10)
-for i in roadArray:
+infrastructureArray = generateInfrastructureData(10)
+for i in infrastructureArray:
     print(i.toString())
 
     
