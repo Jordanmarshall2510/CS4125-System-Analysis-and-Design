@@ -5,12 +5,16 @@
 
 import random
 import time
+import json
+
+with open("config.json") as json_file:
+    conf = json.load(json_file)
 
 # Average house value in Ireland. Units in €.
-AVERAGE_HOUSE_VALUE = 303000
+AVERAGE_HOUSE_VALUE = conf["electricityUser"]["houses"]["averageHouseValue"]
 
 # Electricity usage daily measured in kWh.
-AVERAGE_ELECTRICITY_USAGE = 40
+AVERAGE_ELECTRICITY_USAGE = conf["electricityUser"]["houses"]["averageElectricityValue"]
 
 class House():
     def __init__(self, homeID, totalElectricityUsage, houseValue, numberOfOccupants, ageOfHouse):
@@ -69,9 +73,6 @@ def getRandomElectrictyUsage(numberOfOccupants, ageOfHouse):
     else: 
         return dailyAverageUsagePerHousehold + random.randint(0, electricityUsageTolerance) 
 
-# start = time.time()
-houseArray = generateHouseData(10)
+houseArray = generateHouseData(2)
 for x in houseArray:
     print(x.toString())
-# end = time.time()
-# print("Elapsed:\t" + str(end - start) + "s")
