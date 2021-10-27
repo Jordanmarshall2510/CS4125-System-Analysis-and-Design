@@ -1,5 +1,5 @@
 import threading
-from Distribution.battery import *
+from ElectricityGenerator.battery import *
 from World.environment import *
 
 env=environment()
