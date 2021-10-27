@@ -1,15 +1,17 @@
 #Coded by Jakub Pazej - 18260179
-import yaml
+import json
 
 class battery:
     battery_size=0 #values read and set in init
     battery_value=0
 
     def __init__(self):
-        with open('config.yaml', 'r') as f:
-            config = yaml.load(f, Loader = yaml.FullLoader)
-        self.battery_size=config['distribution']['battery_size']
-        self.battery_value=config['distribution']['battery_value']
+        
+        with open("config.json") as json_file:
+            conf = json.load(json_file)
+
+        self.battery_size=conf["electricityGenerator"]["distribution"]["batterySize"]
+        self.battery_value=conf["electricityGenerator"]["distribution"]["batteryValue"]
 
     def getValue(self):
         return self.battery_value

@@ -1,5 +1,9 @@
 {
     "electricityGenerator": {
+        "distribution": {
+            "batterySize": 30,
+            "batteryValue": 10
+        },
         "solar": {
             "test1": 0,
             "test2": 0,
@@ -28,8 +32,8 @@
             "averagePassangerRangeCost": 0.06
         },
         "infrastructure": {
-           "averageElectricityUsage" : 30,
-           "streetLightUsage": 0.08
+            "averageElectricityUsage": 30,
+            "streetLightUsage": 0.08
         }
     }
 }
