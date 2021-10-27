@@ -6,6 +6,7 @@
 import random
 import time
 import yaml
+from World.clock import clock
 
 # Average house value in Ireland. Units in euro.
 AVERAGE_PROPERTY_VALUE_PER_OCCUPANT= 32000
@@ -15,6 +16,9 @@ AVERAGE_ELECTRICITY_USAGE = 50
 
 # Average square metre per occupant
 AVERAGE_SQM_PER_OCCUPANT = 18
+
+# Whether it night time.
+NIGHT_TIME = False
 
 class Business():
     def __init__(self, businessID, totalElectricityUsage, propertyValue, propertySize ,numberOfOccupants):
