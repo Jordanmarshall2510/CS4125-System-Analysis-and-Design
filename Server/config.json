@@ -1,0 +1,35 @@
+{
+    "electricityGenerator": {
+        "solar": {
+            "test1": 0,
+            "test2": 0,
+            "test3": 0
+        },
+        "wind": {
+            "test1": 0,
+            "test2": 0,
+            "test3": 0
+        }
+    },
+    "electricityUser": {
+        "houses": {
+            "averageHouseValue": 303000,
+            "averageElectricityValue": 40
+        },
+        "businesses": {
+            "averagePropertyValuePerOccupant": 32000,
+            "averageElectricityUsage": 50,
+            "averageSQMPerOccupant": 18
+        },
+        "vehicles": {
+            "test1": 0,
+            "test2": 0,
+            "test3": 0
+        },
+        "infrastructure": {
+            "test1": 0,
+            "test2": 0,
+            "test3": 0
+        }
+    }
+}
