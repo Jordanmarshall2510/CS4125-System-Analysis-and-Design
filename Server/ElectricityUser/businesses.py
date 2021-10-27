@@ -6,6 +6,7 @@
 import random
 import time
 import json
+from World.clock import clock
 
 with open("config.json") as json_file:
     conf = json.load(json_file)
@@ -18,6 +19,9 @@ AVERAGE_ELECTRICITY_USAGE = conf["electricityUser"]["businesses"]["averageElectr
 
 # Average square metre per occupant
 AVERAGE_SQM_PER_OCCUPANT = conf["electricityUser"]["businesses"]["averageSQMPerOccupant"]
+
+# Whether it night time.
+NIGHT_TIME = False
 
 class Business():
     def __init__(self, businessID, totalElectricityUsage, propertyValue, propertySize ,numberOfOccupants):
