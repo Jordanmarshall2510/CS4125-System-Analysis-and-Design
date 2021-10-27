@@ -5,16 +5,19 @@
 
 import random
 import time
-import yaml
+import json
+
+with open("config.json") as json_file:
+    conf = json.load(json_file)
 
 # Average house value in Ireland. Units in euro.
-AVERAGE_PROPERTY_VALUE_PER_OCCUPANT= 32000
+AVERAGE_PROPERTY_VALUE_PER_OCCUPANT= conf["electricityUser"]["businesses"]["averagePropertyValuePerOccupant"]
 
 # Electricity usage daily measured in kWh.
-AVERAGE_ELECTRICITY_USAGE = 50
+AVERAGE_ELECTRICITY_USAGE = conf["electricityUser"]["businesses"]["averageElectricityUsage"]
 
 # Average square metre per occupant
-AVERAGE_SQM_PER_OCCUPANT = 18
+AVERAGE_SQM_PER_OCCUPANT = conf["electricityUser"]["businesses"]["averageSQMPerOccupant"]
 
 class Business():
     def __init__(self, businessID, totalElectricityUsage, propertyValue, propertySize ,numberOfOccupants):
@@ -40,7 +43,7 @@ class Business():
         self.numberOfOccupants = newValue
 
     def toString(self):
-        return  "ID: " + str(self.businessID) + "\t\t\tTotal Electricity Usage: " + str(self.totalElectricityUsage) + "kWh" + "\t\t\tProperty Value: EURO" + str(self.propertyValue) + "\t\t\tProperty Size: " + str(self.propertySize) + "sqm" + "\t\t\tNumber of Occupants: " + str(self.numberOfOccupants)
+        return  "ID: " + str(self.businessID) + "\t\t\tTotal Electricity Usage: " + str(self.totalElectricityUsage) + "kWh" + "\t\t\tProperty Value: EURO " + str(self.propertyValue) + "\t\t\tProperty Size: " + str(self.propertySize) + "sqm" + "\t\t\tNumber of Occupants: " + str(self.numberOfOccupants)
 
 def generateBusinessData(numberOfBusinesses):
     businessData = []
