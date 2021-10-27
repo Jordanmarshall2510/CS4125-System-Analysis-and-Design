@@ -3,7 +3,10 @@ import yaml
 import time
 from World.weather import *
 
-class clock:
+# Whether it night time.
+NIGHT_TIME = False
+
+class Clock():
     time=0
 
     def __init__(self):
@@ -16,6 +19,15 @@ class clock:
 
     def getTimeOnly(self):
         return time.strftime("%H:%M:%S",time.localtime(self.time))
+
+    def getTimeHours(self):
+        return time.strftime("%H",time.localtime(self.time))
+
+    def getTimeMinutes(self):
+        return time.strftime("%M",time.localtime(self.time))
+
+    def getTimeSeconds(self):
+        return time.strftime("%S",time.localtime(self.time))
 
     def getTimeSeconds(self):
         return self.time

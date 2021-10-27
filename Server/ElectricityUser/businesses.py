@@ -17,9 +17,6 @@ AVERAGE_ELECTRICITY_USAGE = 50
 # Average square metre per occupant
 AVERAGE_SQM_PER_OCCUPANT = 18
 
-# Whether it night time.
-NIGHT_TIME = False
-
 class Business():
     def __init__(self, businessID, totalElectricityUsage, propertyValue, propertySize ,numberOfOccupants):
         self.businessID = businessID
