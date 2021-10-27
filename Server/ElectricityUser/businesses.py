@@ -6,7 +6,7 @@
 import random
 import time
 import json
-from World.Clock import Clock
+from Server.World.clock import *
 
 with open("config.json") as json_file:
     conf = json.load(json_file)

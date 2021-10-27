@@ -35,5 +35,9 @@
             "averageElectricityUsage": 30,
             "streetLightUsage": 0.08
         }
+    },
+    "weather": {
+        "clock": 0,
+        "environment": 0
     }
 }
