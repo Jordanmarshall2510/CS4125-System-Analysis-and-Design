@@ -15,8 +15,6 @@ arrUsers = []
 with open(path) as json_file:
     conf = json.load(json_file)
 
-    print(conf['session']['electricityUser']['businesses'])
-
     arrUsers.append(generateBusinessData(conf['session']['electricityUser']['businesses']))
     arrUsers.append(generateHouseData(conf['session']['electricityUser']['houses']))
     arrUsers.append(generateInfrastructureData(conf['session']['electricityUser']['infrastructure']))
