@@ -1,7 +1,8 @@
 #Coded by Jakub Pazej - 18260179
-import yaml
+import json
+import os
 import time
-from World.weather import *
+# from World.weather import *
 
 # Whether it night time.
 NIGHT_TIME = False
@@ -10,9 +11,11 @@ class Clock():
     time=0
 
     def __init__(self):
-            with open('config.yaml', 'r') as f:
-                config = yaml.load(f, Loader = yaml.FullLoader)
-            self.time=time.mktime(time.strptime(config['world']['clock']['date'], '%d.%m.%Y, %H:%M:%S'))
+        path = os.path.dirname(os.path.realpath(__file__)).split("World")[0] + "config.json"
+        
+        with open(path) as json_file:
+            conf = json.load(json_file)
+        self.time=time.mktime(time.strptime(conf['world']['clock']['date'], '%d.%m.%Y, %H:%M:%S'))
 
     def getTime(self):
         return time.strftime("%A, %d.%m.%Y, %H:%M:%S",time.localtime(self.time))

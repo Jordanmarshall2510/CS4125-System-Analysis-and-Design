@@ -1,20 +1,26 @@
 #Coded by Jakub Pazej - 18260179
 import random
-from World.clock import *
-from World.weather import *
+import json
+import os
+import time
+
+from Server.World.clock import Clock
+from Server.World.weather import Weather
 
 class environment:
     delay=0
     weather_change=0
-    clock=clock()
-    weather=weather()
+    clock= Clock()
+    weather= Weather()
     start=False
 
     def __init__(self):
-        with open('config.yaml', 'r') as f:
-            config = yaml.load(f, Loader = yaml.FullLoader)
-            self.delay=config['world']['environment']['delay']
-            self.weather_change=config['world']['environment']['change']
+        path = os.path.dirname(os.path.realpath(__file__)).split(" World")[0] + "config.json"
+
+        with open(path) as json_file:
+            conf = json.load(json_file)
+            self.delay=conf['world']['environment']['delay']
+            self.weather_change=conf['world']['environment']['change']
 
     def getTime(self):
         return self.clock.getTime()

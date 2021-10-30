@@ -2,13 +2,19 @@
 
 # To Do:
 #   
+#   put global constants in class and use self. / House. to access examples (vehicles.py: lines{28, 36, 66})
+#	
+#	***Extend electricityUsers and import required functions (update & getElectricityUsed)***
 
 import random
 import time
 import json
-from Server.World.clock import *
+import os
+# from Server.World.clock import *
 
-with open("config.json") as json_file:
+path = os.path.dirname(os.path.realpath(__file__)).split("ElectricityUser")[0] + "config.json"
+
+with open(path) as json_file:
     conf = json.load(json_file)
 
 # Average house value in Ireland. Units in euro.
@@ -75,14 +81,14 @@ def getRandomElectrictyUsage(numberOfOccupants):
     electricityUsageTolerance = 8
     dailyAverageUsage = random.randint(AVERAGE_ELECTRICITY_USAGE - electricityUsageTolerance, AVERAGE_ELECTRICITY_USAGE + electricityUsageTolerance)/4
     dailyAverageUsagePerHousehold = dailyAverageUsage * numberOfOccupants
-    if NIGHT_TIME == True:
-        return dailyAverageUsagePerHousehold*2
-    else:
-        return dailyAverageUsagePerHousehold
+    # if NIGHT_TIME == True:
+    #     return dailyAverageUsagePerHousehold*2
+    # else:
+    return dailyAverageUsagePerHousehold
 
 # start = time.time()
-businessArray = generateBusinessData(10)
-for x in businessArray:
-    print(x.toString())
+# businessArray = generateBusinessData(10)
+# for x in businessArray:
+#     print(x.toString())
 # end = time.time()
 # print("Elapsed:\t" + str(end - start) + "s")
