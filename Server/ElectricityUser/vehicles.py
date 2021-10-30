@@ -4,34 +4,39 @@
 #	NOTE: Winter / cold weather can cause a decrease of up to 25%
 #	Reduce battery performance overtime
 #	NOTE: Battery degredation on average is 1% SOH per 6 months
+#	
+#	***Extend electricityUsers and import required functions (update & getElectricityUsed)***
 
 # import time
 import random
 import json
-
-with open("config.json") as json_file:
-    conf = json.load(json_file)
-
-# Average electric car value. Units in €
-AVERAGE_VEHICLE_VALUE = ["electricityUser"]["vehicles"]["averageVehicleValue"]
-
-# Average electric car battery capacity. Units in kWh
-AVERAGE_BATTERY_CAPACITY = ["electricityUser"]["vehicles"]["averageBatteryCapacity"]
-
-# Average electric car range. Units in KM
-AVERAGE_RANGE = ["electricityUser"]["vehicles"]["averageRange"]
-
-# Average decrease in range per person. Units %
-AVERAGE_PASSANGER_RANGE_COST = ["electricityUser"]["vehicles"]["averagePassengerRangeCost"]
+import os
 
 class Vehicle():
+	path = os.path.dirname(os.path.realpath(__file__)).split("ElectricityUser")[0] + "config.json"
+
+	with open(path) as json_file:
+		conf = json.load(json_file)
+		
+	# Average electric car value. Units in EURO
+	AVERAGE_VEHICLE_VALUE = conf["electricityUser"]["vehicles"]["averageVehicleValue"]
+
+	# Average electric car battery capacity. Units in kWh
+	AVERAGE_BATTERY_CAPACITY = conf["electricityUser"]["vehicles"]["averageBatteryCapacity"]
+
+	# Average electric car range. Units in KM
+	AVERAGE_RANGE = conf["electricityUser"]["vehicles"]["averageRange"]
+
+	# Average decrease in range per person. Units %
+	AVERAGE_PASSANGER_RANGE_COST = conf["electricityUser"]["vehicles"]["averagePassengerRangeCost"]
+
 	def __init__(self, id, vehicleValue, batteryCapacity, range, numberOfPassanagers):
 		self.id = id
 		self.vehicleValue = vehicleValue
 		self.batteryCapacity = batteryCapacity
 		self.maxRange = range
 		self.numberOfPassanagers = numberOfPassanagers
-		self.realRange = int(self.maxRange - (self.maxRange * (AVERAGE_PASSANGER_RANGE_COST * self.numberOfPassanagers)))
+		self.realRange = int(self.maxRange - (self.maxRange * self.AVERAGE_PASSANGER_RANGE_COST * self.numberOfPassanagers))
 
 	def setId(self, newId):
 		self.id = newId
@@ -47,12 +52,12 @@ class Vehicle():
 	
 	def setNumberOfPassanagers(self, newPassanagers):
 		self.numberOfPassanagers = newPassanagers
-		self.realRange = int(self.maxRange - (self.maxRange * (AVERAGE_PASSANGER_RANGE_COST * self.numberOfPassanagers)))
+		self.realRange = int(self.maxRange - (self.maxRange * (self.AVERAGE_PASSANGER_RANGE_COST * self.numberOfPassanagers)))
 
 	def toString(self):
 		return  "Vehicle: " + self.id + "\tVehicle Value: €" + str(self.vehicleValue) + "\tTotal Battery Capacity: " + str(self.batteryCapacity) + "kWh" + "\tMax vehicle range: " + str(self.maxRange) + "KM" + "\tReal vehicle range: " + str(self.realRange) + "KM" + "\tNumber of Passanagers: " + str(self.numberOfPassanagers)
 
-def generateVehicle(numberOfVehicles):
+def generateVehicleData(numberOfVehicles):
 	vehicleData = []
 	vehicleValueTolerance = 10000
 	batteryCapacityTolerance = 15
@@ -61,9 +66,9 @@ def generateVehicle(numberOfVehicles):
 	for i in range(numberOfVehicles):
 		# Generate Values
 		id = "C" + str(i)
-		vehicleValue = random.randint(AVERAGE_VEHICLE_VALUE - vehicleValueTolerance, AVERAGE_VEHICLE_VALUE + vehicleValueTolerance)
-		batteryCap = random.randint(AVERAGE_BATTERY_CAPACITY - batteryCapacityTolerance, AVERAGE_BATTERY_CAPACITY + batteryCapacityTolerance)
-		vehicleRange = random.randint(AVERAGE_RANGE - vehicleRangeTolerance, AVERAGE_RANGE + vehicleRangeTolerance)
+		vehicleValue = random.randint(Vehicle.AVERAGE_VEHICLE_VALUE - vehicleValueTolerance, Vehicle.AVERAGE_VEHICLE_VALUE + vehicleValueTolerance)
+		batteryCap = random.randint(Vehicle.AVERAGE_BATTERY_CAPACITY - batteryCapacityTolerance, Vehicle.AVERAGE_BATTERY_CAPACITY + batteryCapacityTolerance)
+		vehicleRange = random.randint(Vehicle.AVERAGE_RANGE - vehicleRangeTolerance, Vehicle.AVERAGE_RANGE + vehicleRangeTolerance)
 		passanagers = random.randint(0, 5)
 
 		# Generate Vehicle
@@ -72,8 +77,8 @@ def generateVehicle(numberOfVehicles):
 	return vehicleData
 
 # start = time.time()
-vehicleArray = generateVehicle(15)
-for vehicle in vehicleArray:
-	print(vehicle.toString())
+# vehicleArray = generateVehicleData(15)
+# for vehicle in vehicleArray:
+# 	print(vehicle.toString())
 # end = time.time()
 # print("Elapsed:\t" + str(end - start) + "s")

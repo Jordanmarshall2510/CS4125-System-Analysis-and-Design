@@ -10,18 +10,23 @@
 #   Traffic lights output           1/6     DONE
 #   Reduce power output of road in cold weather
 #   Streetlights power output calculator is currently one hour, must make daily add up all hours in the night
-
+#
+#   put global constants in class and use self. / House. to access examples (vehicles.py: lines{28, 36, 66})
+#	
+#	***Extend electricityUsers and import required functions (update & getElectricityUsed)***
 import random
-from World.Clock import Clock
-
 import json
+import os
+# from World.Clock import Clock
 
-with open("config.json") as json_file:
+path = os.path.dirname(os.path.realpath(__file__)).split("ElectricityUser")[0] + "config.json"
+
+with open(path) as json_file:
     conf = json.load(json_file)
 
 
-AVERAGE_ELECTRICITY_USAGE = ["electricityUser"]["infrastructure"]["averageElectricityUsage"]
-STREET_LIGHT_USAGE = ["electricityUser"]["infrastructure"]["streetLightUsage"]
+AVERAGE_ELECTRICITY_USAGE = conf["electricityUser"]["infrastructure"]["averageElectricityUsage"]
+STREET_LIGHT_USAGE = conf["electricityUser"]["infrastructure"]["streetLightUsage"]
 TRAFFIC_LIGHT_USAGE= random.randrange(90, 160, 1)/100
 
 class Infrastructure():
@@ -56,7 +61,7 @@ class Infrastructure():
             dailyAverageUsage += TRAFFIC_LIGHT_USAGE
         #Will be reliant on time
         if self.setStreetLight() == True:
-            Clock.getTimeOnly()
+            # Clock.getTimeOnly()
             dailyAverageUsage += STREET_LIGHT_USAGE
 
     def toString(self):

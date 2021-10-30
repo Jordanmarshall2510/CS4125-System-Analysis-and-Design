@@ -1,5 +1,21 @@
 {
+    "session": {
+        "electricityUser": {
+            "businesses": 100,
+            "houses": 500,
+            "infrastucture": 20,
+            "vehicles": 200
+        },
+        "electricityGenerator": {
+            "solar": 0,
+            "wind": 0
+        }
+    },
     "electricityGenerator": {
+        "distribution": {
+            "distributionSize": 30,
+            "distributionValue": 10
+        },
         "solar": {
             "test1": 0,
             "test2": 0,
@@ -28,8 +44,21 @@
             "averagePassengerRangeCost": 0.06
         },
         "infrastructure": {
-           "averageElectricityUsage" : 30,
-           "streetLightUsage": 0.08
+            "averageElectricityUsage": 30,
+            "streetLightUsage": 0.08
+        }
+    },
+    "world": {
+        "clock": {
+            "date": "1.1.2100, 00:00:00"
+        },
+        "environment": {
+            "delay": 1,
+            "change": 5
+        },
+        "weather": {
+            "weather": "rain",
+            "season": "winter"
         }
     }
 }

@@ -2,12 +2,18 @@
 
 # To Do:
 #   Heating
+#   put global constants in class and use self. / House. to access examples (vehicles.py: lines{28, 36, 66})
+#	
+#	***Extend electricityUsers and import required functions (update & getElectricityUsed)***
 
 import random
 import time
 import json
+import os
 
-with open("config.json") as json_file:
+path = os.path.dirname(os.path.realpath(__file__)).split("ElectricityUser")[0] + "config.json"
+
+with open(path) as json_file:
     conf = json.load(json_file)
 
 # Average house value in Ireland. Units in €.
@@ -73,6 +79,6 @@ def getRandomElectrictyUsage(numberOfOccupants, ageOfHouse):
     else: 
         return dailyAverageUsagePerHousehold + random.randint(0, electricityUsageTolerance) 
 
-houseArray = generateHouseData(2)
-for x in houseArray:
-    print(x.toString())
+# houseArray = generateHouseData(2)
+# for x in houseArray:
+#     print(x.toString())
