@@ -1,28 +1,23 @@
 import json
 import os
 from Server import ElectricityGenerator
+from World import clock
 
-# TODO:
-#   if the system is calculating generation hourly then update should calculate what an hour of solar power will
-#   be, then this data can be retrieved with the getElectricityGenerated function
+class Solar(ElectricityGenerator, clock):
+    wattage= conf["electricityGenerator"]["solar"]["output"]
 
-path = os.path.dirname(os.path.realpath(__file__)).split("ElectricityGenerator")[0] + "config.json"
+    def __init__(self):
+           path = os.path.dirname(os.path.realpath(__file__)).split("ElectricityGenerator")[0] + "config.json"
+            with open(path) as json_file:
+                conf = json.load(json_file)
+                self.delay=conf['world']['environment']['delay']
+                self.weather_change=conf['world']['environment']['change']
 
-with open(path) as json_file:
-    conf = json.load(json_file)
-
-# Comment 1
-TEST_1= conf["electricityGenerator"]["solar"]["test1"]
-
-# Comment 2
-TEST_2 = conf["electricityGenerator"]["solar"]["test2"]
-
-# Comment 3
-TEST_3 = conf["electricityGenerator"]["solar"]["test3"]
-
-class Solar(ElectricityGenerator):
-    def update(date):
-        print("Here electricityGenerator method is definied")
+    def update():
+        if(clock.checkDayLight()=True):
+            return wattage
+        else if(clock.checkDayLight()=False):
+            return 0
 
     def getElectricityGenerated():
         print("Here electricityGenerator method is defined")
