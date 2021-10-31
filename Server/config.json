@@ -17,9 +17,7 @@
             "distributionValue": 10
         },
         "solar": {
-            "test1": 0,
-            "test2": 0,
-            "test3": 0
+            "output": 300
         },
         "wind": {
             "test1": 0,

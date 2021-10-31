@@ -2,10 +2,6 @@
 import json
 import os
 import time
-# from World.weather import *
-
-# Whether it night time.
-NIGHT_TIME = False
 
 class Clock():
     time=0
@@ -44,8 +40,8 @@ class Clock():
     def setTimeSeconds(self, value):
             self.time=value
 
-    def CheckDaylight(self):
+    def checkDaylight(self):
         if(8<int(self.getTimeHours()<18)):
-            NIGHT_TIME = False
+            return True
         else:
-            NIGHT_TIME = True
+            return False
