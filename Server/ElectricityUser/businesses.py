@@ -10,23 +10,24 @@ import random
 import time
 import json
 import os
-# from Server.World.clock import *
-
-path = os.path.dirname(os.path.realpath(__file__)).split("ElectricityUser")[0] + "config.json"
-
-with open(path) as json_file:
-    conf = json.load(json_file)
-
-# Average house value in Ireland. Units in euro.
-AVERAGE_PROPERTY_VALUE_PER_OCCUPANT= conf["electricityUser"]["businesses"]["averagePropertyValuePerOccupant"]
-
-# Electricity usage daily measured in kWh.
-AVERAGE_ELECTRICITY_USAGE = conf["electricityUser"]["businesses"]["averageElectricityUsage"]
-
-# Average square metre per occupant
-AVERAGE_SQM_PER_OCCUPANT = conf["electricityUser"]["businesses"]["averageSQMPerOccupant"]
+from Server.World.clock import clock
+import electricityuser
 
 class Business():
+    path = os.path.dirname(os.path.realpath(__file__)).split("ElectricityUser")[0] + "config.json"
+
+    with open(path) as json_file:
+        conf = json.load(json_file)
+
+    # Average house value in Ireland. Units in euro.
+    AVERAGE_PROPERTY_VALUE_PER_OCCUPANT= conf["electricityUser"]["businesses"]["averagePropertyValuePerOccupant"]
+
+    # Electricity usage daily measured in kWh.
+    AVERAGE_ELECTRICITY_USAGE = conf["electricityUser"]["businesses"]["averageElectricityUsage"]
+
+    # Average square metre per occupant
+    AVERAGE_SQM_PER_OCCUPANT = conf["electricityUser"]["businesses"]["averageSQMPerOccupant"]
+
     def __init__(self, businessID, totalElectricityUsage, propertyValue, propertySize ,numberOfOccupants):
         self.businessID = businessID
         self.totalElectricityUsage = totalElectricityUsage
@@ -36,13 +37,13 @@ class Business():
 
     def setBusinessID(self, newID):
         self.businessID = newID
-    
+
     def setTotalElectricityUsage(self, newValue):
         self.totalElectricityUsage = newValue
 
     def setPropertyValue(self, newValue):
         self.propertyValue = newValue
-    
+
     def setPropertySize(self, newSize):
         self.propertySize = newSize
 
@@ -81,10 +82,10 @@ def getRandomElectrictyUsage(numberOfOccupants):
     electricityUsageTolerance = 8
     dailyAverageUsage = random.randint(AVERAGE_ELECTRICITY_USAGE - electricityUsageTolerance, AVERAGE_ELECTRICITY_USAGE + electricityUsageTolerance)/4
     dailyAverageUsagePerHousehold = dailyAverageUsage * numberOfOccupants
-    # if NIGHT_TIME == True:
-    #     return dailyAverageUsagePerHousehold*2
-    # else:
-    return dailyAverageUsagePerHousehold
+    if Clock.checkDaylight() == False:
+        return dailyAverageUsagePerHousehold*2
+    else:
+        return dailyAverageUsagePerHousehold
 
 # start = time.time()
 # businessArray = generateBusinessData(10)
