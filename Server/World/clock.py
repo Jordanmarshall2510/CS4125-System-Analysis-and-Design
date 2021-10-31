@@ -40,7 +40,7 @@ class Clock():
     def setTimeSeconds(self, value):
             self.time=value
 
-    def checkDaylight(self):
+    def getDaylight(self):
         if(8<int(self.getTimeHours()<18)):
             return True
         else:

@@ -1,28 +1,22 @@
 import json
 import os
+import random
 from Server import ElectricityGenerator
+from World import environment
 
-# TODO:
-#   if the system is calculating generation hourly then update should calculate what an hour of solar power will
-#   be, then this data can be retrieved with the getElectricityGenerated function
+class Solar(ElectricityGenerator, weather):
+    wattage= conf["electricityGenerator"]["wind"]["output"]
 
-path = os.path.dirname(os.path.realpath(__file__)).split("ElectricityGenerator")[0] + "config.json"
+    def __init__(self):
+        path = os.path.dirname(os.path.realpath(__file__)).split("ElectricityGenerator")[0] + "config.json"
+        with open(path) as json_file:
+            conf = json.load(json_file)
+            self.delay=conf['world']['environment']['delay']
+            self.weather_change=conf['world']['environment']['change']
 
-with open(path) as json_file:
-    conf = json.load(json_file)
+    def update(self):
+        a=random.randint(1,10)
+        return wattage+(a*1000)
 
-# Comment 1
-TEST_1= conf["electricityGenerator"]["wind"]["test1"]
-
-# Comment 2
-TEST_2 = conf["electricityGenerator"]["wind"]["test2"]
-
-# Comment 3
-TEST_3 = conf["electricityGenerator"]["wind"]["test3"]
-
-class Wind(ElectricityGenerator):
-    def update(date):
-        print("Here electricityGenerator method is definied")
-
-    def getElectricityGenerated():
+    def getElectricityGenerated(self):
         print("Here electricityGenerator method is defined")

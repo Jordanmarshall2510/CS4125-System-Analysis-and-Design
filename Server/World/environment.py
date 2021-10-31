@@ -100,3 +100,6 @@ class environment:
 
     def stop(self):
         self.start=False
+
+    def getDaylight(self):
+        return self.clock.getDayLight()
