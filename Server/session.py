@@ -1,27 +1,37 @@
 import threading
-from ElectricityGenerator.battery import *
-from World.environment import *
+from datetime import timedelta, datetime
+from ElectricityGenerator.distribution import *
+from ElectricityUser.businesses import generateBusinessData
+from ElectricityUser.houses import generateHouseData
+from ElectricityUser.infrastrucure import generateInfrastructureData
+from ElectricityUser.vehicles import generateVehicleData
 
-env=environment()
+path = os.path.dirname(os.path.realpath(__file__)) + "//config.json"
 
-th = threading.Thread(target=env.start)
-th.start()
+# Craete user array
+arrUsers = []
 
-print('before')
-time.sleep(2)
-print('after')
-env.stop()
-time.sleep(0.1)
+# Load users
+with open(path) as json_file:
+    conf = json.load(json_file)
 
-env.setTime('1.4.2100, 00:00:00')
-print(env.getTime())
-print(env.getSeason())
-print(env.getWeather())
-env.setTime('1.7.2100, 00:00:00')
-print(env.getTime())
-print(env.getSeason())
-print(env.getWeather())
-env.setTime('1.10.2100, 00:00:00')
-print(env.getTime())
-print(env.getSeason())
-print(env.getWeather())
+    arrUsers.append(generateBusinessData(conf['session']['electricityUser']['businesses']))
+    arrUsers.append(generateHouseData(conf['session']['electricityUser']['houses']))
+    arrUsers.append(generateInfrastructureData(conf['session']['electricityUser']['infrastructure']))
+    arrUsers.append(generateVehicleData(conf["session"]['electricityUser']['vehicles']))
+
+# Initialise timer
+timestamp = datetime.today()
+
+while (True):
+    # Progress time
+    timestamp += datetime.timedelta(hours=1)
+
+    # Update Distribution
+    distribution.update(timestamp) # Might need a change
+
+    # Update Users
+    for user in arrUsers:
+        user.update(timestamp)
+
+    # Put data into database
