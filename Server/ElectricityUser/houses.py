@@ -11,19 +11,23 @@ import time
 import json
 import os
 
-path = os.path.dirname(os.path.realpath(__file__)).split("ElectricityUser")[0] + "config.json"
-
-with open(path) as json_file:
-    conf = json.load(json_file)
-
-# Average house value in Ireland. Units in €.
-AVERAGE_HOUSE_VALUE = conf["electricityUser"]["houses"]["averageHouseValue"]
-
-# Electricity usage daily measured in kWh.
-AVERAGE_ELECTRICITY_USAGE = conf["electricityUser"]["houses"]["averageElectricityValue"]
-
 class House():
+    AVERAGE_HOUSE_VALUE = 0
+    AVERAGE_ELECTRICITY_USAGE = 0
+
     def __init__(self, homeID, totalElectricityUsage, houseValue, numberOfOccupants, ageOfHouse):
+
+        path = os.path.dirname(os.path.realpath(__file__)).split("ElectricityUser")[0] + "config.json"
+
+        with open(path) as json_file:
+            conf = json.load(json_file)
+
+        # Average house value in Ireland. Units in €.
+        self.AVERAGE_HOUSE_VALUE = conf["electricityUser"]["houses"]["averageHouseValue"]
+
+        # Electricity usage daily measured in kWh.
+        self.AVERAGE_ELECTRICITY_USAGE = conf["electricityUser"]["houses"]["averageElectricityValue"]
+
         self.homeID = homeID
         self.totalElectricityUsage = totalElectricityUsage
         self.houseValue = houseValue

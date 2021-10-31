@@ -6,6 +6,9 @@ from ElectricityUser.houses import generateHouseData
 from ElectricityUser.infrastrucure import generateInfrastructureData
 from ElectricityUser.vehicles import generateVehicleData
 
+# TODO:
+#   Create class for session so we can run multiple instances
+
 path = os.path.dirname(os.path.realpath(__file__)) + "//config.json"
 
 # Craete user array

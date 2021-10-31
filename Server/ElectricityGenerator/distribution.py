@@ -9,8 +9,8 @@ import os
 #   be taken by ElectricityUsers
 
 class distribution:
-    distribution_size=0 #values read and set in init
-    distribution_value=0
+    DISTRIBUTION_SIZE=0 #values read and set in init
+    DISTRIBUTION_VALUE=0
 
     def __init__(self):
 
@@ -19,62 +19,62 @@ class distribution:
         with open(path) as json_file:
             conf = json.load(json_file)
 
-        self.distribution_size=conf["electricityGenerator"]["distribution"]["distributionSize"]
-        self.distribution_value=conf["electricityGenerator"]["distribution"]["distributionValue"]
+        self.DISTRIBUTION_SIZE=conf["electricityGenerator"]["distribution"]["distributionSize"]
+        self.DISTRIBUTION_VALUE=conf["electricityGenerator"]["distribution"]["distributionValue"]
 
     def getValue(self):
-        return self.distribution_value
+        return self.DISTRIBUTION_VALUE
 
     def getSize(self):
-        return self.distribution_size
+        return self.DISTRIBUTION_SIZE
 
     def setValue(self, value):
-        self.distribution_value = value
+        self.DISTRIBUTION_VALUE = value
 
     def setSize(self, value):
-        self.distribution_size = value
-        if (self.distribution_value > self.distribution_size): self.distribution_value = self.distribution_size
+        self.DISTRIBUTION_SIZE = value
+        if (self.DISTRIBUTION_VALUE > self.DISTRIBUTION_SIZE): self.DISTRIBUTION_VALUE = self.DISTRIBUTION_SIZE
 
     def input(self, value, unit):
         if (unit.lower() == 'watt' or 'watts'):
-                self.distribution_value += value/1000000000
-                if (self.distribution_value > self.distribution_size): self.distribution_value = self.distribution_size
+                self.DISTRIBUTION_VALUE += value/1000000000
+                if (self.DISTRIBUTION_VALUE > self.DISTRIBUTION_SIZE): self.DISTRIBUTION_VALUE = self.DISTRIBUTION_SIZE
         elif (unit.lower() == 'kilowatt' or 'kilowatts' or 'kw'):
-                self.distribution_value += value/1000000
-                if (self.distribution_value > self.distribution_size): self.distribution_value = self.distribution_size
+                self.DISTRIBUTION_VALUE += value/1000000
+                if (self.DISTRIBUTION_VALUE > self.DISTRIBUTION_SIZE): self.DISTRIBUTION_VALUE = self.DISTRIBUTION_SIZE
         elif (unit.lower() == 'megawatt' or 'megawatts' or 'mw'):
-                self.distribution_value += value/1000
-                if (self.distribution_value > self.distribution_size): self.distribution_value = self.distribution_size
+                self.DISTRIBUTION_VALUE += value/1000
+                if (self.DISTRIBUTION_VALUE > self.DISTRIBUTION_SIZE): self.DISTRIBUTION_VALUE = self.DISTRIBUTION_SIZE
         elif (unit.lower() == 'gigawatt' or 'gigawatts' or 'gw'):
-                self.distribution_value += value
-                if (self.distribution_value > self.distribution_size): self.distribution_value = self.distribution_size
+                self.DISTRIBUTION_VALUE += value
+                if (self.DISTRIBUTION_VALUE > self.DISTRIBUTION_SIZE): self.DISTRIBUTION_VALUE = self.DISTRIBUTION_SIZE
         else:
             print('wrong unit input!!!')
 
     def output(self, value, unit):
         if (unit.lower() == 'watt' or 'watts'):
-                if (self.distribution_value - value/1000000000 < 0):
+                if (self.DISTRIBUTION_VALUE - value/1000000000 < 0):
                     return False
                 else:
-                    self.distribution_value -= value/1000000000
+                    self.DISTRIBUTION_VALUE -= value/1000000000
                     return True
         elif (unit.lower() == 'kilowatt' or 'kilowatts' or 'kw'):
-                if (self.distribution_value - value/1000000 < 0):
+                if (self.DISTRIBUTION_VALUE - value/1000000 < 0):
                     return False
                 else:
-                    self.distribution_value -= value/1000000
+                    self.DISTRIBUTION_VALUE -= value/1000000
                     return True
         elif (unit.lower() == 'megawatt' or 'megawatts' or 'mw'):
-                if (self.distribution_value - value/1000 < 0):
+                if (self.DISTRIBUTION_VALUE - value/1000 < 0):
                     return False
                 else:
-                    self.distribution_value -= value/1000
+                    self.DISTRIBUTION_VALUE -= value/1000
                     return True
         elif (unit.lower() == 'gigawatt' or 'gigawatts' or 'gw'):
-                if (self.distribution_value - value < 0):
+                if (self.DISTRIBUTION_VALUE - value < 0):
                     return False
                 else:
-                    self.distribution_value -= value
+                    self.DISTRIBUTION_VALUE -= value
                     return True
         else:
             print('wrong unit input!!!')
