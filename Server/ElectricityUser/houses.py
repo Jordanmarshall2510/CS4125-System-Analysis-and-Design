@@ -2,12 +2,10 @@
 
 # To Do:
 #   Heating
-#   put global constants in class and use self. / House. to access examples (vehicles.py: lines{28, 36, 66})
 #	
 #	***Extend electricityUsers and import required functions (update & getElectricityUsed)***
 
 import random
-import time
 import json
 import os
 
@@ -15,7 +13,7 @@ class House():
     AVERAGE_HOUSE_VALUE = 0
     AVERAGE_ELECTRICITY_USAGE = 0
 
-    def __init__(self, homeID, totalElectricityUsage, houseValue, numberOfOccupants, ageOfHouse):
+    def __init__(self):
 
         path = os.path.dirname(os.path.realpath(__file__)).split("ElectricityUser")[0] + "config.json"
 
@@ -28,11 +26,11 @@ class House():
         # Electricity usage daily measured in kWh.
         self.AVERAGE_ELECTRICITY_USAGE = conf["electricityUser"]["houses"]["averageElectricityValue"]
 
-        self.homeID = homeID
-        self.totalElectricityUsage = totalElectricityUsage
-        self.houseValue = houseValue
-        self.numberOfOccupants = numberOfOccupants
-        self.ageOfHouse = ageOfHouse
+        self.homeID = 0
+        self.numberOfOccupants = random.randint(1,10)
+        self.ageOfHouse = random.randint(1,30)
+        self.totalElectricityUsage = self.getRandomElectrictyUsage(self.numberOfOccupants, self.ageOfHouse)
+        self.houseValue = self.getRandomHouseValue(self.ageOfHouse)
 
     def setHomeID(self, newID):
         self.homeID = newID
@@ -50,39 +48,35 @@ class House():
         self.ageOfHouse = newValue
 
     def toString(self):
-        return  "ID: " + self.homeID + "\t\t\tTotal Electricity Usage: " + str(self.totalElectricityUsage) + "kWh" + "\t\t\tHouse Value: €" + str(self.houseValue) + "\t\t\tNumber of Occupants: " + str(self.numberOfOccupants) + "\t\t\tAge of House: " + str(self.ageOfHouse)
+        return  "ID: " + str(self.homeID) + "\t\t\tTotal Electricity Usage: " + str(self.totalElectricityUsage) + "kWh" + "\t\t\tHouse Value: €" + str(self.houseValue) + "\t\t\tNumber of Occupants: " + str(self.numberOfOccupants) + "\t\t\tAge of House: " + str(self.ageOfHouse)
 
-def generateHouseData(numberOfHouses):
+    def getRandomHouseValue(self, ageOfHouse):
+        houseValueTolerance = 100000
+        value = random.randint(self.AVERAGE_HOUSE_VALUE - houseValueTolerance, self.AVERAGE_HOUSE_VALUE + houseValueTolerance)
+        if ageOfHouse < 20:
+            return value
+        else: 
+            return value - random.randint(0, houseValueTolerance)
+
+    # Get random electricity usage based on number of occupants in a household
+    def getRandomElectrictyUsage(self, numberOfOccupants, ageOfHouse):
+        electricityUsageTolerance = 10
+        dailyAverageUsage = random.randint(self.AVERAGE_ELECTRICITY_USAGE - electricityUsageTolerance, self.AVERAGE_ELECTRICITY_USAGE + electricityUsageTolerance)/4
+        dailyAverageUsagePerHousehold = dailyAverageUsage * numberOfOccupants
+        if ageOfHouse < 20:
+            return dailyAverageUsagePerHousehold
+        else: 
+            return dailyAverageUsagePerHousehold + random.randint(0, electricityUsageTolerance) 
+
+def generateHouses(numberOfHouses):
     houseData = []
-    homeCounter = 0
-
     for x in range(numberOfHouses):
-        numberOfOccupants = random.randint(1,10)
-        ageOfHouse = random.randint(1,30)
-        house = House("H" + str(homeCounter), getRandomElectrictyUsage(numberOfOccupants, ageOfHouse), getRandomHouseValue(ageOfHouse), numberOfOccupants, ageOfHouse )
+        house = House()
+        house.setHomeID(x + 1)
+        print(house.toString())
         houseData.append(house)
-        homeCounter += 1
 
     return houseData
 
-def getRandomHouseValue(ageOfHouse):
-    houseValueTolerance = 100000
-    value = random.randint(AVERAGE_HOUSE_VALUE - houseValueTolerance, AVERAGE_HOUSE_VALUE + houseValueTolerance)
-    if ageOfHouse < 20:
-        return value
-    else: 
-        return value - random.randint(0, houseValueTolerance)
+generateHouses(10)
 
-# Get random electricity usage based on number of occupants in a household
-def getRandomElectrictyUsage(numberOfOccupants, ageOfHouse):
-    electricityUsageTolerance = 10
-    dailyAverageUsage = random.randint(AVERAGE_ELECTRICITY_USAGE - electricityUsageTolerance, AVERAGE_ELECTRICITY_USAGE + electricityUsageTolerance)/4
-    dailyAverageUsagePerHousehold = dailyAverageUsage * numberOfOccupants
-    if ageOfHouse < 20:
-        return dailyAverageUsagePerHousehold
-    else: 
-        return dailyAverageUsagePerHousehold + random.randint(0, electricityUsageTolerance) 
-
-# houseArray = generateHouseData(2)
-# for x in houseArray:
-#     print(x.toString())
