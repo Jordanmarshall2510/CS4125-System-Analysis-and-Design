@@ -17,12 +17,12 @@
 import random
 import json
 import os
-# from World.Clock import Clock
 
+from electricityuser import ElectricityUser
 
 TRAFFIC_LIGHT_USAGE= random.randrange(90, 160, 1)/100
 
-class Infrastructure():
+class Infrastructure(ElectricityUser):
     AVERAGE_ELECTRICITY_USAGE = 0 
     STREET_LIGHT_USAGE = 0 
     TRAFFIC_LIGHT_USAGE = random.randrange(90, 160, 1)/100
@@ -75,6 +75,9 @@ class Infrastructure():
     def toString(self):
         return  "ID:" + self.infrastructureID + "\t\t\tTotal Electricity Usage: " + str(self.totalElectricityUsage) + "kWh" + "\t\t\tStreetLight?: " + str(self.hasStreetLight) + "\t\t\tTrafficLight?: " + str(self.hasTrafficLight)
 
+    def getElectricityUsed(self):
+        return self.totalElectricityUsage
+        
 def generateInfrastructureData(numberOfInfrastructure):    # NOTE: Will be dependent on number of houses in future
     infrastructureData = []
     infrastructureCounter = 0
