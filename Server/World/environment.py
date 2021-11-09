@@ -4,8 +4,8 @@ import json
 import os
 import time
 
-from Server.World.clock import Clock
-from Server.World.weather import Weather
+from World.clock import Clock
+from World.weather import Weather
 
 class environment:
     delay=0

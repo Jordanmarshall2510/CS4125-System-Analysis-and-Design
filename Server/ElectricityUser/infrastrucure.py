@@ -18,7 +18,7 @@ import random
 import json
 import os
 
-from electricityuser import ElectricityUser
+from ElectricityUser.electricityuser import ElectricityUser
 
 TRAFFIC_LIGHT_USAGE= random.randrange(90, 160, 1)/100
 
@@ -75,23 +75,22 @@ class Infrastructure(ElectricityUser):
     def toString(self):
         return  "ID:" + self.infrastructureID + "\t\t\tTotal Electricity Usage: " + str(self.totalElectricityUsage) + "kWh" + "\t\t\tStreetLight?: " + str(self.hasStreetLight) + "\t\t\tTrafficLight?: " + str(self.hasTrafficLight)
 
+    # TODO: implement update and getElectricityUsed
+    def update(self, date):
+        return -1
+
     def getElectricityUsed(self):
-        return self.totalElectricityUsage
+        return -1
         
-def generateInfrastructureData(numberOfInfrastructure):    # NOTE: Will be dependent on number of houses in future
-    infrastructureData = []
-    infrastructureCounter = 0
+    def generateUsers(numberOfInfrastructure):    # NOTE: Will be dependent on number of houses in future
+        infrastructureData = []
+        infrastructureCounter = 0
 
-    for i in range(numberOfInfrastructure):
-        infrastructure = Infrastructure("R" + str(infrastructureCounter))
-        infrastructure.sumElectricitityUsage()
-        infrastructureData.append(infrastructure)
-        infrastructureCounter += 1
-    
-    return infrastructureData
-  
-infrastructureArray = generateInfrastructureData(10)
-for i in infrastructureArray:
-    print(i.toString())
-
+        for i in range(numberOfInfrastructure):
+            infrastructure = Infrastructure("R" + str(infrastructureCounter))
+            infrastructure.sumElectricitityUsage()
+            infrastructureData.append(infrastructure)
+            infrastructureCounter += 1
+        
+        return infrastructureData
     

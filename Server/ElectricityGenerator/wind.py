@@ -1,10 +1,11 @@
 import json
 import os
 import random
-from Server import ElectricityGenerator
+from ElectricityGenerator.electricitygenerator import ElectricityGenerator
 from World import environment
 
-class Solar(ElectricityGenerator, weather):
+# FIXME: why does solar inherit weather ?
+class Wind(ElectricityGenerator, weather):
     wattage=0
 
     def __init__(self):
@@ -13,9 +14,13 @@ class Solar(ElectricityGenerator, weather):
             conf = json.load(json_file)
             self.wattage=conf["electricityGenerator"]["wind"]["output"]
 
+    # TODO: implement update, getElectricityGenenerated and generateGenerators
     def update(self):
         a=random.randint(1,10)
-        return wattage+(a*1000)
+        return self.wattage+(a*1000)
 
     def getElectricityGenerated(self):
         print("Here electricityGenerator method is defined")
+
+    def generateGenerators(numberOfGenertors):
+        print("return array here")
