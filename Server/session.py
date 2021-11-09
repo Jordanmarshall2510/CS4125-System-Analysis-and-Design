@@ -5,7 +5,7 @@ from ElectricityUser.businesses import Business
 from ElectricityUser.houses import House
 from ElectricityUser.infrastrucure import Infrastructure
 from ElectricityUser.vehicles import Vehicle
-from ElectricityGenerator.distribution import Distribution
+# from ElectricityGenerator.distribution import Distribution
 
 path = os.path.dirname(os.path.realpath(__file__)) + "//config.json"
 
@@ -13,7 +13,7 @@ path = os.path.dirname(os.path.realpath(__file__)) + "//config.json"
 arrUsers = []
 
 # Set distribution
-distribution = Distribution()
+# distribution = Distribution()
 
 # Load users
 with open(path) as json_file:
@@ -26,8 +26,11 @@ with open(path) as json_file:
 
 # Initialise timer
 # timestamp = datetime.today()
-
+day = 0
 while (True):
+    # Create dictionary for the day
+    dict = {}
+
     # Progress time
     # timestamp += datetime.timedelta(hours=1)
 
@@ -36,7 +39,22 @@ while (True):
 
     # Update Users
     for user in arrUsers:
-        distribution.update(100)
-        electricityUsed = user.update(100)        
+        # distribution.update(100)
+        electricityUsed = user.update(100)
+        if type(user).__name__ in dict:
+            dict[type(user).__name__] += electricityUsed
+        else:
+            dict[type(user).__name__] = electricityUsed
+
+    print("=================================")
+    print(f"Day {day}")
+    print("-- Users --")
+    for key in dict:
+        print(f"Total usage from {key}: {dict[key]}")
+    print("-- Generators --")
+    # TODO: print the generator data
+    print("=================================")
 
     # Put data into database
+
+    day += 1
