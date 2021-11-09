@@ -18,7 +18,7 @@ import random
 import json
 import os
 
-from electricityuser import ElectricityUser
+from ElectricityUser.electricityuser import ElectricityUser
 
 TRAFFIC_LIGHT_USAGE= random.randrange(90, 160, 1)/100
 
@@ -89,9 +89,4 @@ def generateInfrastructureData(numberOfInfrastructure):    # NOTE: Will be depen
         infrastructureCounter += 1
     
     return infrastructureData
-  
-infrastructureArray = generateInfrastructureData(10)
-for i in infrastructureArray:
-    print(i.toString())
-
     

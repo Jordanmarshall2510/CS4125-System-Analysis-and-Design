@@ -10,8 +10,8 @@ import random
 import time
 import json
 import os
-from Server.World.clock import clock
-import electricityuser
+from World.clock import Clock
+from ElectricityUser.electricityuser import ElectricityUser
 
 class Business():
     path = os.path.dirname(os.path.realpath(__file__)).split("ElectricityUser")[0] + "config.json"
@@ -67,29 +67,24 @@ def generateBusinessData(numberOfBusinesses):
 
 def getRandomPropertyValue(numberOfOccupants):
     propertyValueTolerance = 10000
-    valuePerOccupant = random.randint(AVERAGE_PROPERTY_VALUE_PER_OCCUPANT - propertyValueTolerance, AVERAGE_PROPERTY_VALUE_PER_OCCUPANT + propertyValueTolerance)
+    valuePerOccupant = random.randint(Business.AVERAGE_PROPERTY_VALUE_PER_OCCUPANT - propertyValueTolerance, Business.AVERAGE_PROPERTY_VALUE_PER_OCCUPANT + propertyValueTolerance)
     value = valuePerOccupant * numberOfOccupants
     return value
 
 def getRandomPropertySize(numberOfOccupants):
     propertySizeTolerance = 5
-    valuePerOccupant = random.randint(AVERAGE_SQM_PER_OCCUPANT - propertySizeTolerance, AVERAGE_SQM_PER_OCCUPANT + propertySizeTolerance)
+    valuePerOccupant = random.randint(Business.AVERAGE_SQM_PER_OCCUPANT - propertySizeTolerance, Business.AVERAGE_SQM_PER_OCCUPANT + propertySizeTolerance)
     value = valuePerOccupant * numberOfOccupants
     return value
 
 # Get random electricity usage based on number of occupants in a household
 def getRandomElectrictyUsage(numberOfOccupants):
     electricityUsageTolerance = 8
-    dailyAverageUsage = random.randint(AVERAGE_ELECTRICITY_USAGE - electricityUsageTolerance, AVERAGE_ELECTRICITY_USAGE + electricityUsageTolerance)/4
+    dailyAverageUsage = random.randint(Business.AVERAGE_ELECTRICITY_USAGE - electricityUsageTolerance, Business.AVERAGE_ELECTRICITY_USAGE + electricityUsageTolerance)/4
     dailyAverageUsagePerHousehold = dailyAverageUsage * numberOfOccupants
-    if Clock.checkDaylight() == False:
-        return dailyAverageUsagePerHousehold*2
-    else:
-        return dailyAverageUsagePerHousehold
-
-# start = time.time()
-# businessArray = generateBusinessData(10)
-# for x in businessArray:
-#     print(x.toString())
-# end = time.time()
-# print("Elapsed:\t" + str(end - start) + "s")
+    # FIXME: Clock has no attribute 'checkDayLight'
+    # if Clock.checkDaylight() == False:
+        # return dailyAverageUsagePerHousehold*2
+    # else:
+        # return dailyAverageUsagePerHousehold
+    return dailyAverageUsagePerHousehold

@@ -1,13 +1,9 @@
-import threading
-from datetime import timedelta, datetime
+# from datetime import timedelta, datetime
 from ElectricityGenerator.distribution import *
 from ElectricityUser.businesses import generateBusinessData
-from ElectricityUser.houses import generateHouseData
+from ElectricityUser.houses import generateHouses
 from ElectricityUser.infrastrucure import generateInfrastructureData
-from ElectricityUser.vehicles import generateVehicleData
-
-# TODO:
-#   Create class for session so we can run multiple instances
+from ElectricityUser.vehicles import Vehicle
 
 path = os.path.dirname(os.path.realpath(__file__)) + "//config.json"
 
@@ -18,23 +14,25 @@ arrUsers = []
 with open(path) as json_file:
     conf = json.load(json_file)
 
-    arrUsers.append(generateBusinessData(conf['session']['electricityUser']['businesses']))
-    arrUsers.append(generateHouseData(conf['session']['electricityUser']['houses']))
-    arrUsers.append(generateInfrastructureData(conf['session']['electricityUser']['infrastructure']))
-    arrUsers.append(generateVehicleData(conf["session"]['electricityUser']['vehicles']))
+    arrUsers += generateBusinessData(conf['session']['electricityUser']['businesses'])
+    arrUsers += generateHouses(conf['session']['electricityUser']['houses'])
+    arrUsers += arrUsers, generateInfrastructureData(conf['session']['electricityUser']['infrastucture'])
+    arrUsers += arrUsers, Vehicle.generateUsers(conf["session"]['electricityUser']['vehicles'])
 
 # Initialise timer
-timestamp = datetime.today()
+# timestamp = datetime.today()
 
 while (True):
     # Progress time
-    timestamp += datetime.timedelta(hours=1)
+    # timestamp += datetime.timedelta(hours=1)
 
     # Update Distribution
-    distribution.update(timestamp) # Might need a change
+    # distribution.update(timestamp) # Might need a change
 
     # Update Users
     for user in arrUsers:
-        user.update(timestamp)
+        electricityUsed = user.update(100)
+        print(electricityUsed)
+        
 
     # Put data into database

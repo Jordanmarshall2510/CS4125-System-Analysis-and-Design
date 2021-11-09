@@ -73,10 +73,6 @@ def generateHouses(numberOfHouses):
     for x in range(numberOfHouses):
         house = House()
         house.setHomeID(x + 1)
-        print(house.toString())
         houseData.append(house)
 
     return houseData
-
-generateHouses(10)
-
