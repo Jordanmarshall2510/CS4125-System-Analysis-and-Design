@@ -4,6 +4,7 @@
 # visit http://127.0.0.1:8050/ in your web browser.
 
 import dash
+from dash.dependencies import Input, Output
 import dash_bootstrap_components as dbc
 from dash import dcc
 from dash import html
@@ -20,77 +21,86 @@ colors = {
     'background': '#111111',
     'text': '#7FDBFF'
 }
+df = pd.DataFrame(dict(
+    overall = [4, 6, 1, 3],
+    solar = [1, 3, 2, 4],
+    wind = [1, 2, 3, 4],
+    houses = [2, 3, 4, 5]
+))
 
-# assume you have a "long-form" data frame
-# see https://plotly.com/python/px-arguments/ for more options
-df = pd.DataFrame({
-    "Fruit": ["Apples", "Oranges", "Bananas", "Apples", "Oranges", "Bananas"],
-    "Amount": [4, 1, 2, 2, 4, 5],
-    "City": ["SF", "SF", "SF", "Montreal", "Montreal", "Montreal"]
-})
+fig = px.line(df,) 
 
-fig = px.bar(df, x="Fruit", y="Amount", color="City", barmode="group")
-
-fig.update_layout(
-    plot_bgcolor=colors['background'],
-    paper_bgcolor=colors['background'],
-    font_color=colors['text']
-)
+# fig.update_layout(
+#     plot_bgcolor=colors['background'],
+#     paper_bgcolor=colors['background'],
+#     font_color=colors['text']
+# )
 
 app.layout = html.Div(children=[
                 html.H1(children='Smart City Simulation'),
+                html.Div(id='my-output'),
                 html.Div([
                     html.Div([
-                        html.H3(children='Variables'),
+                        html.H3(children='Overall Electricity Generation and Usage'),
 
-                        # Houses
-                        html.Div(children='''
-                            Houses
-                        '''),
-
-                        dcc.Dropdown(   id='dropdownHouse',
-                                        style={"color": "black"},
-                                        options=[
-                                            { 'label': 'Item 1', 'value': 'foo' },
-                                            { 'label': 'Item 2', 'value': 'bar' },
-                                        ],
+                        dcc.Checklist(
+                            options=[
+                                {'label': 'Overall', 'value': 'overall'},
+                            ],
+                            value=['overall'],
+                            id = "overall"
                         ),
 
-                        # Houses
-                        html.Div(children='''
-                            Business
-                        '''),
-
-                        dcc.Dropdown(   id='dropdownBusiness',
-                                        style={"color": "black"},
-                                        options=[
-                                            { 'label': 'Item 1', 'value': 'foo' },
-                                            { 'label': 'Item 2', 'value': 'bar' },
-                                        ],
+                        html.H3(children='Electricty Generators'),
+                        
+                        dcc.Checklist(
+                            options=[
+                                {'label': 'Solar', 'value': 'solar'},
+                                {'label': 'Wind', 'value': 'wind'},
+                            ],
+                            value=['solar', 'wind'],
+                            id = "generators"
                         ),
 
-                        # Houses
-                        html.Div(children='''
-                            Infrastructure
-                        '''),
-
-                        dcc.Dropdown(   id='dropdownInfrastructure',
-                                        style={"color": "black"},
-                                        options=[
-                                            { 'label': 'Item 1', 'value': 'foo' },
-                                            { 'label': 'Item 2', 'value': 'bar' },
-                                        ],
+                        html.H3(children='Electricty Users'),
+                        
+                        dcc.Checklist(
+                            options=[
+                                {'label': 'Business', 'value': 'business'},
+                                {'label': 'House', 'value': 'house'},
+                                {'label': 'Infrastructure', 'value': 'infrastructure'},
+                                {'label': 'Vehicle', 'value': 'vehicle'}
+                            ],
+                            value=['business', 'house', 'infrastructure', 'vehicle'],
+                            id = "users"
                         ),
-                    ], className='four columns userInput'),
+                    ], className='five columns userInput'),
                     html.Div([
-                        html.H3(children='Results'),
+                        html.H3(children='Simulation'),
                         dcc.Graph(
-                            id='graph2',
+                            id='graph',
                             figure=fig
                         ),  
-                    ], className='eight columns'),
+                    ], className='seven columns'),
                 ], className='row'),
             ])
+
+@app.callback(
+    Output('my-output', 'children'),
+    Input('overall', 'value'),
+    Input('generators', 'value'),
+    Input('users', 'value'),
+)
+def update_output_div(overall, generators, users):
+    inputs = []
+
+    inputs += overall
+    inputs += generators
+    inputs += users
+
+    print(inputs)
+
+    return
 
 if __name__ == '__main__':
     app.run_server(debug=True)
