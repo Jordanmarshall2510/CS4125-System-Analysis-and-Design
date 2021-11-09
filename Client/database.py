@@ -1,23 +1,14 @@
-import mysql.connector
-from mysql.connector import errorcode
+import sqlite3
 
-## MySQL config
-config = {
-	'user': 	'simadmin',
-	'password':	'Password',
-	'host': 	'127.0.0.1',
-	'database':	'smart_city'
-}
+class Database:
+	def __init__(self):
+		self.con = sqlite3.connect("../Server/database.db")
+		self.cur = self.con.cursor()
 
-try:
-	cnx = mysql.connector.connect(**config)
-except mysql.connector.Error as err:
-	if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
-		print("Something is wrong with your user name or password")
-	elif err.errno == errorcode.ER_BAD_DB_ERROR:
-		print("Database does not exist")
-	else:
-		print(err)
-else:
-	print("Connected to database")
-	cnx.close()
+	def selectPowerHistory(self, type):
+		self.cur.execute("SELECT time, power_used FROM users WHERE type = ? ORDER BY time", [type])
+		return self.cur.fetchall()
+		
+
+	def __del__(self):
+		self.con.close()
