@@ -21,20 +21,6 @@ colors = {
     'background': '#111111',
     'text': '#7FDBFF'
 }
-df = pd.DataFrame(dict(
-    overall = [4, 6, 1, 3],
-    solar = [1, 3, 2, 4],
-    wind = [1, 2, 3, 4],
-    houses = [2, 3, 4, 5]
-))
-
-fig = px.line(df,) 
-
-# fig.update_layout(
-#     plot_bgcolor=colors['background'],
-#     paper_bgcolor=colors['background'],
-#     font_color=colors['text']
-# )
 
 app.layout = html.Div(children=[
                 html.H1(children='Smart City Simulation'),
@@ -45,9 +31,9 @@ app.layout = html.Div(children=[
 
                         dcc.Checklist(
                             options=[
-                                {'label': 'Overall', 'value': 'overall'},
+                                {'label': 'Overall', 'value': 'Overall'},
                             ],
-                            value=['overall'],
+                            value=['Overall'],
                             id = "overall"
                         ),
 
@@ -55,10 +41,10 @@ app.layout = html.Div(children=[
                         
                         dcc.Checklist(
                             options=[
-                                {'label': 'Solar', 'value': 'solar'},
-                                {'label': 'Wind', 'value': 'wind'},
+                                {'label': 'Solar', 'value': 'Solar'},
+                                {'label': 'Wind', 'value': 'Wind'},
                             ],
-                            value=['solar', 'wind'],
+                            value=['Solar', 'Wind'],
                             id = "generators"
                         ),
 
@@ -66,12 +52,12 @@ app.layout = html.Div(children=[
                         
                         dcc.Checklist(
                             options=[
-                                {'label': 'Business', 'value': 'business'},
-                                {'label': 'House', 'value': 'house'},
-                                {'label': 'Infrastructure', 'value': 'infrastructure'},
-                                {'label': 'Vehicle', 'value': 'vehicle'}
+                                {'label': 'Business', 'value': 'Business'},
+                                {'label': 'House', 'value': 'House'},
+                                {'label': 'Infrastructure', 'value': 'Infrastructure'},
+                                {'label': 'Vehicle', 'value': 'Vehicle'}
                             ],
-                            value=['business', 'house', 'infrastructure', 'vehicle'],
+                            value=['Business', 'House', 'Infrastructure', 'Vehicle'],
                             id = "users"
                         ),
                     ], className='five columns userInput'),
@@ -86,7 +72,7 @@ app.layout = html.Div(children=[
             ])
 
 @app.callback(
-    Output('my-output', 'children'),
+    Output('graph', 'figure'),
     Input('overall', 'value'),
     Input('generators', 'value'),
     Input('users', 'value'),
@@ -99,8 +85,15 @@ def update_output_div(overall, generators, users):
     inputs += users
 
     print(inputs)
+    fig = px.line(graph.createDF(inputs)) 
 
-    return
+    # fig.update_layout(
+    #     plot_bgcolor=colors['background'],
+    #     paper_bgcolor=colors['background'],
+    #     font_color=colors['text']
+    # )
+
+    return fig
 
 if __name__ == '__main__':
     app.run_server(debug=True)
