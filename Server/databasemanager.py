@@ -21,3 +21,9 @@ except mysql.connector.Error as err:
 else:
 	print("Connected to database")
 	cnx.close()
+
+def insertUsage(timestamp, usageDictionary):
+	pass
+
+def insertGeneration(timestamp, generationDictionary):
+	pass
