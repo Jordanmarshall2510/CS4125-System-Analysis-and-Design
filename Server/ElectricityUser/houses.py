@@ -3,13 +3,14 @@
 # To Do:
 #   Heating
 #	
-#	***Extend electricityUsers and import required functions (update & getElectricityUsed)***
+#import required functions (update & getElectricityUsed)***
 
 import random
 import json
 import os
 
 from ElectricityUser.electricityuser import ElectricityUser
+from Server.ElectricityGenerator.distribution import Distribution
 
 class House(ElectricityUser):
     AVERAGE_HOUSE_VALUE = 0
@@ -72,7 +73,15 @@ class House(ElectricityUser):
 
     # TODO: implement update and getElectricityUsed
     def update(self, date):
-        return -1
+        totalUsage = self.totalElectricityUsage
+        # Weather
+        if 1:
+            pass
+        # Time
+        if 1:
+            pass
+        Distribution.output(totalUsage)
+        return totalUsage
 
     def getElectricityUsed(self):
         return -1
