@@ -10,7 +10,7 @@ import json
 import os
 
 from ElectricityUser.electricityuser import ElectricityUser
-from Server.ElectricityGenerator.distribution import Distribution
+from ElectricityGenerator.distribution import Distribution
 
 class House(ElectricityUser):
     AVERAGE_HOUSE_VALUE = 0
@@ -80,7 +80,7 @@ class House(ElectricityUser):
         # Time
         if 1:
             pass
-        Distribution.output(totalUsage)
+        # Distribution.output(totalUsage)
         return totalUsage
 
     def getElectricityUsed(self):
