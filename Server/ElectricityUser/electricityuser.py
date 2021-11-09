@@ -13,6 +13,6 @@ class ElectricityUser:
 
     @staticmethod
     @abstractmethod
-    def generateUsers(self, count):
-        '''Method to generate a specific amount of the user type'''
+    def generateUsers(count):
+        '''Static method to generate a specific amount of the user type'''
         pass

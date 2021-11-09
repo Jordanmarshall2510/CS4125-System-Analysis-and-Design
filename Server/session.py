@@ -1,14 +1,19 @@
 # from datetime import timedelta, datetime
-from ElectricityGenerator.distribution import *
+import os
+import json
 from ElectricityUser.businesses import Business
 from ElectricityUser.houses import House
 from ElectricityUser.infrastrucure import Infrastructure
 from ElectricityUser.vehicles import Vehicle
+from ElectricityGenerator.distribution import Distribution
 
 path = os.path.dirname(os.path.realpath(__file__)) + "//config.json"
 
-# Craete user array
+# Create user array
 arrUsers = []
+
+# Set distribution
+distribution = Distribution()
 
 # Load users
 with open(path) as json_file:
@@ -31,8 +36,7 @@ while (True):
 
     # Update Users
     for user in arrUsers:
-        electricityUsed = user.update(100)
-        print(electricityUsed)
-        
+        distribution.update(100)
+        electricityUsed = user.update(100)        
 
     # Put data into database

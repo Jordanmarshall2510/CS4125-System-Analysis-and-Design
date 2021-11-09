@@ -1,9 +1,10 @@
 import json
 import os
 import random
-from Server import ElectricityGenerator
+from ElectricityGenerator.electricitygenerator import ElectricityGenerator
 from World import environment
 
+# FIXME: Why does Solar inherit clock ?
 class Solar(ElectricityGenerator, clock):
     wattage=0
 
@@ -13,18 +14,22 @@ class Solar(ElectricityGenerator, clock):
             conf = json.load(json_file)
             self.wattage=conf["electricityGenerator"]["solar"]["output"]
 
-    def update(self):
+    # FIXME: update takes the date/time 
+    def update(self, date):
         if(clock.getDayLight()==True):
             if(clock.getTimeHours()<12):
                 a=random.randint(1,10)
                 b=random.randint(1,3)
-                return (wattage+a)+(b*clock.getTimeHours())
-            else if(clock.getTimeHours()>12):
+                return (self.wattage+a)+(b*clock.getTimeHours())
+            elif(clock.getTimeHours()>12):
                 a=random.randint(1,10)
                 b=random.randint(1,3)
-                return (wattage+a)+(b*(24-clock.getTimeHours())
-        else if(clock.getDayLight()==False):
+                return (self.wattage+a)+(b*(24-clock.getTimeHours()))
+        elif(clock.getDayLight()==False):
             return 0
 
     def getElectricityGenerated(self):
         print("Here electricityGenerator method is defined")
+
+    def generateGenerator(numberOfGenertors):
+        print("Return array here")

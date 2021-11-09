@@ -2,25 +2,32 @@
 import json
 import os
 
+from ElectricityGenerator.solar import Solar
+from ElectricityGenerator.wind import Wind
+
 # TODO:
 #   The distribution class should hold all the electricityGenerator instances
 #   When the update function triggers the class should call the updates on its genetors
 #   and retrive the amount of power using getElectricityGenerated. This power will later
 #   be taken by ElectricityUsers
 
-class distribution:
+class Distribution:
     DISTRIBUTION_SIZE=0 #values read and set in init
     DISTRIBUTION_VALUE=0
 
     def __init__(self):
-
-        path = os.path.dirname(os.path.realpath(__file__)).split("ElectricityUser")[0] + "config.json"
+        path = os.path.dirname(os.path.realpath(__file__)).split("ElectricityGenerator")[0] + "config.json"
 
         with open(path) as json_file:
             conf = json.load(json_file)
 
+        self.arrGenerators = []
+        self.arrGenerators += Solar.generateGenerators(conf["session"]["electricityGenerator"]["solar"])
+        self.arrGenerators += Wind.generateGenerators(conf["session"]["electricityGenerator"]["wind"])
+
         self.DISTRIBUTION_SIZE=conf["electricityGenerator"]["distribution"]["distributionSize"]
         self.DISTRIBUTION_VALUE=conf["electricityGenerator"]["distribution"]["distributionValue"]
+
 
     def getValue(self):
         return self.DISTRIBUTION_VALUE
@@ -78,3 +85,10 @@ class distribution:
                     return True
         else:
             print('wrong unit input!!!')
+
+    def update(self, date):
+        return -1
+        for generator in self.arrGenerators:
+            generator.update(date)
+
+        pass
