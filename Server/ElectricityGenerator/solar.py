@@ -2,10 +2,11 @@ import json
 import os
 import random
 from ElectricityGenerator.electricitygenerator import ElectricityGenerator
-from World import environment
+from World.clock import Clock
+from World.environment import environment
 
-# FIXME: Why does Solar inherit clock ?
-class Solar(ElectricityGenerator, clock):
+# FIXME: Why does Solar inherit Clock ?
+class Solar(ElectricityGenerator, Clock):
     wattage=0
 
     def __init__(self):
@@ -16,16 +17,16 @@ class Solar(ElectricityGenerator, clock):
 
     # FIXME: update takes the date/time 
     def update(self, date):
-        if(clock.getDayLight()==True):
-            if(clock.getTimeHours()<12):
+        if(Clock.getDayLight()==True):
+            if(Clock.getTimeHours()<12):
                 a=random.randint(1,10)
                 b=random.randint(1,3)
-                return (self.wattage+a)+(b*clock.getTimeHours())
-            elif(clock.getTimeHours()>12):
+                return (self.wattage+a)+(b*Clock.getTimeHours())
+            elif(Clock.getTimeHours()>12):
                 a=random.randint(1,10)
                 b=random.randint(1,3)
-                return (self.wattage+a)+(b*(24-clock.getTimeHours()))
-        elif(clock.getDayLight()==False):
+                return (self.wattage+a)+(b*(24-Clock.getTimeHours()))
+        elif(Clock.getDayLight()==False):
             return 0
 
     def getElectricityGenerated(self):

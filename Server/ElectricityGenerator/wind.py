@@ -2,10 +2,10 @@ import json
 import os
 import random
 from ElectricityGenerator.electricitygenerator import ElectricityGenerator
-from World import environment
-
+from World.environment import environment
+from World.weather import Weather
 # FIXME: why does solar inherit weather ?
-class Wind(ElectricityGenerator, weather):
+class Wind(ElectricityGenerator, Weather):
     wattage=0
 
     def __init__(self):
