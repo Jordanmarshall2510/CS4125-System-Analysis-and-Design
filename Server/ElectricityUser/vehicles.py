@@ -40,11 +40,12 @@ class Vehicle(ElectricityUser):
 		self.numberOfPassanagers = numberOfPassanagers
 		self.realRange = int(self.maxRange - (self.maxRange * self.AVERAGE_PASSANGER_RANGE_COST * self.numberOfPassanagers))
 
+	# TODO: implement update and getElectricityUsed methods
 	def update(self, date):
-		return 100
+		return -1
 
 	def getElectricityUsed(self):
-		pass
+		return -1
 
 	def setId(self, newId):
 		self.id = newId

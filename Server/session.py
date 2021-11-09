@@ -1,8 +1,8 @@
 # from datetime import timedelta, datetime
 from ElectricityGenerator.distribution import *
-from ElectricityUser.businesses import generateBusinessData
-from ElectricityUser.houses import generateHouses
-from ElectricityUser.infrastrucure import generateInfrastructureData
+from ElectricityUser.businesses import Business
+from ElectricityUser.houses import House
+from ElectricityUser.infrastrucure import Infrastructure
 from ElectricityUser.vehicles import Vehicle
 
 path = os.path.dirname(os.path.realpath(__file__)) + "//config.json"
@@ -14,9 +14,9 @@ arrUsers = []
 with open(path) as json_file:
     conf = json.load(json_file)
 
-    arrUsers += generateBusinessData(conf['session']['electricityUser']['businesses'])
-    arrUsers += generateHouses(conf['session']['electricityUser']['houses'])
-    arrUsers += generateInfrastructureData(conf['session']['electricityUser']['infrastucture'])
+    arrUsers += Business.generateUsers(conf['session']['electricityUser']['businesses'])
+    arrUsers += House.generateUsers(conf['session']['electricityUser']['houses'])
+    arrUsers += Infrastructure.generateUsers(conf['session']['electricityUser']['infrastucture'])
     arrUsers += Vehicle.generateUsers(conf["session"]['electricityUser']['vehicles'])
 
 # Initialise timer

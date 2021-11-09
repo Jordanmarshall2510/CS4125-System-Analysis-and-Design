@@ -75,18 +75,22 @@ class Infrastructure(ElectricityUser):
     def toString(self):
         return  "ID:" + self.infrastructureID + "\t\t\tTotal Electricity Usage: " + str(self.totalElectricityUsage) + "kWh" + "\t\t\tStreetLight?: " + str(self.hasStreetLight) + "\t\t\tTrafficLight?: " + str(self.hasTrafficLight)
 
-    def getElectricityUsed(self):
-        return self.totalElectricityUsage
-        
-def generateInfrastructureData(numberOfInfrastructure):    # NOTE: Will be dependent on number of houses in future
-    infrastructureData = []
-    infrastructureCounter = 0
+    # TODO: implement update and getElectricityUsed
+    def update(self, date):
+        return -1
 
-    for i in range(numberOfInfrastructure):
-        infrastructure = Infrastructure("R" + str(infrastructureCounter))
-        infrastructure.sumElectricitityUsage()
-        infrastructureData.append(infrastructure)
-        infrastructureCounter += 1
-    
-    return infrastructureData
+    def getElectricityUsed(self):
+        return -1
+        
+    def generateUsers(numberOfInfrastructure):    # NOTE: Will be dependent on number of houses in future
+        infrastructureData = []
+        infrastructureCounter = 0
+
+        for i in range(numberOfInfrastructure):
+            infrastructure = Infrastructure("R" + str(infrastructureCounter))
+            infrastructure.sumElectricitityUsage()
+            infrastructureData.append(infrastructure)
+            infrastructureCounter += 1
+        
+        return infrastructureData
     

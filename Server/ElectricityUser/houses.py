@@ -9,7 +9,9 @@ import random
 import json
 import os
 
-class House():
+from ElectricityUser.electricityuser import ElectricityUser
+
+class House(ElectricityUser):
     AVERAGE_HOUSE_VALUE = 0
     AVERAGE_ELECTRICITY_USAGE = 0
 
@@ -68,11 +70,18 @@ class House():
         else: 
             return dailyAverageUsagePerHousehold + random.randint(0, electricityUsageTolerance) 
 
-def generateHouses(numberOfHouses):
-    houseData = []
-    for x in range(numberOfHouses):
-        house = House()
-        house.setHomeID(x + 1)
-        houseData.append(house)
+    # TODO: implement update and getElectricityUsed
+    def update(self, date):
+        return -1
 
-    return houseData
+    def getElectricityUsed(self):
+        return -1
+
+    def generateUsers(numberOfHouses):
+        houseData = []
+        for x in range(numberOfHouses):
+            house = House()
+            house.setHomeID(x + 1)
+            houseData.append(house)
+
+        return houseData
