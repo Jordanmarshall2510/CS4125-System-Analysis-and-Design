@@ -4,12 +4,16 @@
 # visit http://127.0.0.1:8050/ in your web browser.
 
 import dash
+from dash.dcc.Graph import Graph
 from dash.dependencies import Input, Output
 import dash_bootstrap_components as dbc
 from dash import dcc
 from dash import html
 import plotly.express as px
 import pandas as pd
+from grapher import Grapher
+
+graph = Grapher()
 
 external_stylesheets =  [   
                             'https://codepen.io/chriddyp/pen/bWLwgP.css',
@@ -33,7 +37,6 @@ app.layout = html.Div(children=[
                             options=[
                                 {'label': 'Overall', 'value': 'Overall'},
                             ],
-                            value=['Overall'],
                             id = "overall"
                         ),
 
@@ -44,7 +47,6 @@ app.layout = html.Div(children=[
                                 {'label': 'Solar', 'value': 'Solar'},
                                 {'label': 'Wind', 'value': 'Wind'},
                             ],
-                            value=['Solar', 'Wind'],
                             id = "generators"
                         ),
 
@@ -57,7 +59,6 @@ app.layout = html.Div(children=[
                                 {'label': 'Infrastructure', 'value': 'Infrastructure'},
                                 {'label': 'Vehicle', 'value': 'Vehicle'}
                             ],
-                            value=['Business', 'House', 'Infrastructure', 'Vehicle'],
                             id = "users"
                         ),
                     ], className='five columns userInput'),
@@ -65,7 +66,6 @@ app.layout = html.Div(children=[
                         html.H3(children='Simulation'),
                         dcc.Graph(
                             id='graph',
-                            figure=fig
                         ),  
                     ], className='seven columns'),
                 ], className='row'),
@@ -80,18 +80,29 @@ app.layout = html.Div(children=[
 def update_output_div(overall, generators, users):
     inputs = []
 
-    inputs += overall
-    inputs += generators
-    inputs += users
+    if overall:
+        inputs += overall
+    if generators:
+        inputs += generators
+    if users:
+        inputs += users
 
     print(inputs)
+    
     fig = px.line(graph.createDF(inputs)) 
 
-    # fig.update_layout(
-    #     plot_bgcolor=colors['background'],
-    #     paper_bgcolor=colors['background'],
-    #     font_color=colors['text']
-    # )
+    fig.update_layout(
+        # plot_bgcolor=colors['background'],
+        # paper_bgcolor=colors['background'],
+        # font_color=colors['text']
+
+        xaxis_title="Time",
+        yaxis_title="Electricity (kW)",
+        legend_title="Types",
+        font=dict(
+            size=16,
+        )
+    )
 
     return fig
 
