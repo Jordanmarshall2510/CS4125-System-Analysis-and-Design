@@ -16,8 +16,8 @@ with open(path) as json_file:
 
     arrUsers += generateBusinessData(conf['session']['electricityUser']['businesses'])
     arrUsers += generateHouses(conf['session']['electricityUser']['houses'])
-    arrUsers += arrUsers, generateInfrastructureData(conf['session']['electricityUser']['infrastucture'])
-    arrUsers += arrUsers, Vehicle.generateUsers(conf["session"]['electricityUser']['vehicles'])
+    arrUsers += generateInfrastructureData(conf['session']['electricityUser']['infrastucture'])
+    arrUsers += Vehicle.generateUsers(conf["session"]['electricityUser']['vehicles'])
 
 # Initialise timer
 # timestamp = datetime.today()
