@@ -23,7 +23,7 @@ from ElectricityUser.electricityuser import ElectricityUser
 class Infrastructure(ElectricityUser):
     AVERAGE_ELECTRICITY_USAGE = 0 
     STREET_LIGHT_USAGE = 0 
-    TRAFFIC_LIGHT_USAGE = random.randrange(900, 1600, 1)/100
+    TRAFFIC_LIGHT_USAGE = random.randrange(900, 1600, 1)/10
 
     def __init__(self, infrastructureID):
 
