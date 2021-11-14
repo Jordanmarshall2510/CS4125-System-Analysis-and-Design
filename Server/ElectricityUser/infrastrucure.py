@@ -74,11 +74,12 @@ class Infrastructure(ElectricityUser):
         return  "ID:" + self.infrastructureID + "\t\t\tTotal Electricity Usage: " + str(self.totalElectricityUsage) + "kWh" + "\t\t\tStreetLight?: " + str(self.hasStreetLight) + "\t\t\tTrafficLight?: " + str(self.hasTrafficLight)
 
     # TODO: implement update and getElectricityUsed
-    def update(self, date):
-        return self.totalElectricityUsage
+    def update(self, date): 
+        return -1
 
 
     def getElectricityUsed(self):
+        self.sumElectricitityUsage()
         return self.totalElectricityUsage
 
         
