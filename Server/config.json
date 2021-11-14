@@ -41,7 +41,7 @@
         },
         "infrastructure": {
             "averageElectricityUsage": 30,
-            "streetLightUsage": 0.08
+            "streetLightUsage": 80
         }
     },
     "world": {

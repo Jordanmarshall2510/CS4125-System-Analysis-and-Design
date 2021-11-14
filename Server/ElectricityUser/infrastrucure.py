@@ -20,12 +20,10 @@ import os
 
 from ElectricityUser.electricityuser import ElectricityUser
 
-TRAFFIC_LIGHT_USAGE= random.randrange(90, 160, 1)/100
-
 class Infrastructure(ElectricityUser):
     AVERAGE_ELECTRICITY_USAGE = 0 
     STREET_LIGHT_USAGE = 0 
-    TRAFFIC_LIGHT_USAGE = random.randrange(90, 160, 1)/100
+    TRAFFIC_LIGHT_USAGE = random.randrange(900, 1600, 1)/10
 
     def __init__(self, infrastructureID):
 
@@ -65,7 +63,7 @@ class Infrastructure(ElectricityUser):
         electricityUsageTolerance = 10
         dailyAverageUsage = random.randint(self.AVERAGE_ELECTRICITY_USAGE, self.AVERAGE_ELECTRICITY_USAGE + electricityUsageTolerance)/4 
         if self.setTrafficLight() == True:
-            dailyAverageUsage += TRAFFIC_LIGHT_USAGE
+            dailyAverageUsage += self.TRAFFIC_LIGHT_USAGE
         #Will be reliant on time
         if self.setStreetLight() == True:
             # Clock.getTimeOnly()
@@ -76,11 +74,14 @@ class Infrastructure(ElectricityUser):
         return  "ID:" + self.infrastructureID + "\t\t\tTotal Electricity Usage: " + str(self.totalElectricityUsage) + "kWh" + "\t\t\tStreetLight?: " + str(self.hasStreetLight) + "\t\t\tTrafficLight?: " + str(self.hasTrafficLight)
 
     # TODO: implement update and getElectricityUsed
-    def update(self, date):
+    def update(self, date): 
         return -1
 
+
     def getElectricityUsed(self):
-        return -1
+        self.sumElectricitityUsage()
+        return self.totalElectricityUsage
+
         
     def generateUsers(numberOfInfrastructure):    # NOTE: Will be dependent on number of houses in future
         infrastructureData = []
