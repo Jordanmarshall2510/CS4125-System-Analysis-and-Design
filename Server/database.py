@@ -1,8 +1,10 @@
 import sqlite3
+import os
 
 class Database:
 	def __init__(self):
-		self.con = sqlite3.connect("database.db")
+		path = os.path.dirname(os.path.realpath(__file__)) + "/database.db"
+		self.con = sqlite3.connect(path)
 		self.cur = self.con.cursor()
 		self.setupDatabase()
 

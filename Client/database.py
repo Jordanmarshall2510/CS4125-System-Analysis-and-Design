@@ -1,8 +1,10 @@
+import os
 import sqlite3
 
 class Database:
 	def __init__(self):
-		self.con = sqlite3.connect("../Server/database.db",check_same_thread=False)
+		path = os.path.dirname(os.path.realpath(__file__)) + "/../Server/database.db"
+		self.con = sqlite3.connect(path,check_same_thread=False)
 		self.cur = self.con.cursor()
 
 	def selectUsedPowerHistory(self, type):
