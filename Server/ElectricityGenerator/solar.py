@@ -16,13 +16,13 @@ class Solar(ElectricityGenerator):
             self.wattage=conf["electricityGenerator"]["solar"]["output"]
 
     def setGeneratorID(self, newID):
-            self.GeneratorID = newID
+        self.GeneratorID = newID
 
     def update(self, date):
         current_time = int(date.strftime("%H"))
         if(current_time<6 or current_time>20):
             return 0
-        elif(current_time<12):
+        elif(current_time<=12):
             a=random.randint(1,10)
             b=random.randint(1,3)
             return (self.wattage+a)+(b*current_time)
