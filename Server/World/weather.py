@@ -1,12 +1,20 @@
 #Coded by Jakub Pazej - 18260179
 import json
 import os
+import random
 
 # TODO: Given a date and time it should provide a weather forcast
 
 class Weather:
     weather='' #Sunny, Cloudy, Rain, Snow
     season='' #Summer, Autumn, Winter, Spring
+    counter = 0
+
+    # Base chance for weather to change
+    WEATHER_CHANGE_BASE = 70
+
+    # Rate of change for chance for weather
+    WEATHER_CHANGE_RATE = 1
 
     @staticmethod
     def init():
@@ -48,51 +56,52 @@ class Weather:
             if 9 == int(date.strftime("%m")) and int(date.strftime("%d")) > 21:
                  return 'autumn'
             else:
-                 return 'summer'
+                return 'summer'
         elif 9 <= int(date.strftime("%m")) <= 12 :#autumn
             if 12 == int(date.strftime("%m")) and int(date.strftime("%d")) > 20:
-                 return 'autumn'
+                 return 'winter'
             else:#winter
                  return 'autumn'
-        else:
+        else:#winter
             return 'winter'
-    
-    # @staticmethod
-    # def update(self, date):
-    #     y=random.randint(0,100)
-    #     if (y<self.weather_change):
-    #         x=random.randint(0,100)
-    #         if (self.weather.getSeason().lower()=='summer'):
-    #             if (x < 20):
-    #                 self.weather.setWeather('rain')
-    #             elif (x < 50):
-    #                 self.weather.setWeather('cloudy')
-    #             elif (x >= 50):
-    #                 self.weather.setWeather('sunny')
-    #         elif (self.weather.getSeason().lower()=='autumn'):
-    #             if (x < 5):
-    #                 self.weather.setWeather('snow')
-    #             elif (x < 50):
-    #                 self.weather.setWeather('rain')
-    #             elif (x < 90):
-    #                 self.weather.setWeather('cloudy')
-    #             elif (x >= 90):
-    #                 self.weather.setWeather('sunny')
-    #         elif (self.weather.getSeason().lower()=='winter'):
-    #             if (x < 40):
-    #                 self.weather.setWeather('snow')
-    #             elif (x < 50):
-    #                 self.weather.setWeather('rain')
-    #             elif (x < 90):
-    #                 self.weather.setWeather('cloudy')
-    #             elif (x >= 90):
-    #                 self.weather.setWeather('sunny')
-    #         elif (self.weather.getSeason().lower()=='spring'):
-    #             if (x < 5):
-    #                 self.weather.setWeather('snow')
-    #             elif (x < 50):
-    #                 self.weather.setWeather('rain')
-    #             elif (x < 90):
-    #                 self.weather.setWeather('cloudy')
-    #             elif (x >= 90):
-    #                 self.weather.setWeather('sunny')
+
+    @staticmethod
+    def getWeatherChange(cWeather):
+        fWeather = cWeather
+        if random.randint(Weather.counter,100) < Weather.WEATHER_CHANGE_BASE:
+            Weather.counter += Weather.WEATHER_CHANGE_RATE
+            return cWeather  
+        else:
+            x=random.randint(0,100)
+            if (Weather.getSeason == 'summer'):
+                if (x < 20):
+                    fWeather = 'rain'
+                elif (x < 50):
+                    fWeather = 'cloudy'
+                elif (x >= 50):
+                    fWeather = 'sunny'
+            elif (Weather.getSeason == 'winter'):
+                if (x < 40):
+                    fWeather = 'snow'
+                elif (x < 50):
+                    fWeather = 'rain'
+                elif (x < 90):
+                    fWeather = 'cloudy'
+                elif (x >= 90):
+                    fWeather = 'sunny'
+            else:
+                if (x < 5):
+                    fWeather = 'snow'
+                elif (x < 50):
+                    fWeather = 'rain'
+                elif (x < 90):
+                    fWeather = 'cloudy'
+                elif (x >= 90):
+                    fWeather = 'sunny'
+        if cWeather == fWeather:
+            Weather.counter += Weather.WEATHER_CHANGE_RATE
+            return fWeather
+        else:
+            Weather.counter = 0
+            return fWeather
+
