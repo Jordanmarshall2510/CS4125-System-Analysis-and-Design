@@ -87,8 +87,16 @@ class Distribution:
             print('wrong unit input!!!')
 
     def update(self, date):
-        return -1
-        for generator in self.arrGenerators:
-            generator.update(date)
+        dict = {}
 
-        pass
+        # Update Generators
+        for generator in self.arrGenerators:
+            electricityGenerated = generator.update(date)
+            if type(generator).__name__ in dict:
+                dict[type(generator).__name__] += electricityGenerated
+            else:
+                dict[type(generator).__name__] = electricityGenerated
+
+            # TODO: Add new Electricity to the battery
+
+        return dict

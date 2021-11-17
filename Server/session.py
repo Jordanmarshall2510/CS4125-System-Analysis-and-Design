@@ -5,7 +5,7 @@ from ElectricityUser.businesses import Business
 from ElectricityUser.houses import House
 from ElectricityUser.infrastrucure import Infrastructure
 from ElectricityUser.vehicles import Vehicle
-# from ElectricityGenerator.distribution import Distribution
+from ElectricityGenerator.distribution import Distribution
 from database import Database
 
 path = os.path.dirname(os.path.realpath(__file__)) + "//config.json"
@@ -14,7 +14,7 @@ path = os.path.dirname(os.path.realpath(__file__)) + "//config.json"
 arrUsers = []
 
 # Set distribution
-# distribution = Distribution()
+distribution = Distribution()
 
 # Load users
 with open(path) as json_file:
@@ -31,32 +31,23 @@ db = Database()
 # Initialise timer
 timestamp = datetime.now()
 for i in range(10):
-    # Create dictionary for the day
-    dict = {}
+    # Create dictionary for the Users
+    userDict = {}
 
-    # Update Distribution
-    # distribution.update(timestamp) # Might need a change
+    # Retrieve dictionary for the Generators
+    generatorDict = distribution.update(timestamp) # Might need a change
 
     # Update Users
     for user in arrUsers:
         electricityUsed = user.update(timestamp)
-        if type(user).__name__ in dict:
-            dict[type(user).__name__] += electricityUsed
+        if type(user).__name__ in userDict:
+            userDict[type(user).__name__] += electricityUsed
         else:
-            dict[type(user).__name__] = electricityUsed
-
-    # print("=================================")
-    # print(f"Timestamp: {timestamp}")
-    # print("-- Users --")
-    # for key in dict:
-    #     print(f"Total usage from {key}: {dict[key]}")
-    # print("-- Generators --")
-    # # TODO: print the generator data
-    # print("=================================")
+            userDict[type(user).__name__] = electricityUsed
 
     # Put data into database
-    db.insertUsage(timestamp, dict)
-    # insertGeneration(timestamp, dict) # Will this be a new dictionary ? (How to access solar and wind)
+    db.insertUsage(timestamp, userDict)
+    db.insertGeneration(timestamp, generatorDict) # Will this be a new dictionary ? (How to access solar and wind)
 
     # Progress time
     timestamp += timedelta(hours=1)
