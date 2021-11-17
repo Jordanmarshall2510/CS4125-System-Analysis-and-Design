@@ -122,7 +122,7 @@ def update_output_div(overall, generators, users):
         yaxis_title="Electricity (kW)",
         legend_title="Types",
         font=dict(
-            size=16,
+            size=12,
         )
     )
 
