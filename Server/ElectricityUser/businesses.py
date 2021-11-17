@@ -12,6 +12,7 @@ import json
 import os
 from World.clock import Clock
 from ElectricityUser.electricityuser import ElectricityUser
+from World.weather import Weather
 
 class Business(ElectricityUser):
     path = os.path.dirname(os.path.realpath(__file__)).split("ElectricityUser")[0] + "config.json"
@@ -27,6 +28,18 @@ class Business(ElectricityUser):
 
     # Average square metre per occupant
     AVERAGE_SQM_PER_OCCUPANT = conf["electricityUser"]["businesses"]["averageSQMPerOccupant"]
+
+    # Dictionary for seasons and weather
+    WEATHER_DICTIONARY = {
+        "sunny" : -0.1,
+        "cloudy" : 0,
+        "rain" :0.1,
+        "snow" : 0.2,
+        "summer" : -0.1,
+        "autumn" : 0.1,
+        "spring" : 0,
+        "winter" : 0.2
+    }
 
     def __init__(self, businessID, totalElectricityUsage, propertyValue, propertySize ,numberOfOccupants):
         self.businessID = businessID
@@ -55,7 +68,14 @@ class Business(ElectricityUser):
 
     # TODO: Implement Update and getElectricityUsed
     def update(self, date):
-        return -1
+        totalUsage = self.totalElectricityUsage
+        # Weather
+        totalUsage += totalUsage*self.WEATHER_DICTIONARY[Weather.getSeasonChange(date)]# + totalUsage*self.WEATHER_DICTIONARY[Weather.getSeason()]
+        # Time
+        
+        # Distribution.output(totalUsage)
+        return totalUsage
+
 
     def getElectricityUsed(self):
         return -1
