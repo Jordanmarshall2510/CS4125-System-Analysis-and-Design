@@ -8,28 +8,29 @@ class Weather:
     weather='' #Sunny, Cloudy, Rain, Snow
     season='' #Summer, Autumn, Winter, Spring
 
-    def __init__(self):
+    @staticmethod
+    def init():
         path = os.path.dirname(os.path.realpath(__file__)).split("World")[0] + "config.json"
 
         with open(path) as json_file:
             conf = json.load(json_file)
-            self.delay=conf['world']['weather']['weather']
-            self.weather_change=conf['world']['weather']['season']
+            Weather.delay=conf['world']['weather']['weather']
+            Weather.weather_change=conf['world']['weather']['season']
 
     @staticmethod
-    def getWeather(self):
-        return self.weather
+    def getWeather():
+        return Weather.weather
 
     @staticmethod
-    def setWeather(self, string):
+    def setWeather(string):
         if (string.lower() == 'sunny' or 'cloudy' or 'rain' or 'snow'):
-            self.weather=string.lower()
+            Weather.weather=string.lower()
 
     @staticmethod
-    def getSeason(self):
-        return self.season
+    def getSeason():
+        return Weather.season
 
     @staticmethod
-    def setSeason(self, string):
+    def setSeason(string):
         if (string.lower() == 'summer' or 'autumn' or 'winter' or 'spring'):
-            self.season=string.lower()
+            Weather.season=string.lower()
