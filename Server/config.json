@@ -9,7 +9,8 @@
         "electricityGenerator": {
             "solar": 0,
             "wind": 0
-        }
+        },
+        "time" : "2021-11-17 15:24:30"
     },
     "electricityGenerator": {
         "distribution": {

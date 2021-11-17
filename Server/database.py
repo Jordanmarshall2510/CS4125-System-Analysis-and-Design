@@ -22,7 +22,7 @@ class Database:
 
 	def insertGeneration(self, timestamp, generationDictionary):
 		for key in generationDictionary:
-			self.cur.execute("INSERT INTO users VALUES(?, ?, ?)", (timestamp, key, generationDictionary[key]))
+			self.cur.execute("INSERT INTO generators VALUES(?, ?, ?)", (timestamp, key, generationDictionary[key]))
 
 		self.con.commit()
 

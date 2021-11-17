@@ -6,6 +6,7 @@ from ElectricityUser.houses import House
 from ElectricityUser.infrastrucure import Infrastructure
 from ElectricityUser.vehicles import Vehicle
 from ElectricityGenerator.distribution import Distribution
+from World.weather import Weather
 from database import Database
 
 path = os.path.dirname(os.path.realpath(__file__)) + "//config.json"
@@ -16,8 +17,11 @@ arrUsers = []
 # Set distribution
 distribution = Distribution()
 
+# Initialze weather
+weather = Weather()
+
 # Load users
-with open(path) as json_file:
+with open(path, 'r') as json_file:
     conf = json.load(json_file)
 
     arrUsers += Business.generateUsers(conf['session']['electricityUser']['businesses'])
@@ -29,8 +33,8 @@ with open(path) as json_file:
 db = Database()
 
 # Initialise timer
-timestamp = datetime.now()
-for i in range(10):
+timestamp = datetime.strptime(conf['session']['time'], "%Y-%m-%d %H:%M:%S")
+for i in range(730):
     # Create dictionary for the Users
     userDict = {}
 
@@ -51,5 +55,10 @@ for i in range(10):
 
     # Progress time
     timestamp += timedelta(hours=1)
+
+    # Update Json files
+    conf['session']['time'] = timestamp.strftime("%Y-%m-%d %H:%M:%S")
+    with open(path, 'w') as json_file:
+        json.dump(conf, json_file)
 
 del db
