@@ -30,10 +30,10 @@ class Wind(ElectricityGenerator):
     def getElectricityGenerated(self):
         return self.update()
 
-    def generateGenerator(numberOfGenerators):
+    def generateGenerators(numberOfGenerators):
         generatedArray = []
         for x in range(numberOfGenerators):
             generator = Wind()
             generator.setGeneratorID(x + 1)
-            houseData.append(generator)
+            generatedArray.append(generator)
         return generatedArray
