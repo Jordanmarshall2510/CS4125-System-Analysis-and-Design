@@ -74,12 +74,13 @@ class House(ElectricityUser):
     # TODO: implement update and getElectricityUsed
     def update(self, date):
         totalUsage = self.totalElectricityUsage
+        randomNum = random.randint(0,1)
         # Weather
-        if 1:
-            pass
+        if randomNum:
+            totalUsage += random.randint(0,1000)
         # Time
-        if 1:
-            pass
+        else:
+            totalUsage -= random.randint(0,1000)
         # Distribution.output(totalUsage)
         return totalUsage
 

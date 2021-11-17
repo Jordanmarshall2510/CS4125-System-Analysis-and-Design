@@ -13,7 +13,14 @@ class Grapher:
         result = []
         for i in inputs:
             result.append(i)
-            if i == "Overall":
+            if i == "Overall Generation":
+                value = self.db.selectTotalGeneratedPowerHistory()
+                pos = []
+                for j in value:
+                    num = j[0]
+                    pos.append(num)
+                result.append(pos)
+            elif i == "Overall Usage":
                 value = self.db.selectTotalUsedPowerHistory()
                 pos = []
                 for j in value:

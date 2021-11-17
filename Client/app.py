@@ -28,14 +28,14 @@ colors = {
 
 app.layout = html.Div(children=[
                 html.H1(children='Smart City Simulation'),
-                html.Div(id='my-output'),
                 html.Div([
                     html.Div([
-                        html.H3(children='Overall Electricity Generation and Usage'),
+                        html.H3(children='Overall'),
 
                         dcc.Checklist(
                             options=[
-                                {'label': 'Overall', 'value': 'Overall'},
+                                {'label': 'Overall Generation', 'value': 'Overall Generation'},
+                                {'label': 'Overall Usage', 'value': 'Overall Usage'},
                             ],
                             id = "overall"
                         ),
@@ -61,18 +61,40 @@ app.layout = html.Div(children=[
                             ],
                             id = "users"
                         ),
-                    ], className='five columns userInput'),
+                    ], className='four columns userInput'),
                     html.Div([
                         html.H3(children='Simulation'),
                         dcc.Graph(
                             id='graph',
-                        ),  
-                    ], className='seven columns'),
+                        ), 
+                        html.H3(children='Statistics'),
+                        html.Div([
+                            html.Div([
+                                html.H5("Generated"),
+                                html.Table([
+                                    html.Tr([html.Td("Selected: "), html.Td(id='taskName')]),
+                                    html.Tr([html.Td("Total Generated: "), html.Td(id='totalGenerated')]),
+                                    html.Tr([html.Td("Total Usage: "), html.Td(id='totalUsage')]),
+                                ]),
+                            ],className='six columns'),
+                            html.Div([
+                                html.H5("Usage"),
+                                html.Table([
+                                    html.Tr([html.Td("Selected: "), html.Td(id='taskName1')]),
+                                    html.Tr([html.Td("Total Generated: "), html.Td(id='totalGenerated1')]),
+                                    html.Tr([html.Td("Total Usage: "), html.Td(id='totalUsage1')]),
+                                ]),
+                            ],className='six columns')
+                        ],className='row'),
+                    ], className='eight columns'),
                 ], className='row'),
             ])
 
 @app.callback(
     Output('graph', 'figure'),
+    Output("taskName", "children"),
+    Output("totalGenerated", "children"),
+    Output("totalUsage", "children"),
     Input('overall', 'value'),
     Input('generators', 'value'),
     Input('users', 'value'),
@@ -104,7 +126,7 @@ def update_output_div(overall, generators, users):
         )
     )
 
-    return fig
+    return  fig, ", ".join(inputs), ", ".join(inputs), ", ".join(inputs)
 
 if __name__ == '__main__':
     app.run_server(debug=True)
