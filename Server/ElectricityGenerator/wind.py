@@ -36,5 +36,4 @@ class Wind(ElectricityGenerator):
             generator = Wind()
             generator.setGeneratorID(x + 1)
             generatedArray.append(generator)
-        print(generatedArray)
         return generatedArray

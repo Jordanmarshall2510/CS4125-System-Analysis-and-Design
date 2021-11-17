@@ -8,7 +8,6 @@ class Weather:
     weather='' #Sunny, Cloudy, Rain, Snow
     season='' #Summer, Autumn, Winter, Spring
 
-    @staticmethod
     def __init__(self):
         path = os.path.dirname(os.path.realpath(__file__)).split("World")[0] + "config.json"
 
