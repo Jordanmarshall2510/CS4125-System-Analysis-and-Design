@@ -19,8 +19,7 @@ class Solar(ElectricityGenerator):
             self.GeneratorID = newID
 
     def update(self, date):
-        now = date.now()
-        current_time = now.strftime("%H")
+        current_time = int(date.strftime("%H"))
         if(current_time<6 or current_time>20):
             return 0
         elif(current_time<12):

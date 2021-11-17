@@ -16,7 +16,7 @@ class Wind(ElectricityGenerator):
             self.wattage=conf["electricityGenerator"]["wind"]["output"]
 
     def setGeneratorID(self, newID):
-                self.GeneratorID = newID
+        self.GeneratorID = newID
 
     def update(self, date):
         a=random.randint(1,10)
