@@ -3,7 +3,6 @@ import json
 import os
 import random
 from ElectricityGenerator.electricitygenerator import ElectricityGenerator
-from World.environment import environment
 from datetime import datetime
 
 class Solar(ElectricityGenerator):
@@ -27,11 +26,11 @@ class Solar(ElectricityGenerator):
         elif(current_time<12):
             a=random.randint(1,10)
             b=random.randint(1,3)
-            return (self.wattage+a)+(b*Clock.getTimeHours())
+            return (self.wattage+a)+(b*current_time)
         elif(current_time>12):
             a=random.randint(1,10)
             b=random.randint(1,3)
-            return (self.wattage+a)+(b*(24-Clock.getTimeHours()))
+            return (self.wattage+a)+(b*(24-current_time))
 
     def getElectricityGenerated(self):
         return self.update()

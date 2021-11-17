@@ -3,11 +3,11 @@ import json
 import os
 import random
 from ElectricityGenerator.electricitygenerator import ElectricityGenerator
-from World.environment import environment
 from World.weather import Weather
-# FIXME: why does solar inherit weather ?
-class Wind(ElectricityGenerator, Weather):
+
+class Wind(ElectricityGenerator):
     wattage=0
+    GeneratorID = 0
 
     def __init__(self):
         path = os.path.dirname(os.path.realpath(__file__)).split("ElectricityGenerator")[0] + "config.json"
@@ -15,13 +15,22 @@ class Wind(ElectricityGenerator, Weather):
             conf = json.load(json_file)
             self.wattage=conf["electricityGenerator"]["wind"]["output"]
 
-    # TODO: implement update, getElectricityGenenerated and generateGenerators
-    def update(self):
+    def update(self, date):
         a=random.randint(1,10)
-        return self.wattage+(a*1000)
+        if(Weather.getWeather()=="rain"):
+            return self.wattage+(a*1200)
+        elif(Weather.getWeather()=="cloudy"):
+            return self.wattage+(a*1100)
+        else:
+            return self.wattage+(a*1000)
 
     def getElectricityGenerated(self):
-        print("Here electricityGenerator method is defined")
+        return self.update()
 
-    def generateGenerators(numberOfGenertors):
-        print("return array here")
+    def generateGenerator(numberOfGenerators):
+        generatedArray = []
+        for x in range(numberOfGenerators):
+            generator = Wind()
+            generator.setGeneratorID(x + 1)
+            houseData.append(generator)
+        return generatedArray

@@ -24,7 +24,7 @@ class Weather:
     @staticmethod
     def setWeather(self, string):
         if (string.lower() == 'sunny' or 'cloudy' or 'rain' or 'snow'):
-            self.weather=string
+            self.weather=string.lower()
 
     @staticmethod
     def getSeason(self):
@@ -33,4 +33,4 @@ class Weather:
     @staticmethod
     def setSeason(self, string):
         if (string.lower() == 'summer' or 'autumn' or 'winter' or 'spring'):
-            self.season=string
+            self.season=string.lower()
