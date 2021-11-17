@@ -1,3 +1,4 @@
+#Coded by Jakub Pazej - 18260179
 import json
 import os
 import random
