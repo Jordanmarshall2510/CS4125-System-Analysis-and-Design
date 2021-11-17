@@ -6,6 +6,7 @@ from ElectricityUser.houses import House
 from ElectricityUser.infrastrucure import Infrastructure
 from ElectricityUser.vehicles import Vehicle
 from ElectricityGenerator.distribution import Distribution
+from World.weather import Weather
 from database import Database
 
 path = os.path.dirname(os.path.realpath(__file__)) + "//config.json"
@@ -15,6 +16,9 @@ arrUsers = []
 
 # Set distribution
 distribution = Distribution()
+
+# Initialze weather
+weather = Weather()
 
 # Load users
 with open(path) as json_file:
