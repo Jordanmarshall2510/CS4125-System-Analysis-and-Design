@@ -15,8 +15,8 @@ import os
 from ElectricityUser.electricityuser import ElectricityUser
 
 class Vehicle(ElectricityUser):
+	# Read initialising data from json
 	path = os.path.dirname(os.path.realpath(__file__)).split("ElectricityUser")[0] + "config.json"
-
 	with open(path) as json_file:
 		conf = json.load(json_file)
 		
@@ -33,6 +33,7 @@ class Vehicle(ElectricityUser):
 	AVERAGE_PASSANGER_RANGE_COST = conf["electricityUser"]["vehicles"]["averagePassengerRangeCost"]
 
 	def __init__(self, id, vehicleValue, batteryCapacity, range, numberOfPassanagers):
+		"""Intialize a vechicle object"""
 		self.id = id
 		self.vehicleValue = vehicleValue
 		self.batteryCapacity = batteryCapacity
@@ -48,18 +49,23 @@ class Vehicle(ElectricityUser):
 		return -1
 
 	def setId(self, newId):
+		"""Change vechicle ID"""
 		self.id = newId
 	
 	def setVehicleValue(self, newValue):
+		"""Change vechicle value"""
 		self.vehicleValue = newValue
 
 	def setBatteryCapacity(self, newCapacity):
+		"""Change vechicle battery capacity"""
 		self.batteryCapacity = newCapacity
 
 	def setVehicleRange(self, newRange):
+		"""Change vechicle range"""
 		self.maxRange = newRange
 	
 	def setNumberOfPassanagers(self, newPassanagers):
+		"""Change number of occupants"""
 		self.numberOfPassanagers = newPassanagers
 		self.realRange = int(self.maxRange - (self.maxRange * (self.AVERAGE_PASSANGER_RANGE_COST * self.numberOfPassanagers)))
 
@@ -83,11 +89,5 @@ class Vehicle(ElectricityUser):
 		return vehicleData
 
 	def toString(self):
+		"""Return vechicle as a string"""
 		return  "Vehicle: " + self.id + "\tVehicle Value: €" + str(self.vehicleValue) + "\tTotal Battery Capacity: " + str(self.batteryCapacity) + "kWh" + "\tMax vehicle range: " + str(self.maxRange) + "KM" + "\tReal vehicle range: " + str(self.realRange) + "KM" + "\tNumber of Passanagers: " + str(self.numberOfPassanagers)
-
-# start = time.time()
-# vehicleArray = generateVehicleData(15)
-# for vehicle in vehicleArray:
-# 	print(vehicle.toString())
-# end = time.time()
-# print("Elapsed:\t" + str(end - start) + "s")
