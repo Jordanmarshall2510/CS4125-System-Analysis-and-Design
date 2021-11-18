@@ -11,10 +11,23 @@ import os
 
 from ElectricityUser.electricityuser import ElectricityUser
 from ElectricityGenerator.distribution import Distribution
+from World.weather import Weather
 
 class House(ElectricityUser):
     AVERAGE_HOUSE_VALUE = 0
     AVERAGE_ELECTRICITY_USAGE = 0
+
+    # Dictionary for seasons and weather
+    WEATHER_DICTIONARY = {
+        "sunny" : -0.1,
+        "cloudy" : 0,
+        "rain" :0.1,
+        "snow" : 0.2,
+        "summer" : -0.05,
+        "autumn" : 0.05,
+        "spring" : 0.00,
+        "winter" : 0.01
+    }
 
     def __init__(self):
 
@@ -74,14 +87,11 @@ class House(ElectricityUser):
     # TODO: implement update and getElectricityUsed
     def update(self, date):
         totalUsage = self.totalElectricityUsage
-        randomNum = random.randint(0,1)
-        # Weather
-        if randomNum:
-            totalUsage += random.randint(0,1000)
-        # Time
-        else:
-            totalUsage -= random.randint(0,1000)
-        # Distribution.output(totalUsage)
+        seasonValue = self.WEATHER_DICTIONARY[Weather.getSeasonChange(date)]
+        if seasonValue > 0:
+            totalUsage += random.randint(0, int(totalUsage * seasonValue))
+        elif seasonValue < 0:
+            totalUsage -= random.randint(0, int(totalUsage * -seasonValue))
         return totalUsage
 
     def getElectricityUsed(self):
