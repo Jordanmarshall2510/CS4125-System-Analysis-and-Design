@@ -7,10 +7,8 @@
 #	***Extend electricityUsers and import required functions (update & getElectricityUsed)***
 
 import random
-import time
 import json
 import os
-from World.clock import Clock
 from ElectricityUser.electricityuser import ElectricityUser
 from World.weather import Weather
 
@@ -70,7 +68,7 @@ class Business(ElectricityUser):
     def update(self, date):
         totalUsage = self.totalElectricityUsage
         # Weather
-        totalUsage += totalUsage*self.WEATHER_DICTIONARY[Weather.getSeasonChange(date)]# + totalUsage*self.WEATHER_DICTIONARY[Weather.getSeason()]
+        totalUsage += totalUsage*self.WEATHER_DICTIONARY[Weather.getSeasonChange(date)] + totalUsage*self.WEATHER_DICTIONARY[Weather.getWeatherChange('rain')]
         # Time
         
         # Distribution.output(totalUsage)
