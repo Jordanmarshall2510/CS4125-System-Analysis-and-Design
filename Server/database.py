@@ -9,8 +9,8 @@ class Database:
 		self.setupDatabase()
 
 	def setupDatabase(self):
-		self.cur.execute("CREATE TABLE IF NOT EXISTS users(time DATETIME, type VARCHAR(16), power_used INT)")
-		self.cur.execute("CREATE TABLE IF NOT EXISTS generators(time DATETIME, type VARCHAR(16), power_generated INT)")
+		self.cur.execute("CREATE TABLE IF NOT EXISTS users(time DATETIME, type VARCHAR(14), power_used INT)")
+		self.cur.execute("CREATE TABLE IF NOT EXISTS generators(time DATETIME, type VARCHAR(14), power_generated INT)")
 		self.con.commit()
 		pass
 
