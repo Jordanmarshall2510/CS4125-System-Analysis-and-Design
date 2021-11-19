@@ -7,7 +7,7 @@ import time
 from World.clock import Clock
 from World.weather import Weather
 
-class environment:
+class Environment:
     delay=0
     weather_change=0
     clock= Clock()
@@ -22,12 +22,12 @@ class environment:
             self.delay=conf['world']['environment']['delay']
             self.weather_change=conf['world']['environment']['change']
 
-    def getTime(self):
-        return self.clock.getTime()
+    def get_time(self):
+        return self.clock.get_time()
 
-    def setTime(self, string):
-        self.clock.setTime(string)
-        date = time.localtime(self.clock.getTimeSeconds())
+    def set_time(self, string):
+        self.clock.set_time(string)
+        date = time.localtime(self.clock.get_time_seconds())
         if ((date.tm_mon>=3 and date.tm_mday>=20)or(date.tm_mon<=6 and date.tm_mday<21)):#spring
             self.weather.setSeason('spring')
         elif ((date.tm_mon>=6 and date.tm_mday>=21)or(date.tm_mon<=9 and date.tm_mday<22)):#summer
@@ -37,20 +37,20 @@ class environment:
         elif ((date.tm_mon>=12 and date.tm_mday>=21)or(date.tm_mon<=3 and date.tm_mday<20)):#winter
             self.weather.setSeason('winter')
 
-    def getWeather(self):
-        return self.weather.getWeather()
+    def get_weather(self):
+        return self.weather.get_weather()
 
-    def setWeather(self, string):
-        self.weather.setWeather(string)
+    def set_weather(self, string):
+        self.weather.set_weather(string)
 
-    def getSeason(self):
-        return self.weather.getSeason()
+    def get_season(self):
+        return self.weather.get_season()
 
     def start(self):
         self.start=True
         while (self.start == True):
             time.sleep(self.delay)
-            date = time.localtime(self.clock.getTimeSeconds())
+            date = time.localtime(self.clock.get_time_seconds())
             if ((date.tm_mon>=3 and date.tm_mday>=20)or(date.tm_mon<=6 and date.tm_mday<21)):#spring
                self.weather.setSeason('spring')
             elif ((date.tm_mon>=6 and date.tm_mday>=21)or(date.tm_mon<=9 and date.tm_mday<22)):#summer
@@ -62,44 +62,44 @@ class environment:
             y=random.randint(0,100)
             if (y<self.weather_change):
                 x=random.randint(0,100)
-                if (self.weather.getSeason().lower()=='summer'):
+                if (self.weather.get_season().lower()=='summer'):
                     if (x < 20):
-                        self.weather.setWeather('rain')
+                        self.weather.set_weather('rain')
                     elif (x < 50):
-                        self.weather.setWeather('cloudy')
+                        self.weather.set_weather('cloudy')
                     elif (x >= 50):
-                        self.weather.setWeather('sunny')
-                elif (self.weather.getSeason().lower()=='autumn'):
+                        self.weather.set_weather('sunny')
+                elif (self.weather.get_season().lower()=='autumn'):
                     if (x < 5):
-                        self.weather.setWeather('snow')
+                        self.weather.set_weather('snow')
                     elif (x < 50):
-                        self.weather.setWeather('rain')
+                        self.weather.set_weather('rain')
                     elif (x < 90):
-                        self.weather.setWeather('cloudy')
+                        self.weather.set_weather('cloudy')
                     elif (x >= 90):
-                        self.weather.setWeather('sunny')
-                elif (self.weather.getSeason().lower()=='winter'):
+                        self.weather.set_weather('sunny')
+                elif (self.weather.get_season().lower()=='winter'):
                     if (x < 40):
-                        self.weather.setWeather('snow')
+                        self.weather.set_weather('snow')
                     elif (x < 50):
-                        self.weather.setWeather('rain')
+                        self.weather.set_weather('rain')
                     elif (x < 90):
-                        self.weather.setWeather('cloudy')
+                        self.weather.set_weather('cloudy')
                     elif (x >= 90):
-                        self.weather.setWeather('sunny')
-                elif (self.weather.getSeason().lower()=='spring'):
+                        self.weather.set_weather('sunny')
+                elif (self.weather.get_season().lower()=='spring'):
                     if (x < 5):
-                        self.weather.setWeather('snow')
+                        self.weather.set_weather('snow')
                     elif (x < 50):
-                        self.weather.setWeather('rain')
+                        self.weather.set_weather('rain')
                     elif (x < 90):
-                        self.weather.setWeather('cloudy')
+                        self.weather.set_weather('cloudy')
                     elif (x >= 90):
-                        self.weather.setWeather('sunny')
-            self.clock.setTimeSeconds(self.clock.getTimeSeconds()+3600)
+                        self.weather.set_weather('sunny')
+            self.clock.set_time_seconds(self.clock.get_time_seconds()+3600)
 
     def stop(self):
         self.start=False
 
-    def getDaylight(self):
-        return self.clock.getDayLight()
+    def get_daylight(self):
+        return self.clock.get_daylight()

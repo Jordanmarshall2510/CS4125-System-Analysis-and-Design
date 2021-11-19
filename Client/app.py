@@ -74,7 +74,7 @@ app.layout = html.Div(children=[
                                 html.Table([
                                     html.Tr([html.Td("Selected: "), html.Td(id='taskName')]),
                                     html.Tr([html.Td("Total Generated: "), html.Td(id='totalGenerated')]),
-                                    html.Tr([html.Td("Total Usage: "), html.Td(id='totalUsage')]),
+                                    html.Tr([html.Td("Total Usage: "), html.Td(id='total_usage')]),
                                 ]),
                             ],className='six columns'),
                             html.Div([
@@ -82,7 +82,7 @@ app.layout = html.Div(children=[
                                 html.Table([
                                     html.Tr([html.Td("Selected: "), html.Td(id='taskName1')]),
                                     html.Tr([html.Td("Total Generated: "), html.Td(id='totalGenerated1')]),
-                                    html.Tr([html.Td("Total Usage: "), html.Td(id='totalUsage1')]),
+                                    html.Tr([html.Td("Total Usage: "), html.Td(id='total_usage1')]),
                                 ]),
                             ],className='six columns')
                         ],className='row'),
@@ -94,7 +94,7 @@ app.layout = html.Div(children=[
     Output('graph', 'figure'),
     Output("taskName", "children"),
     Output("totalGenerated", "children"),
-    Output("totalUsage", "children"),
+    Output("total_usage", "children"),
     Input('overall', 'value'),
     Input('generators', 'value'),
     Input('users', 'value'),
