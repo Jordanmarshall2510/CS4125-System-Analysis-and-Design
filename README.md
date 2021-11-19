@@ -1,9 +1,7 @@
 # Smart City
-![](https://www.ul.ie/sites/all/themes/base_theme/dist/img/ul-logo.jpg)
+![](https://gamma1.ul.ie/LabStats/Images/Image-UniversityOfLimerick.png)
 
 **Table of Contents**
-
-[TOC]
 
 ##Narrative
 Smart City is a project that our team envisioned to simulate a futuristic smart city, a city in the near future where the majority of modes of transportation are electric and humanity is sourcing most of its power from renewable resources.
