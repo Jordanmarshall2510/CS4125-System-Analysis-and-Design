@@ -1,5 +1,6 @@
 # Smart City
 ![](https://www.ul.ie/sites/all/themes/base_theme/dist/img/ul-logo.jpg)
+
 **Table of Contents**
 
 [TOC]
