@@ -1,7 +1,9 @@
+from datetime import datetime
 import sqlite3
 import os
 
 class Database:
+	"""Database class dealing with insert queries for the simulation"""
 	def __init__(self):
 		"""Initialze Database object & connect to database"""
 		path = os.path.dirname(os.path.realpath(__file__)) + "/database.db"
@@ -16,7 +18,7 @@ class Database:
 		self.con.commit()
 		pass
 
-	def insert_usage(self, timestamp, usage_dictionary):
+	def insert_usage(self, timestamp : datetime, usage_dictionary : dict):
 		"""Insert user data into the user table
 
 		Arguments: 
@@ -30,7 +32,7 @@ class Database:
 
 		self.con.commit()
 
-	def insert_generation(self, timestamp, generation_dictionary):
+	def insert_generation(self, timestamp : datetime, generation_dictionary : dict):
 		"""Insert generator data into the generator table
 
 		Arguments: 

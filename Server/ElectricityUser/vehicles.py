@@ -8,6 +8,7 @@
 #	***Extend electricity_users and import required functions (update & ger_electricity_used)***
 
 # import time
+from datetime import datetime
 import random
 import json
 import os
@@ -15,6 +16,7 @@ import os
 from ElectricityUser.electricityuser import ElectricityUser
 
 class Vehicle(ElectricityUser):
+	"""Vehicle class representing vehicles in the city simulation"""
 	# Read initialising data from json
 	path = os.path.dirname(os.path.realpath(__file__)).split("ElectricityUser")[0] + "config.json"
 	with open(path) as json_file:
@@ -42,34 +44,34 @@ class Vehicle(ElectricityUser):
 		self.realRange = int(self.max_range - (self.max_range * self.average_new_passenger_range_cost * self.number_of_new_passengers))
 
 	# TODO: implement update and ger_electricity_used methods
-	def update(self, date):
+	def update(self, date : datetime):
 		return -1
 
 	def ger_electricity_used(self):
 		return -1
 
-	def setId(self, new_id):
+	def setId(self, new_id : int):
 		"""Change vehicle ID"""
 		self.id = new_id
 	
-	def set_vehicle_value(self, new_value):
+	def set_vehicle_value(self, new_value : int):
 		"""Change vehicle value"""
 		self.vehicle_value = new_value
 
-	def set_battery_capacity(self, new_capacity):
+	def set_battery_capacity(self, new_capacity : int):
 		"""Change vehicle battery capacity"""
 		self.battery_capacity = new_capacity
 
-	def setVehicleRange(self, new_range):
+	def setVehicleRange(self, new_range : int):
 		"""Change vehicle range"""
 		self.max_range = new_range
 	
-	def set_number_of_new_passengers(self, new_new_passengers):
+	def set_number_of_new_passengers(self, new_new_passengers : int):
 		"""Change number of occupants"""
 		self.number_of_new_passengers = new_new_passengers
 		self.realRange = int(self.max_range - (self.max_range * (self.average_new_passenger_range_cost * self.number_of_new_passengers)))
 
-	def generate_users(number_of_vehicles):
+	def generate_users(number_of_vehicles : int):
 		vehicle_data = []
 		vehicle_value_tolerance = 10000
 		battery_capacity_tolerance = 15
@@ -88,6 +90,6 @@ class Vehicle(ElectricityUser):
 			vehicle_data.append(vehicle)
 		return vehicle_data
 
-	def to_string(self):
+	def to_string(self) -> str:
 		"""Return vehicle as a string"""
 		return  "Vehicle: " + self.id + "\tVehicle Value: €" + str(self.vehicle_value) + "\tTotal Battery Capacity: " + str(self.battery_capacity) + "kWh" + "\tMax vehicle range: " + str(self.max_range) + "KM" + "\tReal vehicle range: " + str(self.realRange) + "KM" + "\tNumber of passengers: " + str(self.number_of_new_passengers)
