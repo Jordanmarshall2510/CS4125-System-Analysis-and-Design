@@ -11,7 +11,7 @@ The goal of our project is to allow the user to change the amounts of renewables
 The user will be able to change multiple conditions for the simulation, that would include conditions like weather, time, season, average energy spent by one family home and more.
 This will allow the user to play around with the simulation and see how that impacts the simulated city.
 
-##Project Roles
+## Project Roles
 | Role | Description  | Designated Team Member |
 | :-----: | :-----: | :-----: |
 | Project Manager | Sets up meetings, creates project plan, tracks progress | Jordan Marshall |
