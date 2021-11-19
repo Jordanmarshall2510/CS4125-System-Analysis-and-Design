@@ -8,7 +8,7 @@ class ElectricityUser:
 		pass
 
 	@abstractmethod
-	def ger_electricity_used(self) -> int:
+	def get_electricity_used(self) -> int:
 		'''Method to get the total electricity used by the user'''
 		pass
 

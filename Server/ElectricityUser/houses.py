@@ -3,7 +3,7 @@
 # To Do:
 #   Heating
 #	
-#import required functions (update & ger_electricity_used)***
+#import required functions (update & get_electricity_used)***
 
 import random
 import json
@@ -94,7 +94,7 @@ class House(ElectricityUser):
             total_usage -= random.randint(0, int(total_usage * -season_value))
         return total_usage
 
-    def ger_electricity_used(self):
+    def get_electricity_used(self):
         return -1
 
     def generate_users(number_of_houses):

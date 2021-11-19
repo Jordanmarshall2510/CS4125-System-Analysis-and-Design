@@ -5,7 +5,7 @@
 #	Reduce battery performance overtime
 #	NOTE: Battery degredation on average is 1% SOH per 6 months
 #	
-#	***Extend electricity_users and import required functions (update & ger_electricity_used)***
+#	***Extend electricity_users and import required functions (update & get_electricity_used)***
 
 # import time
 from datetime import datetime
@@ -43,11 +43,11 @@ class Vehicle(ElectricityUser):
 		self.number_of_new_passengers = number_of_new_passengers
 		self.realRange = int(self.max_range - (self.max_range * self.average_new_passenger_range_cost * self.number_of_new_passengers))
 
-	# TODO: implement update and ger_electricity_used methods
+	# TODO: implement update and get_electricity_used methods
 	def update(self, date : datetime):
 		return -1
 
-	def ger_electricity_used(self):
+	def get_electricity_used(self):
 		return -1
 
 	def setId(self, new_id : int):

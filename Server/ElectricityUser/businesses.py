@@ -4,7 +4,7 @@
 #   
 #   put global constants in class and use self. / House. to access examples (vehicles.py: lines{28, 36, 66})
 #	
-#	***Extend electricity_users and import required functions (update & ger_electricity_used)***
+#	***Extend electricity_users and import required functions (update & get_electricity_used)***
 
 import random
 import json
@@ -74,8 +74,7 @@ class Business(ElectricityUser):
         # Distribution.output(total_usage)
         return total_usage
 
-
-    def ger_electricity_used(self):
+    def get_electricity_used(self):
         return -1
 
     def generate_users(number_of_businesses):

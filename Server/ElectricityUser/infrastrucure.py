@@ -13,7 +13,7 @@
 #
 #   put global constants in class and use self. / House. to access examples (vehicles.py: lines{28, 36, 66})
 #	
-#	***Extend electricity_users and import required functions (update & ger_electricity_used)***
+#	***Extend electricity_users and import required functions (update & get_electricity_used)***
 import random
 import json
 import os
@@ -73,12 +73,11 @@ class Infrastructure(ElectricityUser):
     def to_string(self):
         return  "ID:" + self.infrastructure_id + "\t\t\tTotal Electricity Usage: " + str(self.total_electricity_usage) + "kWh" + "\t\t\tStreetLight?: " + str(self.has_street_light) + "\t\t\tTrafficLight?: " + str(self.has_traffic_light)
 
-    # TODO: implement update and ger_electricity_used
+    # TODO: implement update and get_electricity_used
     def update(self, date): 
         return -1
 
-
-    def ger_electricity_used(self):
+    def get_electricity_used(self):
         self.sum_electricity_usage()
         return self.total_electricity_usage
 
