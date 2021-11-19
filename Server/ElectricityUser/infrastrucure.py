@@ -93,4 +93,6 @@ class Infrastructure(ElectricityUser):
             infrastructure_counter += 1
         
         return infrastructure_data
-    
+
+# List outside of class for importing
+generate_infrastructure = Infrastructure.generate_users

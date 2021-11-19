@@ -105,3 +105,6 @@ class House(ElectricityUser):
             house_data.append(house)
 
         return house_data
+
+# List outside of class for importing
+generate_houses = House.generate_users

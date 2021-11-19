@@ -93,3 +93,6 @@ class Vehicle(ElectricityUser):
 	def to_string(self) -> str:
 		"""Return vehicle as a string"""
 		return  "Vehicle: " + self.id + "\tVehicle Value: €" + str(self.vehicle_value) + "\tTotal Battery Capacity: " + str(self.battery_capacity) + "kWh" + "\tMax vehicle range: " + str(self.max_range) + "KM" + "\tReal vehicle range: " + str(self.realRange) + "KM" + "\tNumber of passengers: " + str(self.number_of_new_passengers)
+
+# List outside of class for importing
+generate_vehicles = Vehicle.generate_users

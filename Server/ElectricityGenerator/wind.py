@@ -37,3 +37,6 @@ class Wind(ElectricityGenerator):
             generator.set_generator_id(x + 1)
             generated_array.append(generator)
         return generated_array
+
+# List outside of class for importing
+generate_wind_turbines = Wind.generate_generators
