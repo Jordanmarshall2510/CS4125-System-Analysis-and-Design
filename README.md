@@ -1,5 +1,6 @@
-# Smart City
 ![](https://gamma1.ul.ie/LabStats/Images/Image-UniversityOfLimerick.png)
+
+# Smart City
 
 **Table of Contents**
 - [Smart City](#smart-city)
