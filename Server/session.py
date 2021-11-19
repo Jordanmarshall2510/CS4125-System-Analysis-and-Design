@@ -12,7 +12,7 @@ from database import Database
 path = os.path.dirname(os.path.realpath(__file__)) + "//config.json"
 
 # Create user array
-arrUsers = []
+users_array = []
 
 # Set distribution
 distribution = Distribution()
@@ -24,10 +24,10 @@ weather = Weather()
 with open(path, 'r') as json_file:
     conf = json.load(json_file)
 
-    arrUsers += Business.generateUsers(conf['session']['electricityUser']['businesses'])
-    arrUsers += House.generateUsers(conf['session']['electricityUser']['houses'])
-    arrUsers += Infrastructure.generateUsers(conf['session']['electricityUser']['infrastucture'])
-    arrUsers += Vehicle.generateUsers(conf["session"]['electricityUser']['vehicles'])
+    users_array += Business.generate_users(conf['session']['electricity_user']['businesses'])
+    users_array += House.generate_users(conf['session']['electricity_user']['houses'])
+    users_array += Infrastructure.generate_users(conf['session']['electricity_user']['infrastructure'])
+    users_array += Vehicle.generate_users(conf["session"]['electricity_user']['vehicles'])
 
 # Connect to database
 db = Database()
@@ -36,22 +36,22 @@ db = Database()
 timestamp = datetime.strptime(conf['session']['time'], "%Y-%m-%d %H:%M:%S")
 for i in range(730):
     # Create dictionary for the Users
-    userDict = {}
+    user_dictionary = {}
 
     # Retrieve dictionary for the Generators
-    generatorDict = distribution.update(timestamp) # Might need a change
+    generator_dictionary = distribution.update(timestamp) # Might need a change
 
     # Update Users
-    for user in arrUsers:
+    for user in users_array:
         electricityUsed = user.update(timestamp)
-        if type(user).__name__ in userDict:
-            userDict[type(user).__name__] += electricityUsed
+        if type(user).__name__ in user_dictionary:
+            user_dictionary[type(user).__name__] += electricityUsed
         else:
-            userDict[type(user).__name__] = electricityUsed
+            user_dictionary[type(user).__name__] = electricityUsed
 
     # Put data into database
-    db.insertUsage(timestamp, userDict)
-    db.insertGeneration(timestamp, generatorDict) # Will this be a new dictionary ? (How to access solar and wind)
+    db.insert_usage(timestamp, user_dictionary)
+    db.insert_generation(timestamp, generator_dictionary) # Will this be a new dictionary ? (How to access solar and wind)
 
     # Progress time
     timestamp += timedelta(hours=1)

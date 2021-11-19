@@ -7,12 +7,12 @@ class ElectricityUser:
         pass
 
     @abstractmethod
-    def getElectricityUsed(self):
+    def ger_electricity_used(self):
         '''Method to get the total electricity used by the user'''
         pass
 
     @staticmethod
     @abstractmethod
-    def generateUsers(count):
+    def generate_users(count):
         '''Static method to generate a specific amount of the user type'''
         pass

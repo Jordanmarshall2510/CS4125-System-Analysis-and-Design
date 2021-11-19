@@ -13,35 +13,35 @@ class Clock():
             conf = json.load(json_file)
         self.time=time.mktime(time.strptime(conf['world']['clock']['date'], '%d.%m.%Y, %H:%M:%S'))
 
-    def getTime(self):
+    def get_time(self):
         return time.strftime("%A, %d.%m.%Y, %H:%M:%S",time.localtime(self.time))
 
-    def getTimeOnly(self):
+    def get_time_only(self):
         return time.strftime("%H:%M:%S",time.localtime(self.time))
 
-    def getTimeHours(self):
+    def get_time_hours(self):
         return time.strftime("%H",time.localtime(self.time))
 
-    def getTimeMinutes(self):
+    def get_time_minutes(self):
         return time.strftime("%M",time.localtime(self.time))
 
-    def getTimeSeconds(self):
+    def get_time_seconds(self):
         return time.strftime("%S",time.localtime(self.time))
 
-    def getTimeSeconds(self):
+    def get_time_seconds(self):
         return self.time
 
-    def setTime(self, string):
+    def set_time(self, string):
         try:
             self.time=time.mktime(time.strptime(string, '%d.%m.%Y, %H:%M:%S'))
         except Exception as e:
             print("Wrong input!!!")
 
-    def setTimeSeconds(self, value):
+    def set_time_seconds(self, value):
             self.time=value
 
-    def getDaylight(self):
-        if(8<int(self.getTimeHours()<18)):
+    def get_daylight(self):
+        if(8<int(self.get_time_hours()<18)):
             return True
         else:
             return False
