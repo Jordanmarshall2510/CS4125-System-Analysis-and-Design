@@ -3,7 +3,7 @@
 
 **Table of Contents**
 
-##Narrative
+## Narrative
 Smart City is a project that our team envisioned to simulate a futuristic smart city, a city in the near future where the majority of modes of transportation are electric and humanity is sourcing most of its power from renewable resources.
 
 The goal of our project is to allow the user to change the amounts of renewables that generate electricity (i.e. Solar, Wind) and the amounts of things that spend it (i.e. houses, cars, public infrastructure etc.). This will allow the user to see what amount of renewables they would need to support a city of different sizes, or see how many electricity spenders they could support with different numbers of electricity generators.
