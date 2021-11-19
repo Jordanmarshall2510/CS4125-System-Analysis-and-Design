@@ -2,8 +2,6 @@
 import json
 import os
 
-from ElectricityGenerator.electricitygenerator import ElectricityGenerator
-
 # TODO:
 #   The distribution class should hold all the electricity_generator instances
 #   When the update function triggers the class should call the updates on its generators
