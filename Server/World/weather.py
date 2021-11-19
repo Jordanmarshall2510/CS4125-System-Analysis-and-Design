@@ -8,13 +8,10 @@ import random
 class Weather:
     weather='' #Sunny, Cloudy, Rain, Snow
     season='' #Summer, Autumn, Winter, Spring
-    counter = 0
-
-    # Base chance for weather to change
-    WEATHER_CHANGE_BASE = 70
-
-    # Rate of change for chance for weather
-    WEATHER_CHANGE_RATE = 1
+    climate='' #Tropical, Dry, Temperate, Continental, Polar
+    weather_change_base = 70 #Base chance for weather to change
+    weather_change_rate = 1 #Rate of change for chance for weather
+    counter = 0 #counter for increasing chance of weather change
 
     @staticmethod
     def init():
@@ -22,29 +19,32 @@ class Weather:
 
         with open(path) as json_file:
             conf = json.load(json_file)
+            Weather.weather=conf['world']['weather']['weather']
+            Weather.season=conf['world']['weather']['season']
+            Weather.climate=conf['world']['weather']['climate']
             Weather.delay=conf['world']['weather']['weather']
             Weather.weather_change=conf['world']['weather']['season']
 
     @staticmethod
-    def getWeather():
+    def get_weather():
         return Weather.weather
 
     @staticmethod
-    def setWeather(string):
+    def set_weather(string):
         if (string.lower() == 'sunny' or 'cloudy' or 'rain' or 'snow'):
             Weather.weather=string.lower()
 
     @staticmethod
-    def getSeason():
+    def get_season():
         return Weather.season
 
     @staticmethod
-    def setSeason(string):
+    def set_season(string):
         if (string.lower() == 'summer' or 'autumn' or 'winter' or 'spring'):
             Weather.season=string.lower()
 
     @staticmethod
-    def getSeasonChange(date):
+    def get_season_change(date):
         if 3 <= int(date.strftime("%m")) <= 6 :#spring
             if 3 == int(date.strftime("%m")) and int(date.strftime("%d")) < 20:
                  return 'winter'
@@ -66,42 +66,44 @@ class Weather:
             return 'winter'
 
     @staticmethod
-    def getWeatherChange(cWeather):
-        fWeather = cWeather
-        if random.randint(Weather.counter,100) < Weather.WEATHER_CHANGE_BASE:
-            Weather.counter += Weather.WEATHER_CHANGE_RATE
-            return cWeather  
+    def get_weather_change(current_weather):
+        future_weather = current_weather
+
+        if random.randint(Weather.counter,100) < Weather.weather_change_base:
+            Weather.counter += Weather.weather_change_rate
+            return current_weather
         else:
             x=random.randint(0,100)
-            if (Weather.getSeason == 'summer'):
+            if (Weather.get_season == 'summer'):
                 if (x < 20):
-                    fWeather = 'rain'
+                    future_weather = 'rain'
                 elif (x < 50):
-                    fWeather = 'cloudy'
+                    future_weather = 'cloudy'
                 elif (x >= 50):
-                    fWeather = 'sunny'
-            elif (Weather.getSeason == 'winter'):
+                    future_weather = 'sunny'
+            elif (Weather.get_season == 'winter'):
                 if (x < 40):
-                    fWeather = 'snow'
+                    future_weather = 'snow'
                 elif (x < 50):
-                    fWeather = 'rain'
+                    future_weather = 'rain'
                 elif (x < 90):
-                    fWeather = 'cloudy'
+                    future_weather = 'cloudy'
                 elif (x >= 90):
-                    fWeather = 'sunny'
+                    future_weather = 'sunny'
             else:
                 if (x < 5):
-                    fWeather = 'snow'
+                    future_weather = 'snow'
                 elif (x < 50):
-                    fWeather = 'rain'
+                    future_weather = 'rain'
                 elif (x < 90):
-                    fWeather = 'cloudy'
+                    future_weather = 'cloudy'
                 elif (x >= 90):
-                    fWeather = 'sunny'
-        if cWeather == fWeather:
-            Weather.counter += Weather.WEATHER_CHANGE_RATE
-            return fWeather
+                    future_weather = 'sunny'
+
+        if current_weather == future_weather:
+            Weather.counter += Weather.weather_change_rate
+            return future_weather
         else:
             Weather.counter = 0
-            return fWeather
+            return future_weather
 

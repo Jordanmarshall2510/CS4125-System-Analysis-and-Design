@@ -7,40 +7,40 @@ class Database:
 		path = os.path.dirname(os.path.realpath(__file__)) + "/database.db"
 		self.con = sqlite3.connect(path)
 		self.cur = self.con.cursor()
-		self.setupDatabase()
+		self.setup_database()
 
-	def setupDatabase(self):
+	def setup_database(self):
 		"""Setup the database if it doesnt exist already"""
 		self.cur.execute("CREATE TABLE IF NOT EXISTS users(time DATETIME, type VARCHAR(14), power_used INT)")
 		self.cur.execute("CREATE TABLE IF NOT EXISTS generators(time DATETIME, type VARCHAR(14), power_generated INT)")
 		self.con.commit()
 		pass
 
-	def insertUsage(self, timestamp, usageDictionary):
+	def insert_usage(self, timestamp, usage_dictionary):
 		"""Insert user data into the user table
 
 		Arguments: 
 			
 		timestamp -- when the data was recorded (simulation time)
 		
-		usageDictionary -- python dictionary in format dict[type] = power_used
+		usage_dictionary -- python dictionary in format dict[type] = power_used
 		"""
-		for key in usageDictionary:
-			self.cur.execute("INSERT INTO users VALUES(?, ?, ?)", (timestamp, key, usageDictionary[key]))
+		for key in usage_dictionary:
+			self.cur.execute("INSERT INTO users VALUES(?, ?, ?)", (timestamp, key, usage_dictionary[key]))
 
 		self.con.commit()
 
-	def insertGeneration(self, timestamp, generationDictionary):
+	def insert_generation(self, timestamp, generation_dictionary):
 		"""Insert generator data into the generator table
 
 		Arguments: 
 			
 		timestamp -- when the data was recorded (simulation time)
 		
-		generationDictionary -- python dictionary in format dict[type] = power_generated
+		generation_dictionary -- python dictionary in format dict[type] = power_generated
 		"""
-		for key in generationDictionary:
-			self.cur.execute("INSERT INTO generators VALUES(?, ?, ?)", (timestamp, key, generationDictionary[key]))
+		for key in generation_dictionary:
+			self.cur.execute("INSERT INTO generators VALUES(?, ?, ?)", (timestamp, key, generation_dictionary[key]))
 
 		self.con.commit()
 
