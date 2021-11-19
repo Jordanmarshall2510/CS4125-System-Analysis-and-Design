@@ -19,6 +19,7 @@ import json
 import os
 
 from ElectricityUser.electricityuser import ElectricityUser
+from datetime import datetime
 
 class Infrastructure(ElectricityUser):
     average_electricity_usage = 0
@@ -74,15 +75,15 @@ class Infrastructure(ElectricityUser):
         return  "ID:" + self.infrastructure_id + "\t\t\tTotal Electricity Usage: " + str(self.total_electricity_usage) + "kWh" + "\t\t\tStreetLight?: " + str(self.has_street_light) + "\t\t\tTrafficLight?: " + str(self.has_traffic_light)
 
     # TODO: implement update and get_electricity_used
-    def update(self, date): 
+    def update(self, date : datetime) -> int: 
         return -1
 
-    def get_electricity_used(self):
+    def get_electricity_used(self) -> int:
         self.sum_electricity_usage()
         return self.total_electricity_usage
 
         
-    def generate_users(number_of_infrastructure):    # NOTE: Will be dependent on number of houses in future
+    def generate_users(number_of_infrastructure : int) -> list:    # NOTE: Will be dependent on number of houses in future
         infrastructure_data = []
         infrastructure_counter = 0
 
