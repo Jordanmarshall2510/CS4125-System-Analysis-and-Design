@@ -19,13 +19,13 @@ class Wind(ElectricityGenerator):
         self.GeneratorID = newID
 
     def update(self, date):
-        a=random.randint(1,10)
+        a=random.uniform(20,30)
         if(Weather.getWeather()=="rain"):
-            return self.wattage+(a*1200)
+            return self.wattage+(a*2)
         elif(Weather.getWeather()=="cloudy"):
-            return self.wattage+(a*1100)
+            return self.wattage+(a*1.5)
         else:
-            return self.wattage+(a*1000)
+            return self.wattage+(a)
 
     def getElectricityGenerated(self):
         return self.update()

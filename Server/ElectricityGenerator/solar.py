@@ -23,12 +23,12 @@ class Solar(ElectricityGenerator):
         if(current_time<6 or current_time>20):
             return 0
         elif(current_time<=12):
-            a=random.randint(1,10)
-            b=random.randint(1,3)
+            a=random.uniform(0,0.00014)
+            b=random.uniform(0,0.0014)
             return (self.wattage+a)+(b*current_time)
         elif(current_time>12):
-            a=random.randint(1,10)
-            b=random.randint(1,3)
+            a=random.uniform(0,0.00014)
+            b=random.uniform(0,0.0014)
             return (self.wattage+a)+(b*(24-current_time))
 
     def getElectricityGenerated(self):
