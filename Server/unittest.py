@@ -10,7 +10,7 @@ from ElectricityGenerator.wind import Wind
 from database import Database
 from World.weather import Weather
 
-class TestMethods(unittest.TestCase):
+class UnitTestMethods(unittest.TestCase):
 
     '''
     houses.py Unit Tests
