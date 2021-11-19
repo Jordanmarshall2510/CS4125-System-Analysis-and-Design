@@ -5,12 +5,12 @@ import random
 from ElectricityGenerator.electricitygenerator import ElectricityGenerator
 from World.weather import Weather
 
-class Wind(electricity_generator):
+class Wind(ElectricityGenerator):
     wattage=0
     generator_id = 0
 
     def __init__(self):
-        path = os.path.dirname(os.path.realpath(__file__)).split("electricity_generator")[0] + "config.json"
+        path = os.path.dirname(os.path.realpath(__file__)).split("ElectricityGenerator")[0] + "config.json"
         with open(path) as json_file:
             conf = json.load(json_file)
             self.wattage=conf["electricity_generator"]["wind"]["output"]
@@ -30,10 +30,10 @@ class Wind(electricity_generator):
     def get_electricity_generated(self):
         return self.update()
 
-    def generateGenerators(number_of_generators):
+    def generate_generators(number_of_generators):
         generated_array = []
         for x in range(number_of_generators):
             generator = Wind()
             generator.set_generator_id(x + 1)
             generated_array.append(generator)
-        return generatedArray
+        return generated_array

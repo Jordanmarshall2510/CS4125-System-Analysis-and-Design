@@ -13,7 +13,7 @@ from ElectricityUser.electricityuser import ElectricityUser
 from ElectricityGenerator.distribution import Distribution
 from World.weather import Weather
 
-class House(electricity_user):
+class House(ElectricityUser):
     average_house_value = 0
     average_electricity_usage = 0
 
@@ -31,7 +31,7 @@ class House(electricity_user):
 
     def __init__(self):
 
-        path = os.path.dirname(os.path.realpath(__file__)).split("electricity_user")[0] + "config.json"
+        path = os.path.dirname(os.path.realpath(__file__)).split("ElectricityUser")[0] + "config.json"
 
         with open(path) as json_file:
             conf = json.load(json_file)

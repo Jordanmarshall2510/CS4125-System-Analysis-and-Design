@@ -1,12 +1,12 @@
 import unittest
 
-from electricity_user.businesses import Business
-from electricity_user.houses import House
-from electricity_user.infrastrucure import Infrastructure
-from electricity_user.vehicles import Vehicle
-from electricity_generator.distribution import Distribution
-from electricity_generator.solar import Solar
-from electricity_generator.wind import Wind
+from ElectricityUser.businesses import Business
+from ElectricityUser.houses import House
+from ElectricityUser.infrastrucure import Infrastructure
+from ElectricityUser.vehicles import Vehicle
+from ElectricityGenerator.distribution import Distribution
+from ElectricityGenerator.solar import Solar
+from ElectricityGenerator.wind import Wind
 from database import Database
 from World.weather import Weather
 
@@ -125,15 +125,15 @@ class test_methods(unittest.TestCase):
     '''
 
     def test_solar_generation(self):
-        data = Solar.generateGenerators(100)
+        data = Solar.generate_generators(100)
         self.assertEqual(len(data), 100)
 
     def test_solar_id(self):
-        data = Solar.generateGenerators(1)
+        data = Solar.generate_generators(1)
         self.assertIs(type(data[0].generator_id), int)
 
     def test_solar_wattage(self):
-        data = Solar.generateGenerators(100)
+        data = Solar.generate_generators(100)
         for x in data:
             self.assertTrue(0 <= x.wattage)
 
@@ -142,15 +142,15 @@ class test_methods(unittest.TestCase):
     '''
     
     def test_wind_generation(self):
-        data = Wind.generateGenerators(100)
+        data = Wind.generate_generators(100)
         self.assertEqual(len(data), 100)
 
     def test_wind_id(self):
-        data = Wind.generateGenerators(1)
+        data = Wind.generate_generators(1)
         self.assertIs(type(data[0].generator_id), int)
 
     def test_wind_wattage(self):
-        data = Wind.generateGenerators(100)
+        data = Wind.generate_generators(100)
         for x in data:
             self.assertTrue(0 <= x.wattage)
 

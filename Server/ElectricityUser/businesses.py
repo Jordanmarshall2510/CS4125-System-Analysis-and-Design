@@ -12,8 +12,8 @@ import os
 from ElectricityUser.electricityuser import ElectricityUser
 from World.weather import Weather
 
-class Business(electricity_user):
-    path = os.path.dirname(os.path.realpath(__file__)).split("electricity_user")[0] + "config.json"
+class Business(ElectricityUser):
+    path = os.path.dirname(os.path.realpath(__file__)).split("ElectricityUser")[0] + "config.json"
 
     with open(path) as json_file:
         conf = json.load(json_file)

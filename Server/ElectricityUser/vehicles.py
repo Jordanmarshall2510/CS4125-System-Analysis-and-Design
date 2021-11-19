@@ -14,23 +14,23 @@ import os
 
 from ElectricityUser.electricityuser import ElectricityUser
 
-class Vehicle(electricity_user):
+class Vehicle(ElectricityUser):
 	# Read initialising data from json
-	path = os.path.dirname(os.path.realpath(__file__)).split("electricity_user")[0] + "config.json"
+	path = os.path.dirname(os.path.realpath(__file__)).split("ElectricityUser")[0] + "config.json"
 	with open(path) as json_file:
 		conf = json.load(json_file)
 		
 	# Average electric car value. Units in EURO
-	average_vehicle_value= conf["electricity_user"]["vehicles"]["averagevehicle_value"]
+	average_vehicle_value= conf["electricity_user"]["vehicles"]["average_vehicle_value"]
 
 	# Average electric car battery capacity. Units in kWh
-	average_battery_capacity = conf["electricity_user"]["vehicles"]["averagebattery_capacity"]
+	average_battery_capacity = conf["electricity_user"]["vehicles"]["average_battery_capacity"]
 
 	# Average electric car range. Units in KM
-	average_range = conf["electricity_user"]["vehicles"]["averageRange"]
+	average_range = conf["electricity_user"]["vehicles"]["average_range"]
 
 	# Average decrease in range per person. Units %
-	average_new_passenger_range_cost = conf["electricity_user"]["vehicles"]["averagePassengerRangeCost"]
+	average_new_passenger_range_cost = conf["electricity_user"]["vehicles"]["average_passenger_range_cost"]
 
 	def __init__(self, id, vehicle_value, battery_capacity, range, number_of_new_passengers):
 		"""Intialize a vehicle object"""

@@ -5,12 +5,12 @@ import random
 from ElectricityGenerator.electricitygenerator import ElectricityGenerator
 from datetime import datetime
 
-class Solar(electricity_generator):
+class Solar(ElectricityGenerator):
     wattage=0
     generator_id = 0
 
     def __init__(self):
-        path = os.path.dirname(os.path.realpath(__file__)).split("electricity_generator")[0] + "config.json"
+        path = os.path.dirname(os.path.realpath(__file__)).split("ElectricityGenerator")[0] + "config.json"
         with open(path) as json_file:
             conf = json.load(json_file)
             self.wattage=conf["electricity_generator"]["solar"]["output"]
@@ -35,9 +35,9 @@ class Solar(electricity_generator):
         return self.update()
 
     def generate_generators(number_of_generators):
-        generatedArray = []
+        generated_array = []
         for x in range(number_of_generators):
             generator = Solar()
             generator.set_generator_id(x + 1)
-            generatedArray.append(generator)
-        return generatedArray
+            generated_array.append(generator)
+        return generated_array

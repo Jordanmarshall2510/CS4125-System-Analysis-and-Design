@@ -26,7 +26,7 @@ with open(path, 'r') as json_file:
 
     users_array += Business.generate_users(conf['session']['electricity_user']['businesses'])
     users_array += House.generate_users(conf['session']['electricity_user']['houses'])
-    users_array += Infrastructure.generate_users(conf['session']['electricity_user']['infrastucture'])
+    users_array += Infrastructure.generate_users(conf['session']['electricity_user']['infrastructure'])
     users_array += Vehicle.generate_users(conf["session"]['electricity_user']['vehicles'])
 
 # Connect to database

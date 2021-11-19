@@ -20,14 +20,14 @@ import os
 
 from ElectricityUser.electricityuser import ElectricityUser
 
-class Infrastructure(electricity_user):
+class Infrastructure(ElectricityUser):
     average_electricity_usage = 0
     street_light_usage = 0
     traffic_light_usage = random.randrange(900, 1600, 1)/10
 
     def __init__(self, infrastructure_id):
 
-        path = os.path.dirname(os.path.realpath(__file__)).split("electricity_user")[0] + "config.json"
+        path = os.path.dirname(os.path.realpath(__file__)).split("ElectricityUser")[0] + "config.json"
 
         with open(path) as json_file:
             conf = json.load(json_file)
