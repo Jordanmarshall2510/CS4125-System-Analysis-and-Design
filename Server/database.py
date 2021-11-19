@@ -18,7 +18,7 @@ class Database:
 		self.con.commit()
 		pass
 
-	def insert_usage(self, timestamp : datetime, usage_dictionary : dict):
+	def insert_usage(self, timestamp: datetime, usage_dictionary : dict):
 		"""Insert user data into the user table
 
 		Arguments: 
@@ -32,7 +32,7 @@ class Database:
 
 		self.con.commit()
 
-	def insert_generation(self, timestamp : datetime, generation_dictionary : dict):
+	def insert_generation(self, timestamp: datetime, generation_dictionary: dict):
 		"""Insert generator data into the generator table
 
 		Arguments: 

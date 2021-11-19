@@ -17,11 +17,11 @@ class City:
 	def __init__(self):
 		pass
 
-	def add_users(self, users : list) -> None:
+	def add_users(self, users: list) -> None:
 		self.users += users
 		pass
 
-	def add_generators(self, generators : list) -> None:
+	def add_generators(self, generators: list) -> None:
 		self.distribution.add_generators(generators)
 		pass
 
@@ -49,42 +49,42 @@ class CityBuilder:
 		self.city = City()
 		pass
 
-	def construct_buisnesses(self, number_of_businesses : int) -> None:
+	def construct_buisnesses(self, number_of_businesses: int) -> None:
 		"""Constructs buisness for the city
 		Arguments: number_of_businesses -- Number of buisnesses to be constructed
 		"""
 		self.city.add_users(generate_buisnesses(number_of_businesses))
 		pass
 
-	def construct_houses(self, number_of_houses : int) -> None:
+	def construct_houses(self, number_of_houses: int) -> None:
 		"""Constructs houses for the city
 		Arguments: number_of_houses -- Number of houses to be constructed
 		"""
 		self.city.add_users(generate_houses(number_of_houses))
 		pass
 
-	def construct_infrastructure(self, size_of_infrastructure : int) -> None:
+	def construct_infrastructure(self, size_of_infrastructure: int) -> None:
 		"""Constructs infrastructure for the city
 		Arguments: size_of_infrastructure -- Size of infrastructure to be constructed
 		"""
 		self.city.add_users(generate_infrastructure(size_of_infrastructure))
 		pass
 
-	def construct_vehicles(self, number_of_vehicles : int) -> None:
+	def construct_vehicles(self, number_of_vehicles: int) -> None:
 		"""Constructs vehicles for the city
 		Arguments: number_of_vehicles -- Number of vehicles to be constructed
 		"""
 		self.city.add_users(generate_vehicles(number_of_vehicles))
 		pass
 
-	def construct_wind_turbines(self, number_of_wind_turbines : int) -> None:
+	def construct_wind_turbines(self, number_of_wind_turbines: int) -> None:
 		"""Constructs wind turbines for the city
 		Arguments: number_of_wind_turbines -- Number of wind turbines to be constructed
 		"""
 		self.city.add_generators(generate_wind_turbines(number_of_wind_turbines))
 		pass
 
-	def construct_solar_panels(self, number_of_solar_panels : int) -> None:
+	def construct_solar_panels(self, number_of_solar_panels: int) -> None:
 		"""Constructs solar panels for the city
 		Arguments: number_of_solar_panels -- Number of solar panels to be constructed
 		"""

@@ -23,7 +23,7 @@ class Distribution:
         self.distribution_size=conf["electricity_generator"]["distribution"]["distribution_size"]
         self.distribution_value=conf["electricity_generator"]["distribution"]["distribution_value"]
 
-    def add_generators(self, generators : list) -> None:
+    def add_generators(self, generators: list) -> None:
         """Method to add generators to the distribution class
         Arguments: generators -- A list of ElectricityGenerators being added
         """

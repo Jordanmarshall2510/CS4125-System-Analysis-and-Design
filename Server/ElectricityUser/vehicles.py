@@ -44,34 +44,34 @@ class Vehicle(ElectricityUser):
 		self.realRange = int(self.max_range - (self.max_range * self.average_new_passenger_range_cost * self.number_of_new_passengers))
 
 	# TODO: implement update and get_electricity_used methods
-	def update(self, date : datetime) -> int:
+	def update(self, date: datetime) -> int:
 		return -1
 
 	def get_electricity_used(self) -> int:
 		return -1
 
-	def setId(self, new_id : int):
+	def setId(self, new_id: int):
 		"""Change vehicle ID"""
 		self.id = new_id
 	
-	def set_vehicle_value(self, new_value : int):
+	def set_vehicle_value(self, new_value: int):
 		"""Change vehicle value"""
 		self.vehicle_value = new_value
 
-	def set_battery_capacity(self, new_capacity : int):
+	def set_battery_capacity(self, new_capacity: int):
 		"""Change vehicle battery capacity"""
 		self.battery_capacity = new_capacity
 
-	def setVehicleRange(self, new_range : int):
+	def setVehicleRange(self, new_range: int):
 		"""Change vehicle range"""
 		self.max_range = new_range
 	
-	def set_number_of_new_passengers(self, new_new_passengers : int):
+	def set_number_of_new_passengers(self, new_new_passengers: int):
 		"""Change number of occupants"""
 		self.number_of_new_passengers = new_new_passengers
 		self.realRange = int(self.max_range - (self.max_range * (self.average_new_passenger_range_cost * self.number_of_new_passengers)))
 
-	def generate_users(number_of_vehicles : int) -> list:
+	def generate_users(number_of_vehicles: int) -> list:
 		vehicle_data = []
 		vehicle_value_tolerance = 10000
 		battery_capacity_tolerance = 15

@@ -19,7 +19,7 @@ class Wind(ElectricityGenerator):
     def set_generator_id(self, new_id):
         self.generator_id = new_id
 
-    def update(self, date : datetime) -> int:
+    def update(self, date: datetime) -> int:
         a=random.uniform(20,30)
         if(Weather.get_weather()=="rain"):
             return self.wattage+(a*2)
@@ -31,7 +31,7 @@ class Wind(ElectricityGenerator):
     def get_electricity_generated(self) -> int:
         return self.update()
 
-    def generate_generators(number_of_generators : int) -> list:
+    def generate_generators(number_of_generators: int) -> list:
         generated_array = []
         for x in range(number_of_generators):
             generator = Wind()

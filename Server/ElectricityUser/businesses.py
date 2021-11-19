@@ -78,7 +78,7 @@ class Business(ElectricityUser):
     def get_electricity_used(self) -> int:
         return -1
 
-    def generate_users(number_of_businesses : int) -> list:
+    def generate_users(number_of_businesses: int) -> list:
         business_data = []
         business_counter = 0
 

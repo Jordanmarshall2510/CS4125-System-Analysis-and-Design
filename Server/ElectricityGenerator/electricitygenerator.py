@@ -3,7 +3,7 @@ from datetime import datetime
 
 class ElectricityGenerator:
 	@abstractmethod
-	def update(self, date : datetime) -> int:
+	def update(self, date: datetime) -> int:
 		'''Method to update the electricity generated at a specific date'''
 		pass
 
@@ -14,6 +14,6 @@ class ElectricityGenerator:
 
 	@staticmethod
 	@abstractmethod
-	def generate_generators(count : int) -> list:
+	def generate_generators(count: int) -> list:
 		'''Static method to generate a specific type of generator'''
 		pass

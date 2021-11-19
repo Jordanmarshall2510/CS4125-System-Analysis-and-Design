@@ -3,7 +3,7 @@ from datetime import datetime
 
 class ElectricityUser:
 	@abstractmethod
-	def update(self, date : datetime) -> int:
+	def update(self, date: datetime) -> int:
 		'''Method to update the electricity usage of a specific user'''
 		pass
 
@@ -14,6 +14,6 @@ class ElectricityUser:
 
 	@staticmethod
 	@abstractmethod
-	def generate_users(count : int) -> list:
+	def generate_users(count: int) -> list:
 		'''Static method to generate a specific amount of the user type'''
 		pass
