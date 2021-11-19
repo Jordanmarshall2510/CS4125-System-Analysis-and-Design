@@ -2,7 +2,7 @@
 import json
 import os
 import random
-from electricity_generator.electricity_generator import electricity_generator
+from ElectricityGenerator.electricitygenerator import ElectricityGenerator
 from World.weather import Weather
 
 class Wind(electricity_generator):

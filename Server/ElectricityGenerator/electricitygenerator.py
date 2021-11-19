@@ -1,6 +1,6 @@
 from abc import abstractmethod
 
-class electricity_generator:
+class ElectricityGenerator:
     @abstractmethod
     def update(self, date):
         '''Method to update the electricity generated at a specific date'''

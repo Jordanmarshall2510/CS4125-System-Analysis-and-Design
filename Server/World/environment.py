@@ -7,7 +7,7 @@ import time
 from World.clock import Clock
 from World.weather import Weather
 
-class environment:
+class Environment:
     delay=0
     weather_change=0
     clock= Clock()

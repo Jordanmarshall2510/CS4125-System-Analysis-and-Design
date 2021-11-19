@@ -12,7 +12,7 @@ import random
 import json
 import os
 
-from electricity_user.electricity_user import electricity_user
+from ElectricityUser.electricityuser import ElectricityUser
 
 class Vehicle(electricity_user):
 	# Read initialising data from json

@@ -9,8 +9,8 @@ import random
 import json
 import os
 
-from electricity_user.electricity_user import electricity_user
-from electricity_generator.distribution import Distribution
+from ElectricityUser.electricityuser import ElectricityUser
+from ElectricityGenerator.distribution import Distribution
 from World.weather import Weather
 
 class House(electricity_user):

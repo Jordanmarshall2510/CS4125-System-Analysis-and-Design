@@ -18,7 +18,7 @@ import random
 import json
 import os
 
-from electricity_user.electricity_user import electricity_user
+from ElectricityUser.electricityuser import ElectricityUser
 
 class Infrastructure(electricity_user):
     average_electricity_usage = 0

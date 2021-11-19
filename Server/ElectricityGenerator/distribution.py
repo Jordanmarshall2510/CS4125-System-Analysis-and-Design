@@ -2,8 +2,8 @@
 import json
 import os
 
-from electricity_generator.solar import Solar
-from electricity_generator.wind import Wind
+from ElectricityGenerator.solar import Solar
+from ElectricityGenerator.wind import Wind
 
 # TODO:
 #   The distribution class should hold all the electricity_generator instances

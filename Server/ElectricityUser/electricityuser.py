@@ -1,6 +1,6 @@
 from abc import abstractmethod
 
-class electricity_user:
+class ElectricityUser:
     @abstractmethod
     def update(self, date):
         '''Method to update the electricity usage of a specific user'''

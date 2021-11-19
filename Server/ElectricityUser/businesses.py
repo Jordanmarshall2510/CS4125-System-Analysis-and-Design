@@ -9,7 +9,7 @@
 import random
 import json
 import os
-from electricity_user.electricity_user import electricity_user
+from ElectricityUser.electricityuser import ElectricityUser
 from World.weather import Weather
 
 class Business(electricity_user):

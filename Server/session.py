@@ -1,11 +1,11 @@
 import os
 import json
 from datetime import datetime, timedelta
-from electricity_user.businesses import Business
-from electricity_user.houses import House
-from electricity_user.infrastrucure import Infrastructure
-from electricity_user.vehicles import Vehicle
-from electricity_generator.distribution import Distribution
+from ElectricityUser.businesses import Business
+from ElectricityUser.houses import House
+from ElectricityUser.infrastrucure import Infrastructure
+from ElectricityUser.vehicles import Vehicle
+from ElectricityGenerator.distribution import Distribution
 from World.weather import Weather
 from database import Database
 
