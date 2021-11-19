@@ -2,6 +2,11 @@
 ![](https://gamma1.ul.ie/LabStats/Images/Image-UniversityOfLimerick.png)
 
 **Table of Contents**
+- [Smart City](#smart-city)
+  * [Narrative](#narrative)
+  * [Project Roles](#project-roles)
+  * [Project Plan](#project-plan)
+  * [Quickstart Guide](#quickstart-guide)
 
 ## Narrative
 Smart City is a project that our team envisioned to simulate a futuristic smart city, a city in the near future where the majority of modes of transportation are electric and humanity is sourcing most of its power from renewable resources.
