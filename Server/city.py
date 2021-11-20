@@ -1,5 +1,5 @@
 from datetime import datetime
-
+from typing import Tuple
 from ElectricityGenerator.distribution import Distribution
 from ElectricityUser.businesses import generate_buisnesses
 from ElectricityUser.houses import generate_houses
@@ -25,7 +25,7 @@ class City:
 		self.distribution.add_generators(generators)
 		pass
 
-	def update(self, date: datetime) -> dict:
+	def update(self, date: datetime) -> Tuple[dict, dict]:
 		"""Updates the city to date given"""
 		# Update distribution
 		generation = self.distribution.update(date)
