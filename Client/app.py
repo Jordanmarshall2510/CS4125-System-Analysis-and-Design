@@ -110,8 +110,8 @@ def update_output_div(overall, generators, users):
         inputs += users
 
     print(inputs)
-    
-    fig = px.line(graph.createDF(inputs)) 
+    sim_graph, total_generated, total_usage = graph.createDF(inputs)
+    fig = px.line(sim_graph) 
 
     fig.update_layout(
         # plot_bgcolor=colors['background'],
@@ -126,7 +126,7 @@ def update_output_div(overall, generators, users):
         )
     )
 
-    return  fig, ", ".join(inputs), ", ".join(inputs), ", ".join(inputs)
+    return  fig, ", ".join(inputs), total_generated, total_usage
 
 if __name__ == '__main__':
     app.run_server(debug=True)
