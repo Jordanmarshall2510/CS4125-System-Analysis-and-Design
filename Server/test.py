@@ -103,7 +103,7 @@ class test_methods(unittest.TestCase):
     def test_vehicle_number_of_passengers(self):
         data = Vehicle.generate_users(100)
         for x in data:
-            self.assertTrue(1 <= x.number_of_new_passengers)
+            self.assertTrue(0 <= x.number_of_new_passengers)
 
     '''
     database.py Unit Tests
