@@ -163,7 +163,7 @@ class Weather:
 
         elif (Weather.climate == 'temperate' or 'continental'):
             if (Weather.get_season == 'summer'):
-                if (x = 2):
+                if (x == 2):
                     future_weather = 'tornado'
                 if (x < 20):
                     future_weather = 'rain'
@@ -185,7 +185,7 @@ class Weather:
                 elif (x >= 90):
                     future_weather = 'sunny'
             else:
-                if (x = 1):
+                if (x == 1):
                     future_weather = 'tornado'
                 if (x < 5):
                     future_weather = 'snow'
