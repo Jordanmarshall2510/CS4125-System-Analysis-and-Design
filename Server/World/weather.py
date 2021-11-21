@@ -59,6 +59,7 @@ class Weather:
                 return 'dry'
             else:
                 return 'wet'
+
         elif (Weather.climate.lower() == 'dry_cold' or 'dry_hot'):
             if (Weather.climate.lower() == 'dry_cold'):
                 return 'winter'

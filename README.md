@@ -50,7 +50,7 @@ This will allow the user to play around with the simulation and see how that imp
 
 1. To install the prerequisite dependencies to be able to run our project  run the command below.
 
-	`pip install requirements.txt`
+	`python3 -m pip install -r requirements.txt`
 2.  To run the project enter the following command.
 
 	`python3 app.py`
