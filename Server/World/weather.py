@@ -119,12 +119,12 @@ class Weather:
     @staticmethod
     def get_weather_change(current_weather):
         future_weather = current_weather
+        x=random.randint(0,100)
 
         if random.randint(Weather.counter,100) < Weather.weather_change_base:
             Weather.counter += Weather.weather_change_rate
             return current_weather
 
-        x=random.randint(0,100)
         elif (Weather.climate == 'tropical'):
             if (Weather.get_season == 'dry'):
                 if (x < 90):
