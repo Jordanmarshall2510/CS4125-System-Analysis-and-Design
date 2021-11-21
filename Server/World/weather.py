@@ -3,12 +3,12 @@ import json
 import os
 import random
 
-# TODO: Given a date and time it should provide a weather forcast
+# TODO: Given a date and time it should provide a weather forecast
 
 class Weather:
-    weather='' #Sunny, Cloudy, Rain, Snow
-    season='' #Summer, Autumn, Winter, Spring
-    climate='' #Tropical, Dry, Temperate, Continental, Polar
+    weather='' #Sunny, Cloudy, Rain, Snow, Fog, Tornado, Sandstorm, Snowstorm
+    season='' #Summer, Autumn, Winter, Spring, Dry, Wet, Desert Summer, Polar Winter
+    climate='' #Tropical, Dry Cold, Dry Hot, Temperate, Continental, Polar, Desert
     weather_change_base = 70 #Base chance for weather to change
     weather_change_rate = 1 #Rate of change for chance for weather
     counter = 0 #counter for increasing chance of weather change
@@ -31,7 +31,7 @@ class Weather:
 
     @staticmethod
     def set_weather(string):
-        if (string.lower() == 'sunny' or 'cloudy' or 'rain' or 'snow'):
+        if (string.lower() == 'sunny' or 'cloudy' or 'rain' or 'snow' or 'fog' or 'tornado' or 'sandstorm' or 'snowstorm'):
             Weather.weather=string.lower()
 
     @staticmethod
@@ -40,12 +40,12 @@ class Weather:
 
     @staticmethod
     def set_season(string):
-        if (string.lower() == 'summer' or 'autumn' or 'winter' or 'spring'):
+        if (string.lower() == 'summer' or 'autumn' or 'winter' or 'spring' or 'dry' or 'wet' or 'desert_summer' or 'polar_winter'):
             Weather.season=string.lower()
 
     @staticmethod
     def set_climate(string):
-        if (string.lower() == 'tropical' or 'dry' or 'temperate' or 'continental' or 'polar'):#Tropical, Dry, Temperate, Continental, Polar
+        if (string.lower() == 'tropical' or 'dry_cold' or 'dry_hot' or 'temperate' or 'continental' or 'polar' or 'desert'):
             Weather.climate=string.lower()
 
     @staticmethod
@@ -54,25 +54,67 @@ class Weather:
 
     @staticmethod
     def get_season_change(date):
-        if 3 <= int(date.strftime("%m")) <= 6 :#spring
-            if 3 == int(date.strftime("%m")) and int(date.strftime("%d")) < 20:
-                 return 'winter'
-            elif 6 == int(date.strftime("%m")) and int(date.strftime("%d")) > 20:
-                return 'summer'
-            else:
-                 return 'spring'
-        elif 6 <= int(date.strftime("%m")) <= 9 :#summer
-            if 9 == int(date.strftime("%m")) and int(date.strftime("%d")) > 21:
-                 return 'autumn'
+        if (Weather.climate.lower() == 'tropical'):
+        if not(3 <= int(date.strftime("%m")) <= 10):#dry season
+            return 'dry'
+        else:
+            return 'wet'
+        elif (Weather.climate.lower() == 'dry_cold' or 'dry_hot'):
+            if (Weather.climate.lower() == 'dry_cold'):
+                return 'winter'
             else:
                 return 'summer'
-        elif 9 <= int(date.strftime("%m")) <= 12 :#autumn
-            if 12 == int(date.strftime("%m")) and int(date.strftime("%d")) > 20:
-                 return 'winter'
+
+        elif (Weather.climate.lower() == 'temperate'):
+            if 3 <= int(date.strftime("%m")) <= 6 :#spring
+                if 3 == int(date.strftime("%m")) and int(date.strftime("%d")) < 20:
+                    return 'winter'
+                elif 6 == int(date.strftime("%m")) and int(date.strftime("%d")) > 20:
+                    return 'summer'
+                else:
+                    return 'spring'
+            elif 6 <= int(date.strftime("%m")) <= 9 :#summer
+                if 9 == int(date.strftime("%m")) and int(date.strftime("%d")) > 21:
+                    return 'autumn'
+                else:
+                    return 'summer'
+            elif 9 <= int(date.strftime("%m")) <= 12 :#autumn
+                if 12 == int(date.strftime("%m")) and int(date.strftime("%d")) > 20:
+                    return 'winter'
+                else:
+                    return 'autumn'
             else:#winter
-                 return 'autumn'
-        else:#winter
-            return 'winter'
+                return 'winter'
+
+        elif (Weather.climate.lower() == 'continental'):
+            if 3 <= int(date.strftime("%m")) <= 6 :#spring
+                if 3 == int(date.strftime("%m")) and int(date.strftime("%d")) < 20:
+                    return 'winter'
+                elif 6 == int(date.strftime("%m")) and int(date.strftime("%d")) > 20:
+                    return 'summer'
+                else:
+                    return 'spring'
+            elif 6 <= int(date.strftime("%m")) <= 9 :#summer
+                if 9 == int(date.strftime("%m")) and int(date.strftime("%d")) > 21:
+                    return 'autumn'
+                else:
+                    return 'summer'
+            elif 9 <= int(date.strftime("%m")) <= 12 :#autumn
+                if 12 == int(date.strftime("%m")) and int(date.strftime("%d")) > 20:
+                    return 'winter'
+                else:
+                    return 'autumn'
+            else:#winter
+                return 'winter'
+
+        elif (Weather.climate.lower() == 'polar'):
+            if (6 == int(date.strftime("%m")) and int(date.strftime("%d")) < 8):
+                return 'winter'
+            else:
+                return 'polar_winter'
+
+        elif (Weather.climate.lower() == 'desert'):
+            return 'desert_summer'
 
     @staticmethod
     def get_weather_change(current_weather):
@@ -81,17 +123,60 @@ class Weather:
         if random.randint(Weather.counter,100) < Weather.weather_change_base:
             Weather.counter += Weather.weather_change_rate
             return current_weather
-        else:
-            x=random.randint(0,100)
+
+        x=random.randint(0,100)
+        elif (Weather.climate == 'tropical'):
+            if (Weather.get_season == 'dry'):
+                if (x < 90):
+                    future_weather = 'sunny'
+                elif (x <= 99):
+                    future_weather = 'cloudy'
+                elif (x > 99):
+                    future_weather = 'rain'
+            elif (Weather.get_season == 'wet'):
+                if (x < 70):
+                    future_weather = 'rain'
+                elif (x < 90):
+                    future_weather = 'fog'
+                elif (x <= 99):
+                    future_weather = 'cloudy'
+                elif (x > 99):
+                    future_weather = 'sunny'
+
+        elif (Weather.climate == 'dry_cold'):
+            if (x < 2):
+                future_weather = 'snow'
+            elif (x < 3):
+                future_weather = 'rain'
+            elif (x <= 30):
+                future_weather = 'cloudy'
+            elif (x > 30):
+                future_weather = 'sunny'
+
+        elif (Weather.climate == 'dry_hot'):
+            if (x < 2):
+                future_weather = 'rain'
+            elif (x <= 10):
+                future_weather = 'cloudy'
+            elif (x > 10):
+                future_weather = 'sunny'
+
+        elif (Weather.climate == 'temperate' or 'continental'):
             if (Weather.get_season == 'summer'):
+                if (x = 2):
+                    future_weather = 'tornado'
                 if (x < 20):
                     future_weather = 'rain'
+                elif (x < 25):
+                    future_weather = 'fog'
                 elif (x < 50):
                     future_weather = 'cloudy'
                 elif (x >= 50):
                     future_weather = 'sunny'
             elif (Weather.get_season == 'winter'):
-                if (x < 40):
+                if (x <= 5):
+                    future_weather = 'fog'
+                elif (x < 40):
                     future_weather = 'snow'
                 elif (x < 50):
                     future_weather = 'rain'
@@ -100,13 +185,43 @@ class Weather:
                 elif (x >= 90):
                     future_weather = 'sunny'
             else:
+                if (x = 1):
+                    future_weather = 'tornado'
                 if (x < 5):
                     future_weather = 'snow'
+                elif (x < 15):
+                    future_weather = 'fog'
                 elif (x < 50):
                     future_weather = 'rain'
                 elif (x < 90):
                     future_weather = 'cloudy'
                 elif (x >= 90):
+                    future_weather = 'sunny'
+
+        elif (Weather.climate == 'polar'):
+            if (Weather.get_season == 'winter'):
+                if (x < 20):
+                    future_weather = 'snow'
+                elif (x < 50):
+                    future_weather = 'cloudy'
+                elif (x >= 50):
+                    future_weather = 'sunny'
+            elif (Weather.get_season == 'polar_winter'):
+                if (x < 20):
+                    future_weather = 'snowstorm'
+                elif (x < 50):
+                    future_weather = 'snow'
+                elif (x < 70):
+                    future_weather = 'cloudy'
+                elif (x >= 50):
+                    future_weather = 'sunny'
+
+        elif (Weather.climate == 'desert'):
+                if (x < 10):
+                    future_weather = 'sandstorm'
+                elif (x < 11):
+                    future_weather = 'cloudy'
+                elif (x >= 11):
                     future_weather = 'sunny'
 
         if current_weather == future_weather:
