@@ -59,32 +59,32 @@ class Weather:
                 return 'dry'
             else:
                 return 'wet'
-            elif (Weather.climate.lower() == 'dry_cold' or 'dry_hot'):
-                if (Weather.climate.lower() == 'dry_cold'):
+        elif (Weather.climate.lower() == 'dry_cold' or 'dry_hot'):
+            if (Weather.climate.lower() == 'dry_cold'):
+                return 'winter'
+            else:
+                return 'summer'
+
+        elif (Weather.climate.lower() == 'temperate'):
+            if 3 <= int(date.strftime("%m")) <= 6 :#spring
+                if 3 == int(date.strftime("%m")) and int(date.strftime("%d")) < 20:
                     return 'winter'
+                elif 6 == int(date.strftime("%m")) and int(date.strftime("%d")) > 20:
+                    return 'summer'
+                else:
+                    return 'spring'
+            elif 6 <= int(date.strftime("%m")) <= 9 :#summer
+                if 9 == int(date.strftime("%m")) and int(date.strftime("%d")) > 21:
+                    return 'autumn'
                 else:
                     return 'summer'
-
-            elif (Weather.climate.lower() == 'temperate'):
-                if 3 <= int(date.strftime("%m")) <= 6 :#spring
-                    if 3 == int(date.strftime("%m")) and int(date.strftime("%d")) < 20:
-                        return 'winter'
-                    elif 6 == int(date.strftime("%m")) and int(date.strftime("%d")) > 20:
-                        return 'summer'
-                    else:
-                        return 'spring'
-                elif 6 <= int(date.strftime("%m")) <= 9 :#summer
-                    if 9 == int(date.strftime("%m")) and int(date.strftime("%d")) > 21:
-                        return 'autumn'
-                    else:
-                        return 'summer'
-                elif 9 <= int(date.strftime("%m")) <= 12 :#autumn
-                    if 12 == int(date.strftime("%m")) and int(date.strftime("%d")) > 20:
-                        return 'winter'
-                    else:
-                        return 'autumn'
-                else:#winter
+            elif 9 <= int(date.strftime("%m")) <= 12 :#autumn
+                if 12 == int(date.strftime("%m")) and int(date.strftime("%d")) > 20:
                     return 'winter'
+                else:
+                    return 'autumn'
+            else:#winter
+                return 'winter'
 
         elif (Weather.climate.lower() == 'continental'):
             if 3 <= int(date.strftime("%m")) <= 6 :#spring
