@@ -1,4 +1,5 @@
 #Coded by Jakub Pazej - 18260179
+from datetime import datetime
 import json
 import os
 import random
@@ -7,33 +8,36 @@ from World.weather import Weather
 
 class Wind(ElectricityGenerator):
     wattage=0
-    GeneratorID = 0
+    generator_id = 0
 
     def __init__(self):
         path = os.path.dirname(os.path.realpath(__file__)).split("ElectricityGenerator")[0] + "config.json"
         with open(path) as json_file:
             conf = json.load(json_file)
-            self.wattage=conf["electricityGenerator"]["wind"]["output"]
+            self.wattage=conf["electricity_generator"]["wind"]["output"]
 
-    def setGeneratorID(self, newID):
-        self.GeneratorID = newID
+    def set_generator_id(self, new_id):
+        self.generator_id = new_id
 
-    def update(self, date):
+    def update(self, date: datetime) -> int:
         a=random.uniform(20,30)
-        if(Weather.getWeather()=="rain"):
+        if(Weather.get_weather()=="rain"):
             return self.wattage+(a*2)
-        elif(Weather.getWeather()=="cloudy"):
+        elif(Weather.get_weather()=="cloudy"):
             return self.wattage+(a*1.5)
         else:
             return self.wattage+(a)
 
-    def getElectricityGenerated(self):
+    def get_electricity_generated(self) -> int:
         return self.update()
 
-    def generateGenerators(numberOfGenerators):
-        generatedArray = []
-        for x in range(numberOfGenerators):
+    def generate_generators(number_of_generators: int) -> list:
+        generated_array = []
+        for x in range(number_of_generators):
             generator = Wind()
-            generator.setGeneratorID(x + 1)
-            generatedArray.append(generator)
-        return generatedArray
+            generator.set_generator_id(x + 1)
+            generated_array.append(generator)
+        return generated_array
+
+# List outside of class for importing
+generate_wind_turbines = Wind.generate_generators

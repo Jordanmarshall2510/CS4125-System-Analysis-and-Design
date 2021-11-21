@@ -3,8 +3,9 @@
 # To Do:
 #   Heating
 #	
-#import required functions (update & getElectricityUsed)***
+#import required functions (update & get_electricity_used)***
 
+from datetime import datetime
 import random
 import json
 import os
@@ -14,11 +15,11 @@ from ElectricityGenerator.distribution import Distribution
 from World.weather import Weather
 
 class House(ElectricityUser):
-    AVERAGE_HOUSE_VALUE = 0
-    AVERAGE_ELECTRICITY_USAGE = 0
+    average_house_value = 0
+    average_electricity_usage = 0
 
     # Dictionary for seasons and weather
-    WEATHER_DICTIONARY = {
+    weather_dictionary = {
         "sunny" : -0.1,
         "cloudy" : 0,
         "rain" :0.1,
@@ -37,71 +38,74 @@ class House(ElectricityUser):
             conf = json.load(json_file)
 
         # Average house value in Ireland. Units in €.
-        self.AVERAGE_HOUSE_VALUE = conf["electricityUser"]["houses"]["averageHouseValue"]
+        self.average_house_value = conf["electricity_user"]["houses"]["average_house_value"]
 
         # Electricity usage daily measured in kWh.
-        self.AVERAGE_ELECTRICITY_USAGE = conf["electricityUser"]["houses"]["averageElectricityValue"]
+        self.average_electricity_usage = conf["electricity_user"]["houses"]["average_electricity_value"]
 
-        self.homeID = 0
-        self.numberOfOccupants = random.randint(1,10)
-        self.ageOfHouse = random.randint(1,30)
-        self.totalElectricityUsage = self.getRandomElectrictyUsage(self.numberOfOccupants, self.ageOfHouse)
-        self.houseValue = self.getRandomHouseValue(self.ageOfHouse)
+        self.home_id = 0
+        self.number_of_occupants = random.randint(1,10)
+        self.age_of_house = random.randint(1,30)
+        self.total_electricity_usage = self.get_random_electricity_usage(self.number_of_occupants, self.age_of_house)
+        self.house_value = self.get_random_house_value(self.age_of_house)
 
-    def setHomeID(self, newID):
-        self.homeID = newID
+    def set_home_id(self, new_id):
+        self.home_id = new_id
     
-    def setTotalElectricityUsage(self, newValue):
-        self.totalElectricityUsage = newValue
+    def set_total_electricity_usage(self, new_value):
+        self.total_electricity_usage = new_value
 
-    def setHouseValue(self, newValue):
-        self.houseValue = newValue
+    def set_house_value(self, new_value):
+        self.house_value = new_value
     
-    def setNumberOfOccupants(self, newValue):
-        self.numberOfOccupants = newValue
+    def set_number_of_occupants(self, new_value):
+        self.number_of_occupants = new_value
 
-    def setAgeOfHouse(self, newValue):
-        self.ageOfHouse = newValue
+    def set_age_of_house(self, new_value):
+        self.age_of_house = new_value
 
-    def toString(self):
-        return  "ID: " + str(self.homeID) + "\t\t\tTotal Electricity Usage: " + str(self.totalElectricityUsage) + "kWh" + "\t\t\tHouse Value: €" + str(self.houseValue) + "\t\t\tNumber of Occupants: " + str(self.numberOfOccupants) + "\t\t\tAge of House: " + str(self.ageOfHouse)
+    def to_string(self):
+        return  "ID: " + str(self.home_id) + "\t\t\tTotal Electricity Usage: " + str(self.total_electricity_usage) + "kWh" + "\t\t\tHouse Value: €" + str(self.house_value) + "\t\t\tNumber of Occupants: " + str(self.number_of_occupants) + "\t\t\tAge of House: " + str(self.age_of_house)
 
-    def getRandomHouseValue(self, ageOfHouse):
-        houseValueTolerance = 100000
-        value = random.randint(self.AVERAGE_HOUSE_VALUE - houseValueTolerance, self.AVERAGE_HOUSE_VALUE + houseValueTolerance)
-        if ageOfHouse < 20:
+    def get_random_house_value(self, age_of_house):
+        house_value_tolerance = 100000
+        value = random.randint(self.average_house_value - house_value_tolerance, self.average_house_value + house_value_tolerance)
+        if age_of_house < 20:
             return value
         else: 
-            return value - random.randint(0, houseValueTolerance)
+            return value - random.randint(0, house_value_tolerance)
 
     # Get random electricity usage based on number of occupants in a household
-    def getRandomElectrictyUsage(self, numberOfOccupants, ageOfHouse):
-        electricityUsageTolerance = 10
-        dailyAverageUsage = random.randint(self.AVERAGE_ELECTRICITY_USAGE - electricityUsageTolerance, self.AVERAGE_ELECTRICITY_USAGE + electricityUsageTolerance)/4
-        dailyAverageUsagePerHousehold = dailyAverageUsage * numberOfOccupants
-        if ageOfHouse < 20:
-            return dailyAverageUsagePerHousehold
+    def get_random_electricity_usage(self, number_of_occupants, age_of_house):
+        electricity_usage_tolerance = 10
+        daily_average_usage = random.randint(self.average_electricity_usage - electricity_usage_tolerance, self.average_electricity_usage + electricity_usage_tolerance)/4
+        daily_average_usage_per_household = daily_average_usage * number_of_occupants
+        if age_of_house < 20:
+            return daily_average_usage_per_household
         else: 
-            return dailyAverageUsagePerHousehold + random.randint(0, electricityUsageTolerance) 
+            return daily_average_usage_per_household + random.randint(0, electricity_usage_tolerance)
 
-    # TODO: implement update and getElectricityUsed
-    def update(self, date):
-        totalUsage = self.totalElectricityUsage
-        seasonValue = self.WEATHER_DICTIONARY[Weather.getSeasonChange(date)]
-        if seasonValue > 0:
-            totalUsage += random.randint(0, int(totalUsage * seasonValue))
-        elif seasonValue < 0:
-            totalUsage -= random.randint(0, int(totalUsage * -seasonValue))
-        return totalUsage
+    # TODO: implement update and ger_electricity_used
+    def update(self, date: datetime) -> int:
+        total_usage = self.total_electricity_usage
+        season_value = self.weather_dictionary[Weather.get_season_change(date)]
+        if season_value > 0:
+            total_usage += random.randint(0, int(total_usage * season_value))
+        elif season_value < 0:
+            total_usage -= random.randint(0, int(total_usage * -season_value))
+        return total_usage
 
-    def getElectricityUsed(self):
+    def get_electricity_used(self) -> int:
         return -1
 
-    def generateUsers(numberOfHouses):
-        houseData = []
-        for x in range(numberOfHouses):
+    def generate_users(number_of_houses: int) -> list:
+        house_data = []
+        for x in range(number_of_houses):
             house = House()
-            house.setHomeID(x + 1)
-            houseData.append(house)
+            house.set_home_id(x + 1)
+            house_data.append(house)
 
-        return houseData
+        return house_data
+
+# List outside of class for importing
+generate_houses = House.generate_users

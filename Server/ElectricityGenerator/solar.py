@@ -7,18 +7,18 @@ from datetime import datetime
 
 class Solar(ElectricityGenerator):
     wattage=0
-    GeneratorID = 0
+    generator_id = 0
 
     def __init__(self):
         path = os.path.dirname(os.path.realpath(__file__)).split("ElectricityGenerator")[0] + "config.json"
         with open(path) as json_file:
             conf = json.load(json_file)
-            self.wattage=conf["electricityGenerator"]["solar"]["output"]
+            self.wattage=conf["electricity_generator"]["solar"]["output"]
 
-    def setGeneratorID(self, newID):
-        self.GeneratorID = newID
+    def set_generator_id(self, new_id):
+        self.generator_id = new_id
 
-    def update(self, date):
+    def update(self, date: datetime) -> int:
         current_time = int(date.strftime("%H"))
         if(current_time<6 or current_time>20):
             return 0
@@ -31,13 +31,16 @@ class Solar(ElectricityGenerator):
             b=random.uniform(0,0.0014)
             return (self.wattage+a)+(b*(24-current_time))
 
-    def getElectricityGenerated(self):
+    def get_electricity_generated(self) -> int:
         return self.update()
 
-    def generateGenerators(numberOfGenerators):
-        generatedArray = []
-        for x in range(numberOfGenerators):
+    def generate_generators(number_of_generators: int) -> list:
+        generated_array = []
+        for x in range(number_of_generators):
             generator = Solar()
-            generator.setGeneratorID(x + 1)
-            generatedArray.append(generator)
-        return generatedArray
+            generator.set_generator_id(x + 1)
+            generated_array.append(generator)
+        return generated_array
+
+# List outside of class for importing
+generate_solar_panels = Solar.generate_generators

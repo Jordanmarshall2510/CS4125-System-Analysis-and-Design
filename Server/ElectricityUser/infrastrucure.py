@@ -13,85 +13,87 @@
 #
 #   put global constants in class and use self. / House. to access examples (vehicles.py: lines{28, 36, 66})
 #	
-#	***Extend electricityUsers and import required functions (update & getElectricityUsed)***
+#	***Extend electricity_users and import required functions (update & get_electricity_used)***
 import random
 import json
 import os
 
 from ElectricityUser.electricityuser import ElectricityUser
+from datetime import datetime
 
 class Infrastructure(ElectricityUser):
-    AVERAGE_ELECTRICITY_USAGE = 0 
-    STREET_LIGHT_USAGE = 0 
-    TRAFFIC_LIGHT_USAGE = random.randrange(900, 1600, 1)/10
+    average_electricity_usage = 0
+    street_light_usage = 0
+    traffic_light_usage = random.randrange(900, 1600, 1)/10
 
-    def __init__(self, infrastructureID):
+    def __init__(self, infrastructure_id):
 
         path = os.path.dirname(os.path.realpath(__file__)).split("ElectricityUser")[0] + "config.json"
 
         with open(path) as json_file:
             conf = json.load(json_file)
 
-        self.AVERAGE_ELECTRICITY_USAGE = conf["electricityUser"]["infrastructure"]["averageElectricityUsage"]
-        self.STREET_LIGHT_USAGE = conf["electricityUser"]["infrastructure"]["streetLightUsage"]
+        self.average_electricity_usage = conf["electricity_user"]["infrastructure"]["average_electricity_usage"]
+        self.street_light_usage = conf["electricity_user"]["infrastructure"]["street_light_usage"]
 
 
-        self.infrastructureID = infrastructureID
-        self.hasTrafficLight = self.setTrafficLight()
-        self.hasStreetLight = self.setStreetLight()
-        self.sumElectricitityUsage
+        self.infrastructure_id = infrastructure_id
+        self.has_traffic_light = self.set_traffic_light()
+        self.has_street_light = self.set_street_light()
+        self.sum_electricity_usage
 
-    def setinfrastructureID(self, newID):
-        self.infrastructureID = newID
+    def set_infrastructure_id(self, new_id):
+        self.infrastructure_id = new_id
 
-    def setTotalElectricityUsage(self, newValue):
-        self.totalElectricityUsage = newValue
+    def set_total_electricity_usage(self, new_value):
+        self.total_electricity_usage = new_value
 
-    def setStreetLight(self):        
+    def set_street_light(self):
         if random.randint(0, 1) == 0:
             return True
         else:
             return False
 
-    def setTrafficLight(self):
+    def set_traffic_light(self):
         if random.randint(0, 4) == 0:
             return True
         else:
             return False
 
-    def sumElectricitityUsage(self):
-        electricityUsageTolerance = 10
-        dailyAverageUsage = random.randint(self.AVERAGE_ELECTRICITY_USAGE, self.AVERAGE_ELECTRICITY_USAGE + electricityUsageTolerance)/4 
-        if self.setTrafficLight() == True:
-            dailyAverageUsage += self.TRAFFIC_LIGHT_USAGE
+    def sum_electricity_usage(self):
+        electricity_usage_tolerance = 10
+        daily_average_usage = random.randint(self.average_electricity_usage, self.average_electricity_usage + electricity_usage_tolerance)/4
+        if self.set_traffic_light() == True:
+            daily_average_usage += self.traffic_light_usage
         #Will be reliant on time
-        if self.setStreetLight() == True:
-            # Clock.getTimeOnly()
-            dailyAverageUsage += self.STREET_LIGHT_USAGE
-        self.totalElectricityUsage = dailyAverageUsage
+        if self.set_street_light() == True:
+            # Clock.get_time_only()
+            daily_average_usage += self.street_light_usage
+        self.total_electricity_usage = daily_average_usage
 
-    def toString(self):
-        return  "ID:" + self.infrastructureID + "\t\t\tTotal Electricity Usage: " + str(self.totalElectricityUsage) + "kWh" + "\t\t\tStreetLight?: " + str(self.hasStreetLight) + "\t\t\tTrafficLight?: " + str(self.hasTrafficLight)
+    def to_string(self):
+        return  "ID:" + self.infrastructure_id + "\t\t\tTotal Electricity Usage: " + str(self.total_electricity_usage) + "kWh" + "\t\t\tStreetLight?: " + str(self.has_street_light) + "\t\t\tTrafficLight?: " + str(self.has_traffic_light)
 
-    # TODO: implement update and getElectricityUsed
-    def update(self, date): 
+    # TODO: implement update and get_electricity_used
+    def update(self, date: datetime) -> int: 
         return -1
 
-
-    def getElectricityUsed(self):
-        self.sumElectricitityUsage()
-        return self.totalElectricityUsage
+    def get_electricity_used(self) -> int:
+        self.sum_electricity_usage()
+        return self.total_electricity_usage
 
         
-    def generateUsers(numberOfInfrastructure):    # NOTE: Will be dependent on number of houses in future
-        infrastructureData = []
-        infrastructureCounter = 0
+    def generate_users(number_of_infrastructure: int) -> list:    # NOTE: Will be dependent on number of houses in future
+        infrastructure_data = []
+        infrastructure_counter = 0
 
-        for i in range(numberOfInfrastructure):
-            infrastructure = Infrastructure("R" + str(infrastructureCounter))
-            infrastructure.sumElectricitityUsage()
-            infrastructureData.append(infrastructure)
-            infrastructureCounter += 1
+        for i in range(number_of_infrastructure):
+            infrastructure = Infrastructure("R" + str(infrastructure_counter))
+            infrastructure.sum_electricity_usage()
+            infrastructure_data.append(infrastructure)
+            infrastructure_counter += 1
         
-        return infrastructureData
-    
+        return infrastructure_data
+
+# List outside of class for importing
+generate_infrastructure = Infrastructure.generate_users

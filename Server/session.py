@@ -1,33 +1,34 @@
 import os
 import json
 from datetime import datetime, timedelta
-from ElectricityUser.businesses import Business
-from ElectricityUser.houses import House
-from ElectricityUser.infrastrucure import Infrastructure
-from ElectricityUser.vehicles import Vehicle
-from ElectricityGenerator.distribution import Distribution
+from city import CityBuilder
 from World.weather import Weather
 from database import Database
 
 path = os.path.dirname(os.path.realpath(__file__)) + "//config.json"
 
-# Create user array
-arrUsers = []
-
-# Set distribution
-distribution = Distribution()
+# Prepare city builder
+builder = CityBuilder()
 
 # Initialze weather
 weather = Weather()
 
-# Load users
+# Read city parameters
 with open(path, 'r') as json_file:
-    conf = json.load(json_file)
+	conf = json.load(json_file)
 
-    arrUsers += Business.generateUsers(conf['session']['electricityUser']['businesses'])
-    arrUsers += House.generateUsers(conf['session']['electricityUser']['houses'])
-    arrUsers += Infrastructure.generateUsers(conf['session']['electricityUser']['infrastucture'])
-    arrUsers += Vehicle.generateUsers(conf["session"]['electricityUser']['vehicles'])
+	builder.construct_buisnesses(conf['session']['electricity_user']['businesses'])
+	builder.construct_houses(conf['session']['electricity_user']['houses'])
+	builder.construct_infrastructure(conf['session']['electricity_user']['infrastructure'])
+	builder.construct_vehicles(conf["session"]['electricity_user']['vehicles'])
+	builder.construct_solar_panels(conf["session"]['electricity_generator']['solar'])
+	builder.construct_wind_turbines(conf["session"]["electricity_generator"]["wind"])
+
+# Build city
+city = builder.build()
+
+# Remove builder
+del builder
 
 # Connect to database
 db = Database()
@@ -35,30 +36,19 @@ db = Database()
 # Initialise timer
 timestamp = datetime.strptime(conf['session']['time'], "%Y-%m-%d %H:%M:%S")
 for i in range(730):
-    # Create dictionary for the Users
-    userDict = {}
+	# Update City
+	generation, usage = city.update(timestamp)
 
-    # Retrieve dictionary for the Generators
-    generatorDict = distribution.update(timestamp) # Might need a change
+	# Put data into database
+	db.insert_generation(timestamp, generation)
+	db.insert_usage(timestamp, usage)
 
-    # Update Users
-    for user in arrUsers:
-        electricityUsed = user.update(timestamp)
-        if type(user).__name__ in userDict:
-            userDict[type(user).__name__] += electricityUsed
-        else:
-            userDict[type(user).__name__] = electricityUsed
+	# Progress time
+	timestamp += timedelta(hours=1)
 
-    # Put data into database
-    db.insertUsage(timestamp, userDict)
-    db.insertGeneration(timestamp, generatorDict) # Will this be a new dictionary ? (How to access solar and wind)
-
-    # Progress time
-    timestamp += timedelta(hours=1)
-
-    # Update Json files
-    conf['session']['time'] = timestamp.strftime("%Y-%m-%d %H:%M:%S")
-    with open(path, 'w') as json_file:
-        json.dump(conf, json_file)
+	# Update Json files
+	conf['session']['time'] = timestamp.strftime("%Y-%m-%d %H:%M:%S")
+	with open(path, 'w') as json_file:
+		json.dump(conf, json_file)
 
 del db
