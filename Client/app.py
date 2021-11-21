@@ -111,7 +111,7 @@ def update_output_div(overall, generators, users):
 
     print(inputs)
     
-    fig = px.line(graph.createDF(inputs)) 
+    fig = px.line(graph.create_df(inputs))
 
     fig.update_layout(
         # plot_bgcolor=colors['background'],

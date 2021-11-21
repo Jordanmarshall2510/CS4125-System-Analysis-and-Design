@@ -44,6 +44,15 @@ class Weather:
             Weather.season=string.lower()
 
     @staticmethod
+    def set_climate(string):
+        if (string.lower() == 'tropical' or 'dry' or 'temperate' or 'continental' or 'polar'):#Tropical, Dry, Temperate, Continental, Polar
+            Weather.climate=string.lower()
+
+    @staticmethod
+    def get_climate(string):
+        return Weather.climate
+
+    @staticmethod
     def get_season_change(date):
         if 3 <= int(date.strftime("%m")) <= 6 :#spring
             if 3 == int(date.strftime("%m")) and int(date.strftime("%d")) < 20:

@@ -9,33 +9,33 @@ import re
 
 class Grapher:
     db = Database()
-    def createDF(self,inputs):
+    def create_df(self,inputs):
         result = []
         for i in inputs:
             result.append(i)
             if i == "Overall Generation":
-                value = self.db.selectTotalGeneratedPowerHistory()
+                value = self.db.select_total_generated_power_history()
                 pos = []
                 for j in value:
                     num = j[0]
                     pos.append(num)
                 result.append(pos)
             elif i == "Overall Usage":
-                value = self.db.selectTotalUsedPowerHistory()
+                value = self.db.select_total_used_power_history()
                 pos = []
                 for j in value:
                     num = j[0]
                     pos.append(num)
                 result.append(pos)
             elif i == "Solar" or i == "Wind":
-                value = self.db.selectGeneratedPowerHistory(i)
+                value = self.db.select_generated_power_history(i)
                 pos = []
                 for j in value:
                     num = j[0]
                     pos.append(num)
                 result.append(pos)
             else:
-                value = self.db.selectUsedPowerHistory(i)
+                value = self.db.select_used_power_history(i)
                 pos = []
                 for j in value:
                     num = j[0]
