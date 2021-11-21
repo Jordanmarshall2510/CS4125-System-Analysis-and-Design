@@ -2,9 +2,6 @@
 import json
 import os
 
-from ElectricityGenerator.solar import Solar
-from ElectricityGenerator.wind import Wind
-
 # TODO:
 #   The distribution class should hold all the electricity_generator instances
 #   When the update function triggers the class should call the updates on its generators
@@ -22,12 +19,16 @@ class Distribution:
             conf = json.load(json_file)
 
         self.generators_array = []
-        self.generators_array += Solar.generate_generators(conf["session"]["electricity_generator"]["solar"])
-        self.generators_array += Wind.generate_generators(conf["session"]["electricity_generator"]["wind"])
 
         self.distribution_size=conf["electricity_generator"]["distribution"]["distribution_size"]
         self.distribution_value=conf["electricity_generator"]["distribution"]["distribution_value"]
 
+    def add_generators(self, generators: list) -> None:
+        """Method to add generators to the distribution class
+        Arguments: generators -- A list of ElectricityGenerators being added
+        """
+        self.generators_array += generators
+        pass
 
     def get_value(self):
         return self.distribution_value

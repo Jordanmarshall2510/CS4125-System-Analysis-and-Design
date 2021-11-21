@@ -13,12 +13,13 @@
 #
 #   put global constants in class and use self. / House. to access examples (vehicles.py: lines{28, 36, 66})
 #	
-#	***Extend electricity_users and import required functions (update & ger_electricity_used)***
+#	***Extend electricity_users and import required functions (update & get_electricity_used)***
 import random
 import json
 import os
 
 from ElectricityUser.electricityuser import ElectricityUser
+from datetime import datetime
 
 class Infrastructure(ElectricityUser):
     average_electricity_usage = 0
@@ -73,17 +74,16 @@ class Infrastructure(ElectricityUser):
     def to_string(self):
         return  "ID:" + self.infrastructure_id + "\t\t\tTotal Electricity Usage: " + str(self.total_electricity_usage) + "kWh" + "\t\t\tStreetLight?: " + str(self.has_street_light) + "\t\t\tTrafficLight?: " + str(self.has_traffic_light)
 
-    # TODO: implement update and ger_electricity_used
-    def update(self, date): 
+    # TODO: implement update and get_electricity_used
+    def update(self, date: datetime) -> int: 
         return -1
 
-
-    def ger_electricity_used(self):
+    def get_electricity_used(self) -> int:
         self.sum_electricity_usage()
         return self.total_electricity_usage
 
         
-    def generate_users(number_of_infrastructure):    # NOTE: Will be dependent on number of houses in future
+    def generate_users(number_of_infrastructure: int) -> list:    # NOTE: Will be dependent on number of houses in future
         infrastructure_data = []
         infrastructure_counter = 0
 
@@ -94,4 +94,6 @@ class Infrastructure(ElectricityUser):
             infrastructure_counter += 1
         
         return infrastructure_data
-    
+
+# List outside of class for importing
+generate_infrastructure = Infrastructure.generate_users

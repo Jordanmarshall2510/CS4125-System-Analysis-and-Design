@@ -3,8 +3,9 @@
 # To Do:
 #   Heating
 #	
-#import required functions (update & ger_electricity_used)***
+#import required functions (update & get_electricity_used)***
 
+from datetime import datetime
 import random
 import json
 import os
@@ -85,7 +86,7 @@ class House(ElectricityUser):
             return daily_average_usage_per_household + random.randint(0, electricity_usage_tolerance)
 
     # TODO: implement update and ger_electricity_used
-    def update(self, date):
+    def update(self, date: datetime) -> int:
         total_usage = self.total_electricity_usage
         season_value = self.weather_dictionary[Weather.get_season_change(date)]
         if season_value > 0:
@@ -94,10 +95,10 @@ class House(ElectricityUser):
             total_usage -= random.randint(0, int(total_usage * -season_value))
         return total_usage
 
-    def ger_electricity_used(self):
+    def get_electricity_used(self) -> int:
         return -1
 
-    def generate_users(number_of_houses):
+    def generate_users(number_of_houses: int) -> list:
         house_data = []
         for x in range(number_of_houses):
             house = House()
@@ -105,3 +106,6 @@ class House(ElectricityUser):
             house_data.append(house)
 
         return house_data
+
+# List outside of class for importing
+generate_houses = House.generate_users

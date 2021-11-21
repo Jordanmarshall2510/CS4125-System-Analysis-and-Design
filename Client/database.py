@@ -3,13 +3,14 @@ import os
 import sqlite3
 
 class Database:
+	"""Database class dealing with select queries for the frontend"""
 	def __init__(self):
 		"""Initialze Database object & connect to database"""
 		path = os.path.dirname(os.path.realpath(__file__)) + "/../Server/database.db"
 		self.con = sqlite3.connect(path,check_same_thread=False)
 		self.cur = self.con.cursor()
 
-	def selectUsedPowerHistory(self, type):
+	def selectUsedPowerHistory(self, type: str):
 		"""Get the Used_Power of a user
 
 		Arguments: type -- the type of user being search for
@@ -19,7 +20,7 @@ class Database:
 		self.cur.execute("SELECT power_used FROM users WHERE type = ? ORDER BY time", [type])
 		return self.cur.fetchall()
 
-	def selectGeneratedPowerHistory(self, type):
+	def selectGeneratedPowerHistory(self, type: str):
 		"""Get the Generated_Power of a user
 
 		Arguments: type -- the type of user being search for

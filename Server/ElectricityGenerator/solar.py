@@ -18,7 +18,7 @@ class Solar(ElectricityGenerator):
     def set_generator_id(self, new_id):
         self.generator_id = new_id
 
-    def update(self, date):
+    def update(self, date: datetime) -> int:
         current_time = int(date.strftime("%H"))
         if(current_time<6 or current_time>20):
             return 0
@@ -31,13 +31,16 @@ class Solar(ElectricityGenerator):
             b=random.uniform(0,0.0014)
             return (self.wattage+a)+(b*(24-current_time))
 
-    def get_electricity_generated(self):
+    def get_electricity_generated(self) -> int:
         return self.update()
 
-    def generate_generators(number_of_generators):
+    def generate_generators(number_of_generators: int) -> list:
         generated_array = []
         for x in range(number_of_generators):
             generator = Solar()
             generator.set_generator_id(x + 1)
             generated_array.append(generator)
         return generated_array
+
+# List outside of class for importing
+generate_solar_panels = Solar.generate_generators

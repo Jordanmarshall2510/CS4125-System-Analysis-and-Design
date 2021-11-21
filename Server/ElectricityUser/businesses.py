@@ -4,8 +4,9 @@
 #   
 #   put global constants in class and use self. / House. to access examples (vehicles.py: lines{28, 36, 66})
 #	
-#	***Extend electricity_users and import required functions (update & ger_electricity_used)***
+#	***Extend electricity_users and import required functions (update & get_electricity_used)***
 
+from datetime import datetime
 import random
 import json
 import os
@@ -65,7 +66,7 @@ class Business(ElectricityUser):
         return  "ID: " + str(self.business_id) + "\t\t\tTotal Electricity Usage: " + str(self.total_electricity_usage) + "kWh" + "\t\t\tProperty Value: EURO " + str(self.property_value) + "\t\t\tProperty Size: " + str(self.property_size) + "sqm" + "\t\t\tNumber of Occupants: " + str(self.number_of_occupants)
 
     # TODO: Implement Update and ger_electricity_used
-    def update(self, date):
+    def update(self, date: datetime) -> int:
         total_usage = self.total_electricity_usage
         # Weather
         total_usage += total_usage*self.weather_dictionary[Weather.get_season_change(date)] + total_usage*self.weather_dictionary[Weather.get_weather_change('rain')]
@@ -74,11 +75,10 @@ class Business(ElectricityUser):
         # Distribution.output(total_usage)
         return total_usage
 
-
-    def ger_electricity_used(self):
+    def get_electricity_used(self) -> int:
         return -1
 
-    def generate_users(number_of_businesses):
+    def generate_users(number_of_businesses: int) -> list:
         business_data = []
         business_counter = 0
 
@@ -116,3 +116,6 @@ class Business(ElectricityUser):
         # else:
             # return daily_average_usage_per_household
         return daily_average_usage_per_household
+
+# List outside of class for importing
+generate_buisnesses = Business.generate_users
