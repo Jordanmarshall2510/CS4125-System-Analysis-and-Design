@@ -77,7 +77,7 @@ class Business(ElectricityUser):
     def update(self, date: datetime) -> int:
         total_usage = self.total_electricity_usage
         # Weather
-        total_usage += total_usage*self.weather_dictionary[Weather.get_season_change(date)] + total_usage*self.weather_dictionary[Weather.get_weather_change('rain')]
+        total_usage += total_usage*self.weather_dictionary[Weather.get_season()] + total_usage*self.weather_dictionary[Weather.get_weather()]
         # Time
         
         # Distribution.output(total_usage)
