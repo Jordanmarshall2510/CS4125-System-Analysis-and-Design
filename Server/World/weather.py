@@ -232,3 +232,9 @@ class Weather:
             Weather.counter = 0
             return future_weather
 
+    @staticmethod
+    def update_weather(current_weather, date):
+        Weather.set_weather(Weather.get_weather_change(current_weather))
+        Weather.set_season(Weather.get_season_change(date))
+
+

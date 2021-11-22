@@ -36,6 +36,9 @@ db = Database()
 # Initialise timer
 timestamp = datetime.strptime(conf['session']['time'], "%Y-%m-%d %H:%M:%S")
 for i in range(730):
+	#Update the weather and season
+	Weather.update_weather(conf['world']['weather']['weather'], timestamp)
+	
 	# Update City
 	generation, usage = city.update(timestamp)
 
@@ -48,6 +51,7 @@ for i in range(730):
 
 	# Update Json files
 	conf['session']['time'] = timestamp.strftime("%Y-%m-%d %H:%M:%S")
+	conf['world']['weather']['weather'] = Weather.get_weather()
 	with open(path, 'w') as json_file:
 		json.dump(conf, json_file)
 
