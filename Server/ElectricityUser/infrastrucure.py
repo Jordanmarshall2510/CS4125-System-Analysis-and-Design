@@ -106,7 +106,7 @@ class Infrastructure(ElectricityUser):
             else:
                 timetoChange = 6
                 timetoEnd = 20
-            if not(current_time<timetoChange or current_time>timetoEnd):
+            if (current_time<timetoChange or current_time>timetoEnd):
                 daily_average_usage += self.street_light_usage
         self.total_electricity_usage = daily_average_usage
 
@@ -117,7 +117,7 @@ class Infrastructure(ElectricityUser):
     def update(self, date: datetime) -> int: 
         self.sum_electricity_usage_date(date)
         total_usage = self.total_electricity_usage
-        total_usage += total_usage*self.weather_dictionary[Weather.get_season_change(date)] + total_usage*self.weather_dictionary[Weather.get_weather_change('rain')]
+        total_usage += random.uniform(1, total_usage*self.weather_dictionary[Weather.get_season()] + total_usage*self.weather_dictionary[Weather.get_weather()])
         return total_usage
         
 
