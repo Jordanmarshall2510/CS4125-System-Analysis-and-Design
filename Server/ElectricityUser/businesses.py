@@ -37,7 +37,15 @@ class Business(ElectricityUser):
         "summer" : -0.1,
         "autumn" : 0.1,
         "spring" : 0,
-        "winter" : 0.2
+        "winter" : 0.2,
+        "fog" : 0.1,
+        "tornado" : 0.2,
+        "sandstorm" : 0.1,
+        "snowstorm" : 0.2,
+        "wet" : 0,
+        "dry" : 0,
+        "polar_winter" : 0.2,
+        "polar" : 0.2
     }
 
     def __init__(self, business_id, total_electricity_usage, property_value, property_size ,number_of_occupants):

@@ -10,7 +10,7 @@ class Database:
 		self.con = sqlite3.connect(path,check_same_thread=False)
 		self.cur = self.con.cursor()
 
-	def selectUsedPowerHistory(self, type: str):
+	def select_used_power_history(self, type: str):
 		"""Get the Used_Power of a user
 
 		Arguments: type -- the type of user being search for
@@ -20,7 +20,7 @@ class Database:
 		self.cur.execute("SELECT power_used FROM users WHERE type = ? ORDER BY time", [type])
 		return self.cur.fetchall()
 
-	def selectGeneratedPowerHistory(self, type: str):
+	def select_generated_power_history(self, type: str):
 		"""Get the Generated_Power of a user
 
 		Arguments: type -- the type of user being search for
@@ -30,7 +30,7 @@ class Database:
 		self.cur.execute("SELECT power_generated FROM generators WHERE type = ? ORDER BY time", [type])
 		return self.cur.fetchall()
 		
-	def selectTotalUsedPowerHistory(self):
+	def select_total_used_power_history(self):
 		"""Get the total power_used per timestamp
 
 		Return: list of total power_used sorted by time
@@ -38,7 +38,7 @@ class Database:
 		self.cur.execute("SELECT SUM(power_used) AS total FROM users GROUP BY time")
 		return self.cur.fetchall()
 
-	def selectTotalGeneratedPowerHistory(self):
+	def select_total_generated_power_history(self):
 		"""Get the total power_generated per timestamp
 
 		Return: list of total power_generated sorted by time
