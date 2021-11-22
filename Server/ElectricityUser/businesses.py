@@ -34,18 +34,18 @@ class Business(ElectricityUser):
         "cloudy" : 0,
         "rain" :0.1,
         "snow" : 0.2,
-        "summer" : -0.1,
-        "autumn" : 0.1,
+        "summer" : -0.25,
+        "autumn" : 0.2,
         "spring" : 0,
-        "winter" : 0.2,
-        "fog" : 0.1,
-        "tornado" : 0.2,
-        "sandstorm" : 0.1,
-        "snowstorm" : 0.2,
+        "winter" : 0.75,
+        "fog" : 0,
+        "tornado" : -1,
+        "sandstorm" : 0.3,
+        "snowstorm" : 0.4,
         "wet" : 0,
         "dry" : 0,
-        "polar_winter" : 0.2,
-        "polar" : 0.2
+        "polar_winter" : 0.5,
+        "polar" : 0.3
     }
 
     def __init__(self, business_id, total_electricity_usage, property_value, property_size ,number_of_occupants):
@@ -77,10 +77,11 @@ class Business(ElectricityUser):
     def update(self, date: datetime) -> int:
         total_usage = self.total_electricity_usage
         # Weather
-        total_usage += total_usage*self.weather_dictionary[Weather.get_season()] + total_usage*self.weather_dictionary[Weather.get_weather()]
+        total_usage += random.uniform(1, total_usage*self.weather_dictionary[Weather.get_season()] + total_usage*self.weather_dictionary[Weather.get_weather()])
         # Time
-        
-        # Distribution.output(total_usage)
+        if (not (9 < int(date.strftime("%H")) < 22)):
+            total_usage = total_usage*random.uniform(0.25, 0.5)    
+        #Distribution.output(total_usage)
         return total_usage
 
     def get_electricity_used(self) -> int:
