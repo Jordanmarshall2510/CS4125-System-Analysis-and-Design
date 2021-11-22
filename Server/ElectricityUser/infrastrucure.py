@@ -92,14 +92,32 @@ class Infrastructure(ElectricityUser):
             daily_average_usage += self.street_light_usage
         self.total_electricity_usage = daily_average_usage
 
+    def sum_electricity_usage_date(self,date ):
+        electricity_usage_tolerance = 10
+        daily_average_usage = random.randint(self.average_electricity_usage, self.average_electricity_usage + electricity_usage_tolerance)/4
+        if self.set_traffic_light() == True:
+            daily_average_usage += self.traffic_light_usage
+        #Will be reliant on time
+        if self.set_street_light() == True:
+            current_time = int(date.strftime("%H"))
+            if Weather.get_season == 'winter':
+                timetoChange = 8
+                timetoEnd = 17
+            else:
+                timetoChange = 6
+                timetoEnd = 20
+            if (current_time<timetoChange or current_time>timetoEnd):
+                daily_average_usage += self.street_light_usage
+        self.total_electricity_usage = daily_average_usage
+
     def to_string(self):
         return  "ID:" + self.infrastructure_id + "\t\t\tTotal Electricity Usage: " + str(self.total_electricity_usage) + "kWh" + "\t\t\tStreetLight?: " + str(self.has_street_light) + "\t\t\tTrafficLight?: " + str(self.has_traffic_light)
 
     # TODO: implement update and get_electricity_used
     def update(self, date: datetime) -> int: 
-        self.sum_electricity_usage()
+        self.sum_electricity_usage_date(date)
         total_usage = self.total_electricity_usage
-        total_usage += total_usage*self.weather_dictionary[Weather.get_season_change(date)] + total_usage*self.weather_dictionary[Weather.get_weather_change('rain')]
+        total_usage += random.uniform(1, total_usage*self.weather_dictionary[Weather.get_season()] + total_usage*self.weather_dictionary[Weather.get_weather()])
         return total_usage
         
 
