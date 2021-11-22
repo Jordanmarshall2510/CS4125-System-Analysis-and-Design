@@ -6,9 +6,28 @@ from datetime import datetime
 import pandas as pd
 import numpy as np
 import re
+import os,json
 
 class Grapher:
     db = Database()
+    def get_session_data(self):
+        path = os.path.dirname(os.path.realpath(__file__)).split("Client")[0] + "Server/config.json"
+        print(path)
+
+
+        with open(path) as json_file:
+            conf = json.load(json_file)
+            business = conf["session"]["electricity_user"]["businesses"]
+            house = conf["session"]["electricity_user"]["houses"]
+            infrastructure = conf["session"]["electricity_user"]["infrastructure"]
+            vehicles = conf["session"]["electricity_user"]["vehicles"]
+
+            solar = conf["session"]["electricity_generator"]["solar"]
+            wind = conf["session"]["electricity_generator"]["wind"]
+
+            time = conf["session"]["time"]
+
+        return business, house, infrastructure, vehicles, solar, wind, time
 
     def create_df(self,inputs):
         result = []
@@ -43,10 +62,10 @@ class Grapher:
                     pos.append(num)
                 result.append(pos)
         result_dict = {result[i]: result[i + 1] for i in range(0, len(result), 2)}
-        selected_generated, selected_usage, total_generated, total_usage = self.getStatistics(result_dict)
+        selected_generated, selected_usage, total_generated, total_usage = self.get_statistics(result_dict)
         return pd.DataFrame(result_dict), selected_generated, selected_usage, total_generated, total_usage
 
-    def getStatistics(self,selected_items) :
+    def get_statistics(self,selected_items) :
         selected_generated = []
         selected_usage = []
         total_generated = 0
