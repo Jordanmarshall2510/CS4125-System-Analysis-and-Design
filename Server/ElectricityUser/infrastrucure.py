@@ -36,7 +36,15 @@ class Infrastructure(ElectricityUser):
         "summer" : -0.2,
         "autumn" : 0.2,
         "spring" : 0,
-        "winter" : 0.5
+        "winter" : 0.5,
+        "fog" : 0.1,
+        "tornado" : 0.2,
+        "sandstorm" : 0.1,
+        "snowstorm" : 0.2,
+        "wet" : 0,
+        "dry" : 0,
+        "polar_winter" : 0.2,
+        "polar" : 0.2
     }
 
     def __init__(self, infrastructure_id):
