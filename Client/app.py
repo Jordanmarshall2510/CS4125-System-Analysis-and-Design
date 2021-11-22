@@ -30,7 +30,8 @@ app.layout = html.Div(children=[
                 html.H1(children='Smart City Simulation'),
                 html.Div([
                     html.Div([
-                        html.H3(children='Overall'),
+                        html.H3(children='Options'),
+                        html.H4(children='Overall'),
 
                         dcc.Checklist(
                             options=[
@@ -40,7 +41,7 @@ app.layout = html.Div(children=[
                             id = "overall"
                         ),
 
-                        html.H3(children='Electricty Generators'),
+                        html.H4(children='Electricity Generators'),
                         
                         dcc.Checklist(
                             options=[
@@ -50,7 +51,7 @@ app.layout = html.Div(children=[
                             id = "generators"
                         ),
 
-                        html.H3(children='Electricty Users'),
+                        html.H4(children='Electricity Users'),
                         
                         dcc.Checklist(
                             options=[
@@ -72,17 +73,15 @@ app.layout = html.Div(children=[
                             html.Div([
                                 html.H5("Generated"),
                                 html.Table([
-                                    html.Tr([html.Td("Selected: "), html.Td(id='taskName')]),
-                                    html.Tr([html.Td("Total Generated: "), html.Td(id='totalGenerated')]),
-                                    html.Tr([html.Td("Total Usage: "), html.Td(id='total_usage')]),
+                                    html.Tr([html.Td("Selected: "), html.Td(id='generated_selected')]),
+                                    html.Tr([html.Td("Total Generated: "), html.Td(id='total_generated')]),
                                 ]),
                             ],className='six columns'),
                             html.Div([
                                 html.H5("Usage"),
                                 html.Table([
-                                    html.Tr([html.Td("Selected: "), html.Td(id='taskName1')]),
-                                    html.Tr([html.Td("Total Generated: "), html.Td(id='totalGenerated1')]),
-                                    html.Tr([html.Td("Total Usage: "), html.Td(id='total_usage1')]),
+                                    html.Tr([html.Td("Selected: "), html.Td(id='usage_selected')]),
+                                    html.Tr([html.Td("Total Usage: "), html.Td(id='total_usage')]),
                                 ]),
                             ],className='six columns')
                         ],className='row'),
@@ -92,8 +91,9 @@ app.layout = html.Div(children=[
 
 @app.callback(
     Output('graph', 'figure'),
-    Output("taskName", "children"),
-    Output("totalGenerated", "children"),
+    Output("generated_selected", "children"),
+    Output("usage_selected", "children"),
+    Output("total_generated", "children"),
     Output("total_usage", "children"),
     Input('overall', 'value'),
     Input('generators', 'value'),
@@ -110,8 +110,9 @@ def update_output_div(overall, generators, users):
         inputs += users
 
     print(inputs)
-    
-    fig = px.line(graph.create_df(inputs))
+
+    sim_graph, selected_generated, selected_usage, total_generated, total_usage = graph.create_df(inputs)
+    fig = px.line(sim_graph) 
 
     fig.update_layout(
         # plot_bgcolor=colors['background'],
@@ -126,7 +127,7 @@ def update_output_div(overall, generators, users):
         )
     )
 
-    return  fig, ", ".join(inputs), ", ".join(inputs), ", ".join(inputs)
+    return  fig, ", ".join(selected_generated), ", ".join(selected_usage), f"{int(total_generated):,}" + " kW", f"{int(total_usage):,}" + " kW"
 
 if __name__ == '__main__':
     app.run_server(debug=True)

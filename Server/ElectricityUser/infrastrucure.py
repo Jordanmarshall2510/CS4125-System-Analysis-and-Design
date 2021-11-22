@@ -21,10 +21,23 @@ import os
 from ElectricityUser.electricityuser import ElectricityUser
 from datetime import datetime
 
+from World.weather import Weather
+
 class Infrastructure(ElectricityUser):
     average_electricity_usage = 0
     street_light_usage = 0
     traffic_light_usage = random.randrange(900, 1600, 1)/10
+
+    weather_dictionary = {
+        "sunny" : -0.2,
+        "cloudy" : 0.2,
+        "rain" :0.3,
+        "snow" : 0.4,
+        "summer" : -0.2,
+        "autumn" : 0.2,
+        "spring" : 0,
+        "winter" : 0.5
+    }
 
     def __init__(self, infrastructure_id):
 
@@ -76,11 +89,15 @@ class Infrastructure(ElectricityUser):
 
     # TODO: implement update and get_electricity_used
     def update(self, date: datetime) -> int: 
-        return -1
+        self.sum_electricity_usage()
+        total_usage = self.total_electricity_usage
+        total_usage += total_usage*self.weather_dictionary[Weather.get_season_change(date)] + total_usage*self.weather_dictionary[Weather.get_weather_change('rain')]
+        return total_usage
+        
 
     def get_electricity_used(self) -> int:
-        self.sum_electricity_usage()
-        return self.total_electricity_usage
+        
+        return -1
 
         
     def generate_users(number_of_infrastructure: int) -> list:    # NOTE: Will be dependent on number of houses in future
