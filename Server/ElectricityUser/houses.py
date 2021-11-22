@@ -88,7 +88,7 @@ class House(ElectricityUser):
     # TODO: implement update and ger_electricity_used
     def update(self, date: datetime) -> int:
         total_usage = self.total_electricity_usage
-        season_value = self.weather_dictionary[Weather.get_season_change(date)]
+        season_value = self.weather_dictionary[Weather.get_season()]
         if season_value > 0:
             total_usage += random.randint(0, int(total_usage * season_value))
         elif season_value < 0:
