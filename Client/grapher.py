@@ -12,8 +12,6 @@ class Grapher:
     db = Database()
     def get_session_data(self):
         path = os.path.dirname(os.path.realpath(__file__)).split("Client")[0] + "Server/config.json"
-        print(path)
-
 
         with open(path) as json_file:
             conf = json.load(json_file)
