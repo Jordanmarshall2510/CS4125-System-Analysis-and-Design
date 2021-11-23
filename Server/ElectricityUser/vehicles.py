@@ -14,6 +14,7 @@ import json
 import os
 
 from ElectricityUser.electricityuser import ElectricityUser
+from World.weather import Weather
 
 class Vehicle(ElectricityUser):
 	"""Vehicle class representing vehicles in the city simulation"""
@@ -21,6 +22,25 @@ class Vehicle(ElectricityUser):
 	path = os.path.dirname(os.path.realpath(__file__)).split("ElectricityUser")[0] + "config.json"
 	with open(path) as json_file:
 		conf = json.load(json_file)
+
+	weather_dictionary = {
+        "sunny" : -0.3,
+        "cloudy" : 0.1,
+        "rain" :0.3,
+        "snow" : 0.5,
+        "summer" : -0.3,
+        "autumn" : 0.2,
+        "spring" : 0.00,
+        "winter" : 0.6,
+        "fog" : 0.3,
+        "tornado" : 0.4,
+        "sandstorm" : 0.5,
+        "snowstorm" : 0.7,
+        "wet" : 0.4,
+        "dry" : 0,
+        "polar_winter" : 0.5,
+        "polar" : 0.3
+    }
 		
 	# Average electric car value. Units in EURO
 	average_vehicle_value= conf["electricity_user"]["vehicles"]["average_vehicle_value"]
@@ -45,7 +65,19 @@ class Vehicle(ElectricityUser):
 
 	# TODO: implement update and get_electricity_used methods
 	def update(self, date: datetime) -> int:
-		return -1
+		total_usage = self.battery_capacity
+		current_time = int(date.strftime("%H"))
+		total_usage += random.uniform(1, total_usage*self.weather_dictionary[Weather.get_season()] + total_usage*self.weather_dictionary[Weather.get_weather()])
+		if Weather.get_season == 'winter':
+			timetoChange = 8
+			timetoEnd = 17
+		else:
+			timetoChange = 6
+			timetoEnd = 20
+		if (current_time<timetoChange or current_time>timetoEnd):
+			multiplier = random.randrange(1,2)
+			total_usage = total_usage*multiplier
+		return total_usage
 
 	def get_electricity_used(self) -> int:
 		return -1
