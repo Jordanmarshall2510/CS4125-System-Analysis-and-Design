@@ -31,7 +31,7 @@ app.layout = html.Div(children=[
                 html.Div([
                     html.Div([
                         html.H3(children='Options'),
-                        html.H4(children='Overall'),
+                        html.H6(children='Overall'),
 
                         dcc.Checklist(
                             options=[
@@ -41,7 +41,7 @@ app.layout = html.Div(children=[
                             id = "overall"
                         ),
 
-                        html.H4(children='Electricity Generators'),
+                        html.H6(children='Electricity Generators'),
                         
                         dcc.Checklist(
                             options=[
@@ -51,7 +51,7 @@ app.layout = html.Div(children=[
                             id = "generators"
                         ),
 
-                        html.H4(children='Electricity Users'),
+                        html.H6(children='Electricity Users'),
                         
                         dcc.Checklist(
                             options=[
@@ -62,7 +62,19 @@ app.layout = html.Div(children=[
                             ],
                             id = "users"
                         ),
-                    ], className='four columns userInput'),
+
+                        html.H3(children='Session Information'),
+                        html.Table([
+                                    html.Tr([html.Td("Business: "), html.Td(id='business')]),
+                                    html.Tr([html.Td("House: "), html.Td(id='house')]),
+                                    html.Tr([html.Td("Infrastructure: "), html.Td(id='infrastructure')]),
+                                    html.Tr([html.Td("Vehicles: "), html.Td(id='vehicles')]),
+                                    html.Tr([html.Td("Solar: "), html.Td(id='solar')]),
+                                    html.Tr([html.Td("Wind: "), html.Td(id='wind')]),
+                                    html.Tr([html.Td("Time: "), html.Td(id='time')]),                   
+                        ]),
+
+                    ], className='three columns userInput'),
                     html.Div([
                         html.H3(children='Simulation'),
                         dcc.Graph(
@@ -71,21 +83,21 @@ app.layout = html.Div(children=[
                         html.H3(children='Statistics'),
                         html.Div([
                             html.Div([
-                                html.H5("Generated"),
+                                html.H6("Generated"),
                                 html.Table([
                                     html.Tr([html.Td("Selected: "), html.Td(id='generated_selected')]),
                                     html.Tr([html.Td("Total Generated: "), html.Td(id='total_generated')]),
                                 ]),
                             ],className='six columns'),
                             html.Div([
-                                html.H5("Usage"),
+                                html.H6("Usage"),
                                 html.Table([
                                     html.Tr([html.Td("Selected: "), html.Td(id='usage_selected')]),
                                     html.Tr([html.Td("Total Usage: "), html.Td(id='total_usage')]),
                                 ]),
                             ],className='six columns')
                         ],className='row'),
-                    ], className='eight columns'),
+                    ], className='nine columns'),
                 ], className='row'),
             ])
 
@@ -95,6 +107,13 @@ app.layout = html.Div(children=[
     Output("usage_selected", "children"),
     Output("total_generated", "children"),
     Output("total_usage", "children"),
+    Output("business", "children"),
+    Output("house", "children"),
+    Output("infrastructure", "children"),
+    Output("vehicles", "children"),
+    Output("solar", "children"),
+    Output("wind", "children"),
+    Output("time", "children"),
     Input('overall', 'value'),
     Input('generators', 'value'),
     Input('users', 'value'),
@@ -109,10 +128,10 @@ def update_output_div(overall, generators, users):
     if users:
         inputs += users
 
-    print(inputs)
-
     sim_graph, selected_generated, selected_usage, total_generated, total_usage = graph.create_df(inputs)
     fig = px.line(sim_graph) 
+
+    business, house, infrastructure, vehicles, solar, wind, time = graph.get_session_data()
 
     fig.update_layout(
         # plot_bgcolor=colors['background'],
@@ -127,7 +146,7 @@ def update_output_div(overall, generators, users):
         )
     )
 
-    return  fig, ", ".join(selected_generated), ", ".join(selected_usage), f"{int(total_generated):,}" + " kW", f"{int(total_usage):,}" + " kW"
+    return  fig, ", ".join(selected_generated), ", ".join(selected_usage), f"{int(total_generated):,}" + " kW", f"{int(total_usage):,}" + " kW", business, house, infrastructure, vehicles, solar, wind, time
 
 if __name__ == '__main__':
     app.run_server(debug=True)
