@@ -128,8 +128,6 @@ def update_output_div(overall, generators, users):
     if users:
         inputs += users
 
-    print(inputs)
-
     sim_graph, selected_generated, selected_usage, total_generated, total_usage = graph.create_df(inputs)
     fig = px.line(sim_graph) 
 
