@@ -20,14 +20,22 @@ class House(ElectricityUser):
 
     # Dictionary for seasons and weather
     weather_dictionary = {
-        "sunny" : -0.1,
+        "sunny" : -0.2,
         "cloudy" : 0,
-        "rain" :0.1,
-        "snow" : 0.2,
-        "summer" : -0.05,
-        "autumn" : 0.05,
+        "rain" :0.3,
+        "snow" : 0.5,
+        "summer" : -0.3,
+        "autumn" : 0.4,
         "spring" : 0.00,
-        "winter" : 0.01
+        "winter" : 0.6,
+        "fog" : 0.1,
+        "tornado" : 0.2,
+        "sandstorm" : 0.1,
+        "snowstorm" : 0.2,
+        "wet" : 0,
+        "dry" : 0,
+        "polar_winter" : 0.2,
+        "polar" : 0.2
     }
 
     def __init__(self):
@@ -88,11 +96,16 @@ class House(ElectricityUser):
     # TODO: implement update and ger_electricity_used
     def update(self, date: datetime) -> int:
         total_usage = self.total_electricity_usage
-        season_value = self.weather_dictionary[Weather.get_season()]
-        if season_value > 0:
-            total_usage += random.randint(0, int(total_usage * season_value))
-        elif season_value < 0:
-            total_usage -= random.randint(0, int(total_usage * -season_value))
+        current_time = int(date.strftime("%H"))
+        total_usage += random.uniform(1, total_usage*self.weather_dictionary[Weather.get_season()] + total_usage*self.weather_dictionary[Weather.get_weather()])
+        if Weather.get_season == 'winter':
+            timetoChange = 8
+            timetoEnd = 17
+        else:
+            timetoChange = 6
+            timetoEnd = 20
+        if (current_time<timetoChange or current_time>timetoEnd):
+            total_usage = total_usage*2
         return total_usage
 
     def get_electricity_used(self) -> int:
