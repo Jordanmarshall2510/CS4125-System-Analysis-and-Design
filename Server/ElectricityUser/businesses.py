@@ -11,9 +11,14 @@ import random
 import json
 import os
 from ElectricityUser.electricityuser import ElectricityUser
+from ElectricityGenerator.distribution import Distribution
 from World.weather import Weather
 
 class Business(ElectricityUser):
+    
+    #Initializing distribution object
+    distribution = Distribution()
+
     path = os.path.dirname(os.path.realpath(__file__)).split("ElectricityUser")[0] + "config.json"
 
     with open(path) as json_file:
@@ -81,7 +86,7 @@ class Business(ElectricityUser):
         # Time
         if (not (9 < int(date.strftime("%H")) < 22)):
             total_usage = total_usage*random.uniform(0.25, 0.5)    
-        #Distribution.output(total_usage)
+        self.distribution.output(total_usage,"kW")
         return total_usage
 
     def get_electricity_used(self) -> int:
