@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Tuple
 from ElectricityGenerator.distribution import Distribution
-from ElectricityUser.businesses import generate_buisnesses
+from ElectricityUser.businesses import generate_businesses
 from ElectricityUser.houses import generate_houses
 from ElectricityUser.infrastrucure import generate_infrastructure
 from ElectricityUser.vehicles import generate_vehicles
@@ -49,11 +49,11 @@ class CityBuilder:
 		self.city = City()
 		pass
 
-	def construct_buisnesses(self, number_of_businesses: int) -> None:
+	def construct_businesses(self, number_of_businesses: int) -> None:
 		"""Constructs buisness for the city
 		Arguments: number_of_businesses -- Number of buisnesses to be constructed
 		"""
-		self.city.add_users(generate_buisnesses(number_of_businesses))
+		self.city.add_users(generate_businesses(number_of_businesses))
 		pass
 
 	def construct_houses(self, number_of_houses: int) -> None:

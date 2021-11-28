@@ -127,4 +127,4 @@ class Business(ElectricityUser):
         return daily_average_usage_per_household
 
 # List outside of class for importing
-generate_buisnesses = Business.generate_users
+generate_businesses = Business.generate_users
