@@ -4,9 +4,14 @@ import json
 import os
 import random
 from ElectricityGenerator.electricitygenerator import ElectricityGenerator
+from ElectricityGenerator.distribution import Distribution
 from World.weather import Weather
 
 class Wind(ElectricityGenerator):
+        
+    #Initializing distribution object
+    distribution = Distribution()
+
     wattage=0
     generator_id = 0
 
@@ -21,12 +26,15 @@ class Wind(ElectricityGenerator):
 
     def update(self, date: datetime) -> int:
         a=random.uniform(20,30)
+        total_generated = 0
         if(Weather.get_weather()=="rain"):
-            return self.wattage+(a*2)
+            total_generated = self.wattage+(a*2)
         elif(Weather.get_weather()=="cloudy"):
-            return self.wattage+(a*1.5)
+            total_generated = self.wattage+(a*1.5)
         else:
-            return self.wattage+(a)
+            total_generated = self.wattage+(a)
+        self.distribution.input(total_generated,"kW")
+        return total_generated
 
     def get_electricity_generated(self) -> int:
         return self.update()

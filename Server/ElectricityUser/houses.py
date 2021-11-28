@@ -15,6 +15,10 @@ from ElectricityGenerator.distribution import Distribution
 from World.weather import Weather
 
 class House(ElectricityUser):
+        
+    #Initializing distribution object
+    distribution = Distribution()
+    
     average_house_value = 0
     average_electricity_usage = 0
 
@@ -106,6 +110,7 @@ class House(ElectricityUser):
             timetoEnd = 20
         if (current_time<timetoChange or current_time>timetoEnd):
             total_usage = total_usage*2
+        self.distribution.output(total_usage,"kW")
         return total_usage
 
     def get_electricity_used(self) -> int:

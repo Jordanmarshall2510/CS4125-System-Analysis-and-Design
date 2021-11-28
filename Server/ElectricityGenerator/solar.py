@@ -3,9 +3,14 @@ import json
 import os
 import random
 from ElectricityGenerator.electricitygenerator import ElectricityGenerator
+from ElectricityGenerator.distribution import Distribution
 from datetime import datetime
 
 class Solar(ElectricityGenerator):
+        
+    #Initializing distribution object
+    distribution = Distribution()
+
     wattage=0
     generator_id = 0
 
@@ -20,16 +25,19 @@ class Solar(ElectricityGenerator):
 
     def update(self, date: datetime) -> int:
         current_time = int(date.strftime("%H"))
+        total_generated = 0
         if(current_time<6 or current_time>20):
-            return 0
+            total_generated = 0
         elif(current_time<=12):
             a=random.uniform(0,0.00014)
             b=random.uniform(0,0.0014)
-            return (self.wattage+a)+(b*current_time)
+            total_generated = (self.wattage+a)+(b*current_time)
         elif(current_time>12):
             a=random.uniform(0,0.00014)
             b=random.uniform(0,0.0014)
-            return (self.wattage+a)+(b*(24-current_time))
+            total_generated = (self.wattage+a)+(b*(24-current_time))
+        self.distribution.input(total_generated,"kW")
+        return total_generated
 
     def get_electricity_generated(self) -> int:
         return self.update()

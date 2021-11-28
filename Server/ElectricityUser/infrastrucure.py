@@ -19,11 +19,16 @@ import json
 import os
 
 from ElectricityUser.electricityuser import ElectricityUser
+from ElectricityGenerator.distribution import Distribution
 from datetime import datetime
 
 from World.weather import Weather
 
 class Infrastructure(ElectricityUser):
+       
+    #Initializing distribution object
+    distribution = Distribution()
+    
     average_electricity_usage = 0
     street_light_usage = 0
     traffic_light_usage = random.randrange(900, 1600, 1)/10
@@ -118,6 +123,7 @@ class Infrastructure(ElectricityUser):
         self.sum_electricity_usage_date(date)
         total_usage = self.total_electricity_usage
         total_usage += random.uniform(1, total_usage*self.weather_dictionary[Weather.get_season()] + total_usage*self.weather_dictionary[Weather.get_weather()])
+        self.distribution.output(total_usage,"kW")
         return total_usage
         
 

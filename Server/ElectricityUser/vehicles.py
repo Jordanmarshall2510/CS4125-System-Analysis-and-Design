@@ -14,9 +14,14 @@ import json
 import os
 
 from ElectricityUser.electricityuser import ElectricityUser
+from ElectricityGenerator.distribution import Distribution
 from World.weather import Weather
 
 class Vehicle(ElectricityUser):
+
+	#Initializing distribution object
+	distribution = Distribution()
+
 	"""Vehicle class representing vehicles in the city simulation"""
 	# Read initialising data from json
 	path = os.path.dirname(os.path.realpath(__file__)).split("ElectricityUser")[0] + "config.json"
@@ -77,6 +82,7 @@ class Vehicle(ElectricityUser):
 		if (current_time<timetoChange or current_time>timetoEnd):
 			multiplier = random.randrange(1,2)
 			total_usage = total_usage*multiplier
+		self.distribution.output(total_usage,"kW")
 		return total_usage
 
 	def get_electricity_used(self) -> int:
