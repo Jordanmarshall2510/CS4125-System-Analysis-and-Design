@@ -59,9 +59,9 @@ class Vehicle(ElectricityUser):
 	# Average decrease in range per person. Units %
 	average_new_passenger_range_cost = conf["electricity_user"]["vehicles"]["average_passenger_range_cost"]
 
-	def __init__(self, id, vehicle_value, battery_capacity, range, number_of_new_passengers):
+	def __init__(self, vehicle_id, vehicle_value, battery_capacity, range, number_of_new_passengers):
 		"""Intialize a vehicle object"""
-		self.id = id
+		self.vehicle_id = vehicle_id
 		self.vehicle_value = vehicle_value
 		self.battery_capacity = battery_capacity
 		self.max_range = range
@@ -117,14 +117,14 @@ class Vehicle(ElectricityUser):
 
 		for i in range(number_of_vehicles):
 			# Generate Values
-			id = "C" + str(i)
+			vehicle_id = "C" + str(i)
 			vehicle_value = random.randint(Vehicle.average_vehicle_value- vehicle_value_tolerance, Vehicle.average_vehicle_value+ vehicle_value_tolerance)
 			battery_cap = random.randint(Vehicle.average_battery_capacity - battery_capacity_tolerance, Vehicle.average_battery_capacity + battery_capacity_tolerance)
 			vehicleRange = random.randint(Vehicle.average_range - vehicle_range_tolerance, Vehicle.average_range + vehicle_range_tolerance)
 			passengers = random.randint(0, 5)
 
 			# Generate Vehicle
-			vehicle = Vehicle(id, vehicle_value, battery_cap, vehicleRange, passengers)
+			vehicle = Vehicle(vehicle_id, vehicle_value, battery_cap, vehicleRange, passengers)
 			vehicle_data.append(vehicle)
 		return vehicle_data
 
