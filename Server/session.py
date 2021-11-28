@@ -15,14 +15,18 @@ weather = Weather()
 
 # Read city parameters
 with open(path, 'r') as json_file:
-	conf = json.load(json_file)
+    conf = json.load(json_file)
 
-	builder.construct_businesses(conf['session']['electricity_user']['businesses'])
-	builder.construct_houses(conf['session']['electricity_user']['houses'])
-	builder.construct_infrastructure(conf['session']['electricity_user']['infrastructure'])
-	builder.construct_vehicles(conf["session"]['electricity_user']['vehicles'])
-	builder.construct_solar_panels(conf["session"]['electricity_generator']['solar'])
-	builder.construct_wind_turbines(conf["session"]["electricity_generator"]["wind"])
+    builder.construct_businesses(
+        conf['session']['electricity_user']['businesses'])
+    builder.construct_houses(conf['session']['electricity_user']['houses'])
+    builder.construct_infrastructure(
+        conf['session']['electricity_user']['infrastructure'])
+    builder.construct_vehicles(conf["session"]['electricity_user']['vehicles'])
+    builder.construct_solar_panels(
+        conf["session"]['electricity_generator']['solar'])
+    builder.construct_wind_turbines(
+        conf["session"]["electricity_generator"]["wind"])
 
 # Build city
 city = builder.build()
@@ -36,23 +40,23 @@ db = Database()
 # Initialise timer
 timestamp = datetime.strptime(conf['session']['time'], "%Y-%m-%d %H:%M:%S")
 for i in range(730):
-	#Update the weather and season
-	Weather.update_weather(conf['world']['weather']['weather'], timestamp)
-	
-	# Update City
-	generation, usage = city.update(timestamp)
+    # Update the weather and season
+    Weather.update_weather(conf['world']['weather']['weather'], timestamp)
 
-	# Put data into database
-	db.insert_generation(timestamp, generation)
-	db.insert_usage(timestamp, usage)
+    # Update City
+    generation, usage = city.update(timestamp)
 
-	# Progress time
-	timestamp += timedelta(hours=1)
+    # Put data into database
+    db.insert_generation(timestamp, generation)
+    db.insert_usage(timestamp, usage)
 
-	# Update Json files
-	conf['session']['time'] = timestamp.strftime("%Y-%m-%d %H:%M:%S")
-	conf['world']['weather']['weather'] = Weather.get_weather()
-	with open(path, 'w') as json_file:
-		json.dump(conf, json_file)
+    # Progress time
+    timestamp += timedelta(hours=1)
+
+    # Update Json files
+    conf['session']['time'] = timestamp.strftime("%Y-%m-%d %H:%M:%S")
+    conf['world']['weather']['weather'] = Weather.get_weather()
+    with open(path, 'w') as json_file:
+        json.dump(conf, json_file)
 
 del db

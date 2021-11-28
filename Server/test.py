@@ -10,6 +10,7 @@ from ElectricityGenerator.wind import Wind
 from database import Database
 from World.weather import Weather
 
+
 class test_methods(unittest.TestCase):
 
     '''
@@ -23,7 +24,7 @@ class test_methods(unittest.TestCase):
     def test_house_id(self):
         data = House.generate_users(1)
         self.assertIs(type(data[0].home_id), int)
-    
+
     def test_house_number_of_occupants(self):
         data = House.generate_users(100)
         for x in data:
@@ -70,7 +71,7 @@ class test_methods(unittest.TestCase):
         data = Business.generate_users(100)
         for x in data:
             self.assertTrue(0 <= x.property_size)
-    
+
     def test_business_electricity_usage(self):
         data = Business.generate_users(100)
         for x in data:
@@ -98,7 +99,7 @@ class test_methods(unittest.TestCase):
 
     def test_vehicle_id(self):
         data = Vehicle.generate_users(1)
-        self.assertIs(type(data[0].id), str) 
+        self.assertIs(type(data[0].id), str)
 
     def test_vehicle_number_of_passengers(self):
         data = Vehicle.generate_users(100)
@@ -140,7 +141,7 @@ class test_methods(unittest.TestCase):
     '''
     wind.py Unit Tests
     '''
-    
+
     def test_wind_generation(self):
         data = Wind.generate_generators(100)
         self.assertEqual(len(data), 100)
