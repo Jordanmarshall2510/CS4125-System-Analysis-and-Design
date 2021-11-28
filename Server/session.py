@@ -17,7 +17,7 @@ weather = Weather()
 with open(path, 'r') as json_file:
 	conf = json.load(json_file)
 
-	builder.construct_buisnesses(conf['session']['electricity_user']['businesses'])
+	builder.construct_businesses(conf['session']['electricity_user']['businesses'])
 	builder.construct_houses(conf['session']['electricity_user']['houses'])
 	builder.construct_infrastructure(conf['session']['electricity_user']['infrastructure'])
 	builder.construct_vehicles(conf["session"]['electricity_user']['vehicles'])
