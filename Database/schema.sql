@@ -1,15 +1,16 @@
-Table users as U
-{
-  id int [pk, increment]
-  type varchar
-  power_used int
-  time timestamp
-}
+-- create
+CREATE TABLE users (
+	id INT NOT NULL AUTO_INCREMENT,
+	user_type varchar(16) NOT NULL,
+	power_used INTEGER not NULL,
+	time TIMESTAMP,
+	PRIMARY KEY(id)
+);
 
-Table generators as G
-{
-  id int [pk, increment]
-  type varchar
-  power_generated int
-  time timestamp
-}
+CREATE TABLE generators (
+	id INT NOT NULL AUTO_INCREMENT,
+	user_type varchar(16) NOT NULL,
+	power_used INTEGER not NULL,
+	time TIMESTAMP,
+	PRIMARY KEY(id)
+);
