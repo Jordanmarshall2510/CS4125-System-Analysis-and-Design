@@ -88,9 +88,9 @@ class Vehicle(ElectricityUser):
 	def get_electricity_used(self) -> int:
 		return -1
 
-	def setId(self, new_id: int):
+	def set_vehicle_id(self, new_id: int):
 		"""Change vehicle ID"""
-		self.id = new_id
+		self.vehicle_id = new_id
 	
 	def set_vehicle_value(self, new_value: int):
 		"""Change vehicle value"""
