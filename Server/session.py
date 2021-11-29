@@ -37,6 +37,18 @@ del builder
 # Connect to database
 db = Database()
 
+session_dictionary = {} 
+session_dictionary["num_businesess"] = 100
+session_dictionary["num_houses"] = 500
+session_dictionary["num_infrastructure"] = 50
+session_dictionary["num_vehicles"] = 200
+session_dictionary["num_solar"] = 1000
+session_dictionary["num_wind"] = 10
+timestamp = datetime.strptime("2022-10-18 05:24:30", "%Y-%m-%d %H:%M:%S")
+
+insert_session(timestamp,session_dictionary)
+
+
 # Initialise timer
 timestamp = datetime.strptime(conf['session']['time'], "%Y-%m-%d %H:%M:%S")
 for i in range(730):
