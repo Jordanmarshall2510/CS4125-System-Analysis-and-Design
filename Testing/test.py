@@ -98,7 +98,7 @@ class test_methods(unittest.TestCase):
 
     def test_vehicle_id(self):
         data = Vehicle.generate_users(1)
-        self.assertIs(type(data[0].id), str) 
+        self.assertIs(type(data[0].vehicle_id), str) 
 
     def test_vehicle_number_of_passengers(self):
         data = Vehicle.generate_users(100)
