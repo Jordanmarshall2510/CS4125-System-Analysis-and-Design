@@ -19,8 +19,24 @@ class Database:
             "CREATE TABLE IF NOT EXISTS users(time DATETIME, type VARCHAR(14), power_used INT)")
         self.cur.execute(
             "CREATE TABLE IF NOT EXISTS generators(time DATETIME, type VARCHAR(14), power_generated INT)")
+         self.cur.execute(
+            "CREATE TABLE IF NOT EXISTS session_info(num_businesess INT, num_houses INT, num_infrastructure INT, num_vehicles INT, num_solar INT, num_wind INT, num_current_time DATETIME)")
         self.con.commit()
-        pass
+    
+     def insert_session(self, time: datetime, session_dictionary: dict):
+        """Insert session data into the session_info table
+
+        Arguments: 
+
+        time -- when the data was recorded (simulation time)
+
+        session_dictionary - python dictionary in format dict[type] = num_type
+        """
+        for key in session_dictionary:
+            self.cur.execute("INSERT INTO session VALUES(?, ?, ?)",
+                             (timestamp, key, usage_dictionary[key]))
+
+        self.con.commit()
 
     def insert_usage(self, timestamp: datetime, usage_dictionary: dict):
         """Insert user data into the user table
