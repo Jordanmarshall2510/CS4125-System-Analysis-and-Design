@@ -1,9 +1,9 @@
 import os
 import json
 from datetime import datetime, timedelta
-from city import CityBuilder
-from World.weather import Weather
-from database import Database
+from Server.city import CityBuilder
+from Server.World.weather import Weather
+from Server.database import Database
 
 path = os.path.dirname(os.path.realpath(__file__)) + "//config.json"
 
@@ -12,6 +12,7 @@ builder = CityBuilder()
 
 # Initialze weather
 weather = Weather()
+weather.init()
 
 # Read city parameters
 with open(path, 'r') as json_file:

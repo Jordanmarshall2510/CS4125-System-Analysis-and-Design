@@ -1,12 +1,12 @@
 from datetime import datetime
 from typing import Tuple
-from ElectricityGenerator.distribution import Distribution
-from ElectricityUser.businesses import generate_businesses
-from ElectricityUser.houses import generate_houses
-from ElectricityUser.infrastrucure import generate_infrastructure
-from ElectricityUser.vehicles import generate_vehicles
-from ElectricityGenerator.solar import generate_solar_panels
-from ElectricityGenerator.wind import generate_wind_turbines
+from Server.ElectricityGenerator.distribution import Distribution
+from Server.ElectricityUser.businesses import generate_businesses
+from Server.ElectricityUser.houses import generate_houses
+from Server.ElectricityUser.infrastrucure import generate_infrastructure
+from Server.ElectricityUser.vehicles import generate_vehicles
+from Server.ElectricityGenerator.solar import generate_solar_panels
+from Server.ElectricityGenerator.wind import generate_wind_turbines
 
 
 class City:

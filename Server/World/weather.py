@@ -121,3 +121,4 @@ class Weather:
         Weather.set_season(Weather.get_season_change(date))
 
 
+
