@@ -3,9 +3,9 @@ from datetime import datetime
 import json
 import os
 import random
-from ElectricityGenerator.electricitygenerator import ElectricityGenerator
-from ElectricityGenerator.distribution import Distribution
-from World.weather import Weather
+from Server.ElectricityGenerator.electricitygenerator import ElectricityGenerator
+from Server.ElectricityGenerator.distribution import Distribution
+from Server.World.weather import Weather
 
 class Wind(ElectricityGenerator):
         
