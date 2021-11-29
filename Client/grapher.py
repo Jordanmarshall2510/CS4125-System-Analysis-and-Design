@@ -1,7 +1,7 @@
 ## Where the graphing code will reside
 from pandas.core.base import DataError
 from traitlets.traitlets import Integer
-from database import Database
+from Client.database import Database
 from datetime import datetime
 import pandas as pd
 import numpy as np

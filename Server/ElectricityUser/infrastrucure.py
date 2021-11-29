@@ -22,7 +22,7 @@ from Server.ElectricityUser.electricityuser import ElectricityUser
 from Server.ElectricityGenerator.distribution import Distribution
 from datetime import datetime
 
-from World.weather import Weather
+from Server.World.weather import Weather
 
 class Infrastructure(ElectricityUser):
        

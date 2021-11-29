@@ -1,16 +1,20 @@
+from setuptools import find_packages
 from distutils.core import setup
 
-setup(  name='Distutils',
+setup(  name='Smart City Simulation',
         version='1.0',
-        description='Python Distribution Utilities',
-        author='Greg Ward',
-        author_email='gward@python.net',
-        url='https://www.python.org/sigs/distutils-sig/',
-        packages=  ['Server.ElectricityUser',
-                    'Server.ElectricityGenerator',
-                    'Server.World',
-                    'Server',
-                    'Client',
-                    'Testing',],
-        data_files= [('',['Server/config.json'])]
+        description='A smart city simulation for CS4125 System Analysis and Design.',
+        author='Jordan Marshall, Marcin Sek, Jakub Pazej, Eoin McDonough, Aleksandr Jakusev',
+        url='https://github.com/Jordanmarshall2510/CS4125---System-Analysis-and-Design',
+        packages= find_packages('.'),
+        include_package_data=True,
+        package_data= {'Server': ['config.json']},
+        install_requires=[
+            'dash',
+            'plotly',
+            'numpy',
+            'pandas',
+            'dash-bootstrap-components',
+        ],
+
     )
