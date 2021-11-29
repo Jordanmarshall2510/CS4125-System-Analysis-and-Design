@@ -13,9 +13,9 @@ import random
 import json
 import os
 
-from ElectricityUser.electricityuser import ElectricityUser
-from ElectricityGenerator.distribution import Distribution
-from World.weather import Weather
+from Server.ElectricityUser.electricityuser import ElectricityUser
+from Server.ElectricityGenerator.distribution import Distribution
+from Server.World.weather import Weather
 
 class Vehicle(ElectricityUser):
 

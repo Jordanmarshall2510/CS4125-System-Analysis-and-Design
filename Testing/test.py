@@ -1,14 +1,14 @@
 import unittest
 
-from ElectricityUser.businesses import Business
-from ElectricityUser.houses import House
-from ElectricityUser.infrastrucure import Infrastructure
-from ElectricityUser.vehicles import Vehicle
-from ElectricityGenerator.distribution import Distribution
-from ElectricityGenerator.solar import Solar
-from ElectricityGenerator.wind import Wind
-from database import Database
-from World.weather import Weather
+from Server.ElectricityUser.businesses import Business
+from Server.ElectricityUser.houses import House
+from Server.ElectricityUser.infrastrucure import Infrastructure
+from Server.ElectricityUser.vehicles import Vehicle
+from Server.ElectricityGenerator.distribution import Distribution
+from Server.ElectricityGenerator.solar import Solar
+from Server.ElectricityGenerator.wind import Wind
+from Server.database import Database
+from Server.World.weather import Weather
 
 class test_methods(unittest.TestCase):
 

@@ -2,8 +2,8 @@
 import json
 import os
 import random
-from ElectricityGenerator.electricitygenerator import ElectricityGenerator
-from ElectricityGenerator.distribution import Distribution
+from Server.ElectricityGenerator.electricitygenerator import ElectricityGenerator
+from Server.ElectricityGenerator.distribution import Distribution
 from datetime import datetime
 
 class Solar(ElectricityGenerator):
