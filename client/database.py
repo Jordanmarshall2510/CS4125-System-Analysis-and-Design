@@ -6,7 +6,7 @@ class Database:
 	"""Database class dealing with select queries for the frontend"""
 	def __init__(self):
 		"""Initialze Database object & connect to database"""
-		path = os.path.dirname(os.path.realpath(__file__)) + "/../Server/database.db"
+		path = os.path.dirname(os.path.realpath(__file__)) + "/../server/database.db"
 		self.con = sqlite3.connect(path,check_same_thread=False)
 		self.cur = self.con.cursor()
 

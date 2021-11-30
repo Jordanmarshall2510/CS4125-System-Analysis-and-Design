@@ -18,11 +18,11 @@ import random
 import json
 import os
 
-from Server.ElectricityUser.electricityuser import ElectricityUser
-from Server.ElectricityGenerator.distribution import Distribution
+from server.electricity_user.electricityuser import ElectricityUser
+from server.electricity_generator.distribution import Distribution
 from datetime import datetime
-
-from Server.World.weather import Weather
+from server.world.seasons import Seasons
+from server.world.weather import Weather
 
 class Infrastructure(ElectricityUser):
        
@@ -54,7 +54,7 @@ class Infrastructure(ElectricityUser):
 
     def __init__(self, infrastructure_id):
 
-        path = os.path.dirname(os.path.realpath(__file__)).split("ElectricityUser")[0] + "config.json"
+        path = os.path.dirname(os.path.realpath(__file__)).split("electricity_user")[0] + "config.json"
 
         with open(path) as json_file:
             conf = json.load(json_file)
@@ -105,7 +105,7 @@ class Infrastructure(ElectricityUser):
         #Will be reliant on time
         if self.set_street_light() == True:
             current_time = int(date.strftime("%H"))
-            if Weather.get_season == 'winter':
+            if Seasons.get_season == 'winter':
                 timetoChange = 8
                 timetoEnd = 17
             else:
@@ -122,7 +122,7 @@ class Infrastructure(ElectricityUser):
     def update(self, date: datetime) -> int: 
         self.sum_electricity_usage_date(date)
         total_usage = self.total_electricity_usage
-        total_usage += random.uniform(1, total_usage*self.weather_dictionary[Weather.get_season()] + total_usage*self.weather_dictionary[Weather.get_weather()])
+        total_usage += random.uniform(1, total_usage*self.weather_dictionary[Seasons.get_season()] + total_usage*self.weather_dictionary[Weather.get_weather()])
         self.distribution.output(total_usage,"kW")
         return total_usage
         
