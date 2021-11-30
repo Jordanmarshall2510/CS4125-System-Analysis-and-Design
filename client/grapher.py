@@ -1,7 +1,7 @@
 ## Where the graphing code will reside
 from pandas.core.base import DataError
 from traitlets.traitlets import Integer
-from Client.database import Database
+from client.database import Database
 from datetime import datetime
 import pandas as pd
 import numpy as np
@@ -11,7 +11,7 @@ import os,json
 class Grapher:
     db = Database()
     def get_session_data(self):
-        path = os.path.dirname(os.path.realpath(__file__)).split("Client")[0] + "Server/config.json"
+        path = os.path.dirname(os.path.realpath(__file__)).split("client")[0] + "server/config.json"
 
         with open(path) as json_file:
             conf = json.load(json_file)

@@ -1,9 +1,10 @@
 import os
 import json
 from datetime import datetime, timedelta
-from Server.city import CityBuilder
-from Server.World.weather import Weather
-from Server.database import Database
+from server.city import CityBuilder
+from server.world.weather import Weather
+from server.world.seasons import Seasons
+from server.database import Database
 
 path = os.path.dirname(os.path.realpath(__file__)) + "//config.json"
 
@@ -12,6 +13,8 @@ builder = CityBuilder()
 
 # Initialze weather
 weather = Weather()
+season = Seasons()
+season.init()
 weather.init()
 
 # Read city parameters
@@ -37,8 +40,11 @@ db = Database()
 # Initialise timer
 timestamp = datetime.strptime(conf['session']['time'], "%Y-%m-%d %H:%M:%S")
 for i in range(730):
-	#Update the weather and season
-	Weather.update_weather(conf['world']['weather']['weather'], timestamp)
+	#Update the weather
+	Weather.update_weather(conf['world']['weather']['weather'])
+	
+	#Update the season
+	Seasons.update_season(timestamp)
 	
 	# Update City
 	generation, usage = city.update(timestamp)
