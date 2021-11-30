@@ -11,7 +11,7 @@ from dash import dcc
 from dash import html
 import plotly.express as px
 import pandas as pd
-from Client.grapher import Grapher
+from client.grapher import Grapher
 
 graph = Grapher()
 

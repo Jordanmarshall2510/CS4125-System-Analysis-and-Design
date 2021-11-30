@@ -1,10 +1,10 @@
 import os
 import json
 from datetime import datetime, timedelta
-from Server.city import CityBuilder
-from Server.World.weather import Weather
-from Server.World.seasons import Seasons
-from Server.database import Database
+from server.city import CityBuilder
+from server.world.weather import Weather
+from server.world.seasons import Seasons
+from server.database import Database
 
 path = os.path.dirname(os.path.realpath(__file__)) + "//config.json"
 

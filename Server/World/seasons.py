@@ -6,7 +6,7 @@ class Seasons:
 
     @staticmethod
     def init():
-        path = os.path.dirname(os.path.realpath(__file__)).split("World")[0] + "config.json"
+        path = os.path.dirname(os.path.realpath(__file__)).split("world")[0] + "config.json"
 
         with open(path) as json_file:
             conf = json.load(json_file)

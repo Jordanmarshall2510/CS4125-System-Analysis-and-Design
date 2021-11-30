@@ -2,8 +2,8 @@
 import json
 import os
 import random
-from Server.ElectricityGenerator.electricitygenerator import ElectricityGenerator
-from Server.ElectricityGenerator.distribution import Distribution
+from server.electricity_generator.electricitygenerator import ElectricityGenerator
+from server.electricity_generator.distribution import Distribution
 from datetime import datetime
 
 class Solar(ElectricityGenerator):
@@ -15,7 +15,7 @@ class Solar(ElectricityGenerator):
     generator_id = 0
 
     def __init__(self):
-        path = os.path.dirname(os.path.realpath(__file__)).split("ElectricityGenerator")[0] + "config.json"
+        path = os.path.dirname(os.path.realpath(__file__)).split("electricity_generator")[0] + "config.json"
         with open(path) as json_file:
             conf = json.load(json_file)
             self.wattage=conf["electricity_generator"]["solar"]["output"]

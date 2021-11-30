@@ -10,10 +10,10 @@ import random
 import json
 import os
 
-from Server.ElectricityUser.electricityuser import ElectricityUser
-from Server.ElectricityGenerator.distribution import Distribution
-from Server.World.seasons import Seasons
-from Server.World.weather import Weather
+from server.electricity_user.electricityuser import ElectricityUser
+from server.electricity_generator.distribution import Distribution
+from server.world.seasons import Seasons
+from server.world.weather import Weather
 
 class House(ElectricityUser):
         
@@ -45,7 +45,7 @@ class House(ElectricityUser):
 
     def __init__(self):
 
-        path = os.path.dirname(os.path.realpath(__file__)).split("ElectricityUser")[0] + "config.json"
+        path = os.path.dirname(os.path.realpath(__file__)).split("electricity_user")[0] + "config.json"
 
         with open(path) as json_file:
             conf = json.load(json_file)
