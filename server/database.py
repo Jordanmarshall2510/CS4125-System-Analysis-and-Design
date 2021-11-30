@@ -27,8 +27,8 @@ class Database:
 		
 		usage_dictionary -- python dictionary in format dict[type] = power_used
 		"""
-		for key in usage_dictionary:
-			self.cur.execute("INSERT INTO users VALUES(?, ?, ?)", (timestamp, key, usage_dictionary[key]))
+		for key, value in usage_dictionary.items():
+			self.cur.execute("INSERT INTO users VALUES(?, ?, ?)", (timestamp, key, value))
 
 		self.con.commit()
 
@@ -41,8 +41,8 @@ class Database:
 		
 		generation_dictionary -- python dictionary in format dict[type] = power_generated
 		"""
-		for key in generation_dictionary:
-			self.cur.execute("INSERT INTO generators VALUES(?, ?, ?)", (timestamp, key, generation_dictionary[key]))
+		for key, value in generation_dictionary.items():
+			self.cur.execute("INSERT INTO generators VALUES(?, ?, ?)", (timestamp, key, value))
 
 		self.con.commit()
 
