@@ -8,7 +8,7 @@ setup(  name='Smart City Simulation',
         url='https://github.com/Jordanmarshall2510/CS4125---System-Analysis-and-Design',
         packages= find_packages('.'),
         include_package_data=True,
-        package_data= {'Server': ['config.json']},
+        package_data= {'Server': ['config.json', 'database.db']},
         install_requires=[
             'dash',
             'plotly',
