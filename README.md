@@ -50,10 +50,10 @@ This will allow the user to play around with the simulation and see how that imp
 
 1. To install the prerequisite dependencies to be able to run our project  run the command below.
 
-  `pip install .`
+	`pip install .`
 2.  To run the simulation enter the following command.
 
-  `python3 session.py`
+	`python3 session.py`
 2.  To run the frontside grapher enter the following command.
 
 	`python3 app.py`
