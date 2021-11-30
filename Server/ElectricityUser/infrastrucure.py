@@ -106,7 +106,7 @@ class Infrastructure(ElectricityUser):
         #Will be reliant on time
         if self.set_street_light() == True:
             current_time = int(date.strftime("%H"))
-            if Weather.get_season == 'winter':
+            if Seasons.get_season == 'winter':
                 timetoChange = 8
                 timetoEnd = 17
             else:
