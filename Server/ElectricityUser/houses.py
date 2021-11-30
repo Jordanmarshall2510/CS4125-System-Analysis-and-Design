@@ -12,6 +12,7 @@ import os
 
 from Server.ElectricityUser.electricityuser import ElectricityUser
 from Server.ElectricityGenerator.distribution import Distribution
+from Server.World.seasons import Seasons
 from Server.World.weather import Weather
 
 class House(ElectricityUser):
@@ -101,8 +102,8 @@ class House(ElectricityUser):
     def update(self, date: datetime) -> int:
         total_usage = self.total_electricity_usage
         current_time = int(date.strftime("%H"))
-        total_usage += random.uniform(1, total_usage*self.weather_dictionary[Weather.get_season()] + total_usage*self.weather_dictionary[Weather.get_weather()])
-        if Weather.get_season == 'winter':
+        total_usage += random.uniform(1, total_usage*self.weather_dictionary[Seasons.get_season()] + total_usage*self.weather_dictionary[Weather.get_weather()])
+        if Seasons.get_season == 'winter':
             timetoChange = 8
             timetoEnd = 17
         else:

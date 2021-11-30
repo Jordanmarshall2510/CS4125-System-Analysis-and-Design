@@ -21,6 +21,7 @@ import os
 from Server.ElectricityUser.electricityuser import ElectricityUser
 from Server.ElectricityGenerator.distribution import Distribution
 from datetime import datetime
+from Server.World.seasons import Seasons
 
 from Server.World.weather import Weather
 
@@ -122,7 +123,7 @@ class Infrastructure(ElectricityUser):
     def update(self, date: datetime) -> int: 
         self.sum_electricity_usage_date(date)
         total_usage = self.total_electricity_usage
-        total_usage += random.uniform(1, total_usage*self.weather_dictionary[Weather.get_season()] + total_usage*self.weather_dictionary[Weather.get_weather()])
+        total_usage += random.uniform(1, total_usage*self.weather_dictionary[Seasons.get_season()] + total_usage*self.weather_dictionary[Weather.get_weather()])
         self.distribution.output(total_usage,"kW")
         return total_usage
         
