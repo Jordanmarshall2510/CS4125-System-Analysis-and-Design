@@ -37,7 +37,7 @@ class Weather:
         future_weather = current_weather
         x=random.randint(0,100)
       
-        if (Weather.get_season == 'summer'):
+        if (Seasons.get_season == 'summer'):
             if (x == 2):
                 future_weather = 'tornado'
             if (x < 20):
@@ -48,7 +48,7 @@ class Weather:
                 future_weather = 'cloudy'
             elif (x >= 50):
                 future_weather = 'sunny'
-        elif (Weather.get_season == 'winter'):
+        elif (Seasons.get_season == 'winter'):
             if (x <= 5):
                 future_weather = 'fog'
             elif (x < 40):

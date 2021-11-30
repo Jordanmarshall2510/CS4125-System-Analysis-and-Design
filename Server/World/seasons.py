@@ -14,12 +14,12 @@ class Seasons:
    
     @staticmethod
     def get_season():
-        return Weather.season
+        return Seasons.season
 
     @staticmethod
     def set_season(string):
         if (string.lower() == 'summer' or 'autumn' or 'winter' or 'spring' or 'dry' or 'wet' or 'desert_summer' or 'polar_winter'):
-            Weather.season=string.lower()
+            Seasons.season=string.lower() 
 
     @staticmethod
     def get_season_change(date):
@@ -47,4 +47,4 @@ class Seasons:
             
     @staticmethod
     def update_season(date):
-        Weather.set_season(Weather.get_season_change(date))
+        Seasons.set_season(Seasons.get_season_change(date))
