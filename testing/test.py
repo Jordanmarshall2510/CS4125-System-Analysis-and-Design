@@ -7,10 +7,23 @@ from server.electricity_user.vehicles import Vehicle
 from server.electricity_generator.distribution import Distribution
 from server.electricity_generator.solar import Solar
 from server.electricity_generator.wind import Wind
-from server.database import Database
 from server.world.weather import Weather
+import server.database
+
+from client.grapher import Grapher
+import client.database
+from client import app
 
 class test_methods(unittest.TestCase):
+
+    '''
+    database.py (Client) Unit Tests
+    '''
+    
+    def test_database(self):
+        db = client.database.Database()
+        self.assertTrue(db)
+        del db
 
     '''
     houses.py Unit Tests
@@ -106,11 +119,11 @@ class test_methods(unittest.TestCase):
             self.assertTrue(0 <= x.number_of_new_passengers)
 
     '''
-    database.py Unit Tests
+    database.py (Server) Unit Tests
     '''
 
-    def test_database_connection(self):
-        db = Database()
+    def test_database(self):
+        db = server.database.Database()
         self.assertTrue(db)
         del db
 
@@ -158,7 +171,15 @@ class test_methods(unittest.TestCase):
     weather.py Unit Tests
     '''
 
-    weather = Weather()
+    def test_set_weather(self):
+        weather = Weather()
+        weather.set_weather('RAIN')
+        self.assertEqual(weather.weather,'rain')
+
+    def test_get_weather(self):
+        weather = Weather()
+        weather.set_weather('SUNNY')
+        self.assertEqual(weather.get_weather(),'sunny')
 
 
 if __name__ == '__main__':
