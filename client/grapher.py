@@ -7,23 +7,19 @@ import pandas as pd
 import numpy as np
 import re
 import os,json
+import itertools
 
 class Grapher:
     db = Database()
     def get_session_data(self):
-        path = os.path.dirname(os.path.realpath(__file__)).split("client")[0] + "server/config.json"
 
-        with open(path) as json_file:
-            conf = json.load(json_file)
-            business = conf["session"]["electricity_user"]["businesses"]
-            house = conf["session"]["electricity_user"]["houses"]
-            infrastructure = conf["session"]["electricity_user"]["infrastructure"]
-            vehicles = conf["session"]["electricity_user"]["vehicles"]
-
-            solar = conf["session"]["electricity_generator"]["solar"]
-            wind = conf["session"]["electricity_generator"]["wind"]
-
-            time = conf["session"]["time"]
+        business = (self.db.select_info("num_businesses"))[0][0]
+        house = (self.db.select_info("num_houses"))[0][0]
+        infrastructure = (self.db.select_info("num_infrastructure"))[0][0]
+        vehicles = (self.db.select_info("num_vehicles"))[0][0]
+        solar = (self.db.select_info("num_solar"))[0][0]
+        wind = (self.db.select_info("num_wind"))[0][0]
+        time = (self.db.select_info("time"))
 
         return business, house, infrastructure, vehicles, solar, wind, time
 
