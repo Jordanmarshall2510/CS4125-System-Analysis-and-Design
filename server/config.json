@@ -1,1 +1,52 @@
-{"session": {"electricity_user": {"businesses": 100, "houses": 500, "infrastructure": 50, "vehicles": 200}, "electricity_generator": {"solar": 1000, "wind": 10}, "time": "2023-07-18 23:24:30"}, "electricity_generator": {"distribution": {"distribution_size": 30, "distribution_value": 10}, "solar": {"output": 0.0148401826}, "wind": {"output": 684}}, "electricity_user": {"houses": {"average_house_value": 303000, "average_electricity_value": 40}, "businesses": {"average_property_value_per_occupant": 32000, "average_electricity_usage": 50, "average_sqm_per_occupant": 18}, "vehicles": {"average_vehicle_value": 45000, "average_battery_capacity": 60, "average_range": 300, "average_passenger_range_cost": 0.06}, "infrastructure": {"average_electricity_usage": 30, "street_light_usage": 80}}, "world": {"clock": {"date": "1.1.2100, 00:00:00"}, "environment": {"delay": 1, "change": 5}, "weather": {"weather": "rain", "season": "winter", "climate": "tropical"}}}
+{
+    "session": {
+        "time": "2023-07-18 23:24:30"
+    },
+    "electricity_generator": {
+        "distribution": {
+            "distribution_size": 30,
+            "distribution_value": 10
+        },
+        "solar": {
+            "output": 0.0148401826
+        },
+        "wind": {
+            "output": 684
+        }
+    },
+    "electricity_user": {
+        "houses": {
+            "average_house_value": 303000,
+            "average_electricity_value": 40
+        },
+        "businesses": {
+            "average_property_value_per_occupant": 32000,
+            "average_electricity_usage": 50,
+            "average_sqm_per_occupant": 18
+        },
+        "vehicles": {
+            "average_vehicle_value": 45000,
+            "average_battery_capacity": 60,
+            "average_range": 300,
+            "average_passenger_range_cost": 0.06
+        },
+        "infrastructure": {
+            "average_electricity_usage": 30,
+            "street_light_usage": 80
+        }
+    },
+    "world": {
+        "clock": {
+            "date": "1.1.2100, 00:00:00"
+        },
+        "environment": {
+            "delay": 1,
+            "change": 5
+        },
+        "weather": {
+            "weather": "rain",
+            "season": "winter",
+            "climate": "tropical"
+        }
+    }
+}
