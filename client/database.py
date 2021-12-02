@@ -46,6 +46,15 @@ class Database:
 		self.cur.execute("SELECT SUM(power_generated) AS total FROM generators GROUP BY time")
 		return self.cur.fetchall()
 
+	def select_info(self, type: str):
+		"""Get the number of a certain type
+
+		Return: number of a certain type
+		"""
+		self.cur.execute("SELECT number_of_type FROM session_info WHERE type = ?", [type])
+		return self.cur.fetchall()
+
+
 	def __del__(self):
 		"""Delete database object & close the database"""
 		self.con.close()
