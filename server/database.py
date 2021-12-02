@@ -15,8 +15,22 @@ class Database:
 		"""Setup the database if it doesnt exist already"""
 		self.cur.execute("CREATE TABLE IF NOT EXISTS users(time DATETIME, type VARCHAR(14), power_used INT)")
 		self.cur.execute("CREATE TABLE IF NOT EXISTS generators(time DATETIME, type VARCHAR(14), power_generated INT)")
+		self.cur.execute("CREATE TABLE IF NOT EXISTS session_info(time DATETIME,type VARCHAR(14), number_of_type INT)")
 		self.con.commit()
-		pass
+
+	def insert_session(self, time: datetime, session_dictionary : dict):
+		"""Insert session data into the session table
+
+		Arguments: 
+			
+		time -- when the data was recorded (simulation time)
+		
+		session_dictionary -- python dictionary in format dict[type] = num_type
+		"""
+		for key in session_dictionary:
+			self.cur.execute("INSERT INTO session_info VALUES(?, ?, ?)", (time, key, session_dictionary[key]))
+			print(key, session_dictionary[key])
+		self.con.commit()
 
 	def insert_usage(self, timestamp: datetime, usage_dictionary : dict):
 		"""Insert user data into the user table
@@ -45,6 +59,15 @@ class Database:
 			self.cur.execute("INSERT INTO generators VALUES(?, ?, ?)", (timestamp, key, value))
 
 		self.con.commit()
+
+	def select_info(self, type: str):
+		"""Get the number of businesses
+
+		Return: number of businesses
+		"""
+		self.cur.execute("SELECT number_of_type FROM session_info WHERE type = ?", [type])
+		return self.cur.fetchall()
+
 
 	def __del__(self):
 		"""Delete database object & close the database"""
