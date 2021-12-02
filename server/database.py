@@ -29,7 +29,6 @@ class Database:
 		"""
 		for key in session_dictionary:
 			self.cur.execute("INSERT INTO session_info VALUES(?, ?, ?)", (time, key, session_dictionary[key]))
-			print(key, session_dictionary[key])
 		self.con.commit()
 
 	def insert_usage(self, timestamp: datetime, usage_dictionary : dict):

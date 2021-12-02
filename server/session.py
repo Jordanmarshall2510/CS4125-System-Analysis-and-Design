@@ -34,19 +34,20 @@ class Session():
 		session_dictionary["num_solar"] = 1000
 		session_dictionary["num_wind"] = 10
 		timestamp = datetime.strptime("2022-10-18 05:24:30", "%Y-%m-%d %H:%M:%S")
-		print(session_dictionary)
 
 		db.insert_session(timestamp,session_dictionary)
 
 		# Read city parameters
 		with open(path, 'r') as json_file:
 			conf = json.load(json_file)
-			builder.construct_businesses((db.select_info("num_businesses"))[0][0])
-			builder.construct_houses((db.select_info("num_houses"))[0][0])
-			builder.construct_infrastructure((db.select_info("num_infrastructure"))[0][0])
-			builder.construct_vehicles((db.select_info("num_vehicles"))[0][0])
-			builder.construct_solar_panels((db.select_info("num_solar"))[0][0])
-			builder.construct_wind_turbines((db.select_info("num_wind"))[0][0])
+
+
+		builder.construct_businesses((db.select_info("num_businesses"))[0][0])
+		builder.construct_houses((db.select_info("num_houses"))[0][0])
+		builder.construct_infrastructure((db.select_info("num_infrastructure"))[0][0])
+		builder.construct_vehicles((db.select_info("num_vehicles"))[0][0])
+		builder.construct_solar_panels((db.select_info("num_solar"))[0][0])
+		builder.construct_wind_turbines((db.select_info("num_wind"))[0][0])
 
 		# Build city
 		city = builder.build()
