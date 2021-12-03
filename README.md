@@ -32,19 +32,38 @@ This will allow the user to play around with the simulation and see how that imp
 | Dev Ops | Responsible for development infrastructure | Aleksandr Jakusevs |
 
 ## Project Plan
-| Deliverable | Description  | Responsibility | Week |
-| :-----: | :-----: | :-----: | :-----: |
-| Narrative | Describe the business scenario | Jakub Pazej | 3 |
-| Software Lifecycle | Describe and justify the chosen software lifecycle | Jakub Pazej | 4 |
-| Establish Roles| Specify the roles people will need to fill to complete this project | Group | 3 |
-| Requirements | Functional Requirements, Use Case Diagram, Use Case Description, Non, Functional Requirements, Tactics to Support Quality Attributes, GUI Screenshots | Jordan, Eoin, Aleks, Jakub | 5 |
-| System Architecture | Package Diagram, Justify Architectural Decisions | Marcin, Jordan | 6 |
-| Analysis Sketches | Candidate Classes, Analysis Class Diagram, Collaboration Diagram, Communication Diagrams, Entity Relationship Diagram | Marcin, Jordan | 7 |
-| Code | Code Implementation | Group | 4-14 |
-| Design | Architectural Diagram, Class Diagram, State Chart | Marcin, Aleks | - |
-| Added Value | Design Patterns, GitHub, Database | Jordan, Eoin | - |
-| Critique | Overview, Design, Implementation | Jakub,Eoin | - |
-| References | List of sources | Group | - |
+| Deliverable | Description  | Responsibility |
+| :-----: | :-----: | :-----: |
+| Narrative | Describe the business scenario | Jakub Pazej |
+| Software Lifecycle | Describe and justify the chosen software lifecycle | Jakub Pazej |
+| Establish Roles| Specify the roles people will need to fill to complete this project | Group |
+| Requirements | Functional Requirements, Use Case Diagram, Use Case Description, Non, Functional Requirements, Tactics to Support Quality Attributes, GUI Screenshots | Jordan, Eoin, Aleks, Jakub |
+| System Architecture | Package Diagram, Justify Architectural Decisions | Marcin, Jordan |
+| Analysis Sketches | Candidate Classes, Analysis Class Diagram, Collaboration Diagram, Communication Diagrams, Entity Relationship Diagram | Marcin, Jordan |
+| Code | Code Implementation | Group |
+| Design | Architectural Diagram, Class Diagram, State Chart | Marcin, Aleks |
+| Added Value | Design Patterns, GitHub, Database | Jordan, Eoin |
+| Critique | Overview, Design, Implementation | Jakub,Eoin |
+| References | List of sources | Group |
+
+## Coding Standard
+Our codebase follows the PEP-8 coding convention for Python. More can be learned via the PEP-8 section in References.
+
+## References
+### Python
+| Description | Link |
+| :-----: | :-----: |
+| Official Page | https://www.python.org/ |
+| API Reference Manual | https://docs.python.org/3/c-api/index.html |
+| PEP 8 - Style Guide | https://www.python.org/dev/peps/pep-0008/ |
+| Dash | https://dash.plotly.com/introduction |
+
+### SQLite Database
+| Description | Link |
+| :-----: | :-----: |
+| Official Page | https://sqlite.org/index.html |
+| Quickstart | https://sqlite.org/quickstart.html |
+| Tutorial / Reference Sheet | https://www.tutorialspoint.com/sqlite/index.htm |
 
 ## Quickstart Guide
 
