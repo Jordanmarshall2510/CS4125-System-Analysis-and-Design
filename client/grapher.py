@@ -19,7 +19,7 @@ class Grapher:
         vehicles = (self.db.select_info("num_vehicles"))[0][0]
         solar = (self.db.select_info("num_solar"))[0][0]
         wind = (self.db.select_info("num_wind"))[0][0]
-        time = (self.db.select_info("time"))
+        time = (self.db.select_info("num_current_time"))[-1][-1]
 
         return business, house, infrastructure, vehicles, solar, wind, time
 

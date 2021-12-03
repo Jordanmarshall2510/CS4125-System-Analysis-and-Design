@@ -79,9 +79,16 @@ class Session():
 
 			# Progress time
 			timestamp += timedelta(hours=1)
+			
+			# Update  database
+			session_dictionary1 = {} 
 
-			# Update Json files
-			conf['session']['time'] = timestamp.strftime("%Y-%m-%d %H:%M:%S")
+			session_dictionary1["num_current_time"] = timestamp.strftime( "%Y-%m-%d %H:%M:%S")
+			date = datetime.strptime("2022-10-18 05:24:30", "%Y-%m-%d %H:%M:%S")
+
+			db.insert_session(date,session_dictionary1)
+
+			# Update config file with weather
 			conf['world']['weather']['weather'] = Weather.get_weather()
 			with open(path, 'w') as json_file:
 				json.dump(conf, json_file)
