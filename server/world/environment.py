@@ -7,6 +7,8 @@ import time
 from World.clock import Clock
 from World.weather import Weather
 
+"""TODO: Validate if this file can be removed if so remove it"""
+
 class Environment:
     delay=0
     weather_change=0

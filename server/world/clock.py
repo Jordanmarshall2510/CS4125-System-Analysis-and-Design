@@ -3,6 +3,8 @@ import json
 import os
 import time
 
+"""TODO: Validate if this file can be removed if so remove it"""
+
 class Clock():
     time=0
 
