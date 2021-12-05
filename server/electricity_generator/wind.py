@@ -1,4 +1,4 @@
-#Coded by Jakub Pazej - 18260179
+#Coded by Jakub Pazej - 18260179 [Add yourself here if you did any meaningful work on this class]
 from datetime import datetime
 import json
 import os
@@ -8,6 +8,7 @@ from server.electricity_generator.distribution import Distribution
 from server.world.weather import Weather
 
 class Wind(ElectricityGenerator):
+    """Wind class representing a wind turbine in the city"""
         
     #Initializing distribution object
     distribution = Distribution()

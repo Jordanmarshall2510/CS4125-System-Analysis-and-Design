@@ -1,4 +1,4 @@
-#Coded by Jakub Pazej - 18260179
+#Coded by Jakub Pazej - 18260179 [Add yourself here if you did any meaningful work on this class]
 import json
 import os
 import random
@@ -7,6 +7,7 @@ from server.electricity_generator.distribution import Distribution
 from datetime import datetime
 
 class Solar(ElectricityGenerator):
+    """Solar class representing a solar panel in the city"""
         
     #Initializing distribution object
     distribution = Distribution()
