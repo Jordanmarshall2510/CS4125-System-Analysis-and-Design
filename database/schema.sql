@@ -8,7 +8,7 @@ CREATE USER "SimUser" IDENTIFIED BY "!Sim_Password21";
 USE smart_city;
 
 -- Grant user correct permissions
-GRANT ALL PRIVILEGES ON smart_city TO "SimUser";
+GRANT ALL PRIVILEGES ON smart_city.* TO "SimUser";
 FLUSH PRIVILEGES;
 
 -- create tables
@@ -22,8 +22,8 @@ CREATE TABLE users (
 
 CREATE TABLE generators (
 	id INT NOT NULL AUTO_INCREMENT,
-	user_type varchar(16) NOT NULL,
-	power_used INTEGER not NULL,
+	generator_type varchar(16) NOT NULL,
+	power_generated INTEGER not NULL,
 	time TIMESTAMP,
 	PRIMARY KEY(id)
 );
