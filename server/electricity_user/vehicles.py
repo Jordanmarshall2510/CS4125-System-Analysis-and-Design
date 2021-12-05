@@ -1,13 +1,4 @@
-## Coded by Marcin Sek 18254187
-# TODO:
-#	Reduce range based on temperature
-#	NOTE: Winter / cold weather can cause a decrease of up to 25%
-#	Reduce battery performance overtime
-#	NOTE: Battery degredation on average is 1% SOH per 6 months
-#	
-#	***Extend electricity_users and import required functions (update & get_electricity_used)***
-
-# import time
+# Coded by Marcin Sek - 18254187 [Add yourself here if you did any meaningful work on this class]
 from datetime import datetime
 import random
 import json
@@ -19,11 +10,11 @@ from server.world.weather import Weather
 from server.world.seasons import Seasons
 
 class Vehicle(ElectricityUser):
+	"""Vehicle class representing vehicles in the city simulation"""
 
 	#Initializing distribution object
 	distribution = Distribution()
 
-	"""Vehicle class representing vehicles in the city simulation"""
 	# Read initialising data from json
 	path = os.path.dirname(os.path.realpath(__file__)).split("electricity_user")[0] + "config.json"
 	with open(path) as json_file:
@@ -69,7 +60,10 @@ class Vehicle(ElectricityUser):
 		self.number_of_new_passengers = number_of_new_passengers
 		self.realRange = int(self.max_range - (self.max_range * self.average_new_passenger_range_cost * self.number_of_new_passengers))
 
-	# TODO: implement update and get_electricity_used methods
+	# TODO: increase complexity of update function with relation to the following:
+	# 1.) Driving in cold / snowy conditions can decrease the efficiency of the battery by up to 19% on Average
+	# 	as found here: https://www.autoweek.com/news/green-cars/a31898441/study-ev-winter-range-loss-averages-19/
+	# 	NOTE: Lower battery efficiency results in more energy being used to travel the same distance.
 	def update(self, date: datetime) -> int:
 		total_usage = self.battery_capacity
 		current_time = int(date.strftime("%H"))
