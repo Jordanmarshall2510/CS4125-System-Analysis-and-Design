@@ -65,17 +65,72 @@ Our codebase follows the PEP-8 coding convention for Python. More can be learned
 | Quickstart | https://sqlite.org/quickstart.html |
 | Tutorial / Reference Sheet | https://www.tutorialspoint.com/sqlite/index.htm |
 
-## Quickstart Guide
+### MYSQL Database
+| Description | Link |
+| :-----: | :-----: |
+| Official Page | https://dev.mysql.com/ |
+| Quickstart | https://dev.mysql.com/doc/mysql-getting-started/en/ |
+| Tutorial / Reference Sheet | https://www.tutorialspoint.com/mysql/index.htm |
+
+## Guides
+### Quickstart
 
 1. To install the prerequisite dependencies to be able to run our project  run the command below.
 
 	`pip install .`
-2.  To run the simulation enter the following command.
+2. To run the simulation enter the following command.
 
 	`python3 session.py`
-2.  To run the frontside grapher enter the following command.
+3. To run the frontside grapher enter the following command.
 
 	`python3 app.py`
-3. Open the generated IP address to see the frontend.
+4. Open the generated IP address to see the frontend.
 
- 
+### Setting up database
+
+1. Make sure mysql is installed and running on your system (Use MYSQL references for support)
+
+2. Open mysql
+
+3. Run quickstart.sql or do the steps below
+
+4. Create a database for the simulation using the following query
+
+	`CREATE DATBASE [suggested name: smart_city];`
+5. Create a user for the simulation with privileges to the database created using the following queries
+
+	`
+		CREATE USER [Name] IDENTIFIED BY [Password];
+		GRANT ALL PRIVILEGES ON smart_city.* TO [NAME];
+		FLUSH PRIVILEGES;
+	`
+6. Create user and generators tables using the following queries
+
+	`
+		CREATE TABLE users (
+			id INT NOT NULL AUTO_INCREMENT,
+			user_type varchar(16) NOT NULL,
+			power_used INTEGER not NULL,
+			time TIMESTAMP,
+			PRIMARY KEY(id)
+		);
+
+		CREATE TABLE generators (
+			id INT NOT NULL AUTO_INCREMENT,
+			generator_type varchar(16) NOT NULL,
+			power_generated INTEGER not NULL,
+			time TIMESTAMP,
+			PRIMARY KEY(id)
+		);
+	`
+
+### Running simulation remotely
+
+1. Setup database using guide above
+
+2. Install the prerequisite dependencies to be able to run our project run
+
+	`pip install .`
+3. To run the simulation use this command
+
+	`python3 session.py`
