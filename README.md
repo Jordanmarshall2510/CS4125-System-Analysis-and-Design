@@ -8,7 +8,7 @@
   * [Project Roles](#project-roles)
   * [Project Plan](#project-plan)
   * [Quickstart](#quickstart)
-  * [Setting up mysql](#setting-up-database)
+  * [Setting up MySQL](#setting-up-database)
   * [Running simulation remotely](#running-simulation-remotely)
 
 ## Narrative
@@ -67,7 +67,7 @@ Our codebase follows the PEP-8 coding convention for Python. More can be learned
 | Quickstart | https://sqlite.org/quickstart.html |
 | Tutorial / Reference Sheet | https://www.tutorialspoint.com/sqlite/index.htm |
 
-### MYSQL Database
+### MySQL Database
 | Description | Link |
 | :-----: | :-----: |
 | Official Page | https://dev.mysql.com/ |
@@ -90,9 +90,9 @@ Our codebase follows the PEP-8 coding convention for Python. More can be learned
 
 ### Setting up database
 
-1. Make sure mysql is installed and running on your system (Use MYSQL references for support)
+1. Make sure MySQL is installed and running on your system (Use MySQL references for support)
 
-2. Open mysql
+2. Open MySQL
 
 3. Run quickstart.sql or do the steps below
 
