@@ -1,5 +1,6 @@
 import os
 import json
+from threading import Thread
 from datetime import datetime, timedelta
 from server.city import CityBuilder
 from server.world.weather import Weather
@@ -35,7 +36,7 @@ city = builder.build()
 del builder
 
 # Connect to database
-db = Database()
+db = Database(sqlite=True)
 
 # Initialise timer
 timestamp = datetime.strptime(conf['session']['time'], "%Y-%m-%d %H:%M:%S")
@@ -49,7 +50,7 @@ for i in range(730):
 	# Update City
 	generation, usage = city.update(timestamp)
 
-	# Put data into database
+	# Put electricity data into database
 	db.insert_generation(timestamp, generation)
 	db.insert_usage(timestamp, usage)
 

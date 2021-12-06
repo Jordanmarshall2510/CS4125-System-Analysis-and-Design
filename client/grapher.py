@@ -9,7 +9,7 @@ import re
 import os,json
 
 class Grapher:
-    db = Database()
+    db = Database(sqlite=True)
     def get_session_data(self):
         path = os.path.dirname(os.path.realpath(__file__)).split("client")[0] + "server/config.json"
 
