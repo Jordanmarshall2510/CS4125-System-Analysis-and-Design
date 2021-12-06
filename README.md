@@ -7,7 +7,9 @@
   * [Narrative](#narrative)
   * [Project Roles](#project-roles)
   * [Project Plan](#project-plan)
-  * [Quickstart Guide](#quickstart-guide)
+  * [Quickstart](#quickstart)
+  * [Setting up mysql](#setting-up-database)
+  * [Running simulation remotely](#running-simulation-remotely)
 
 ## Narrative
 Smart City is a project that our team envisioned to simulate a futuristic smart city, a city in the near future where the majority of modes of transportation are electric and humanity is sourcing most of its power from renewable resources.
