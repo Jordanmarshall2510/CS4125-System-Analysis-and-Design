@@ -103,7 +103,7 @@ Our codebase follows the PEP-8 coding convention for Python. More can be learned
 
 	`
 		CREATE USER [Name] IDENTIFIED BY [Password];
-		GRANT ALL PRIVILEGES ON smart_city.* TO [NAME];
+		GRANT ALL PRIVILEGES ON [Database from step 4].* TO [Name];
 		FLUSH PRIVILEGES;
 	`
 6. Create user and generators tables using the following queries
