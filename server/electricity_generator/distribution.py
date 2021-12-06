@@ -1,14 +1,10 @@
-#Coded by Jakub Pazej - 18260179
+#Coded by Jakub Pazej - 18260179 Marcin Sek 18254187 [Add yourself here if you did any meaningful work on this class]
 import json
 import os
 
-# TODO:
-#   The distribution class should hold all the electricity_generator instances
-#   When the update function triggers the class should call the updates on its generators
-#   and retrieve the amount of power using get_electricity_generated. This power will later
-#   be taken by electricity_users
-
+"""TODO: Make it into a static class like seasons and weather for the simulation so that all ElectricityUsers have the same instance to work with"""
 class Distribution:
+    """The class dealing with energy generated in the city. It stores and distributes the power to the users"""
     distribution_size=0 #values read and set in init
     distribution_value=0
 

@@ -1,10 +1,4 @@
-# Coded by Jordan Marshall - 18256716
-
-# To Do:
-#   Heating
-#	
-#import required functions (update & get_electricity_used)***
-
+# Coded by Jordan Marshall - 18256716 [Add yourself here if you did any meaningful work on this class]
 from datetime import datetime
 import random
 import json
@@ -16,6 +10,7 @@ from server.world.seasons import Seasons
 from server.world.weather import Weather
 
 class House(ElectricityUser):
+    """House class representing a House inside of the city"""
         
     #Initializing distribution object
     distribution = Distribution()
@@ -98,7 +93,8 @@ class House(ElectricityUser):
         else: 
             return daily_average_usage_per_household + random.randint(0, electricity_usage_tolerance)
 
-    # TODO: implement update and ger_electricity_used
+    # TODO:increase complexity of update function with relation to the following:
+    # 1). Make power usage of heating change depending on the temperature instead of the season
     def update(self, date: datetime) -> int:
         total_usage = self.total_electricity_usage
         current_time = int(date.strftime("%H"))

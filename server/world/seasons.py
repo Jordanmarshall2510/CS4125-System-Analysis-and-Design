@@ -1,7 +1,9 @@
+#Coded by [Add yourself here if you did any meaningful work on this class]
 import json
 import os
 
 class Seasons:
+    """Static Seasons class made to calculate and manage seasons in the simulation"""
     season='' #Summer, Autumn, Winter, Spring, Dry, Wet, Desert Summer, Polar Winter
 
     @staticmethod
