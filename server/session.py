@@ -36,7 +36,7 @@ class Session():
 		session_dictionary["num_vehicles"] = 200
 		session_dictionary["num_solar"] = 1000
 		session_dictionary["num_wind"] = 10
-		session_dictionary["num_current_time"] = datetime.strptime("2022-10-18 05:24:30", "%Y-%m-%d %H:%M:%S")
+		session_dictionary["current_time"] = datetime.strptime("2022-10-18 05:24:30", "%Y-%m-%d %H:%M:%S")
 		timestamp = datetime.strptime("2022-10-18 05:24:30", "%Y-%m-%d %H:%M:%S")
 
 		db.insert_session(timestamp,session_dictionary)
@@ -60,7 +60,7 @@ class Session():
 		del builder		
 
 		# Initialise timer
-		timestamp = datetime.strptime(((db.select_info("num_current_time"))[0][0]), "%Y-%m-%d %H:%M:%S")
+		timestamp = datetime.strptime(((db.select_info("current_time"))[0][0]), "%Y-%m-%d %H:%M:%S")
 		for i in range(730):
 			#Update the weather
 			Weather.update_weather(conf['world']['weather']['weather'])
@@ -81,7 +81,7 @@ class Session():
 			# Update  database
 			session_dictionary1 = {} 
 
-			session_dictionary1["num_current_time"] = timestamp.strftime( "%Y-%m-%d %H:%M:%S")
+			session_dictionary1["current_time"] = timestamp.strftime( "%Y-%m-%d %H:%M:%S")
 			date = datetime.strptime("2022-10-18 05:24:30", "%Y-%m-%d %H:%M:%S")
 
 			db.insert_session(date,session_dictionary1)

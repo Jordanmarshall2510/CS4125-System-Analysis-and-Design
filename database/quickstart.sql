@@ -40,5 +40,5 @@ CREATE TABLE session_info (
   num_vehicles INT,
   num_solar INT,
   num_wind INT,
-  num_current_time TIMESTAMP NOT NULL
+  current_time TIMESTAMP NOT NULL
 );
