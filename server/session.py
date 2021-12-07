@@ -24,6 +24,8 @@ class Session():
 		season.init()
 		weather.init()
 
+		# Connect to database
+
 		db = Database(sqlite=True)
 
 		session_dictionary = {} 
@@ -55,12 +57,7 @@ class Session():
 		city = builder.build()
 
 		# Remove builder
-		del builder
-
-		# Connect to database
-		
-
-
+		del builder		
 
 		# Initialise timer
 		timestamp = datetime.strptime(((db.select_info("num_current_time"))[0][0]), "%Y-%m-%d %H:%M:%S")
