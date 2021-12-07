@@ -1,5 +1,6 @@
 import os
 import json
+from threading import Thread
 from datetime import datetime, timedelta
 from server.city import CityBuilder
 from server.world.weather import Weather
@@ -23,7 +24,7 @@ class Session():
 		season.init()
 		weather.init()
 
-		db = Database()
+		db = Database(sqlite=True)
 
 		session_dictionary = {} 
 

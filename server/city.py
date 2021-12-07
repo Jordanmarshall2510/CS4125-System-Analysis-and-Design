@@ -18,15 +18,23 @@ class City:
 		pass
 
 	def add_users(self, users: list) -> None:
+		"""Adds a electricity user to the city
+		Arguments: users -- Array of users being added to the city
+		"""
 		self.users += users
 		pass
 
 	def add_generators(self, generators: list) -> None:
+		"""Adds a electricity generator to the city
+		Arguments: generators -- Array of generators being added to the city
+		"""
 		self.distribution.add_generators(generators)
 		pass
 
 	def update(self, date: datetime) -> Tuple[dict, dict]:
-		"""Updates the city to date given"""
+		"""Updates the city to date given
+		Arguments: date -- datetime object showing the date the city is updating to
+		"""
 		# Update distribution
 		generation = self.distribution.update(date)
 

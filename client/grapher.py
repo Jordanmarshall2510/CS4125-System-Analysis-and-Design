@@ -10,7 +10,7 @@ import os,json
 import itertools
 
 class Grapher:
-    db = Database()
+    db = Database(sqlite=True)
     def get_session_data(self):
 
         business = (self.db.select_info("num_businesses"))[0][0]

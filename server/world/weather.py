@@ -1,12 +1,11 @@
-#Coded by Jakub Pazej - 18260179
+#Coded by Jakub Pazej - 18260179 [Add yourself here if you did any meaningful work on this class]
 import json
 import os
 import random
 from server.world.seasons import Seasons
 
-# TODO: Given a date and time it should provide a weather forecast
-
 class Weather:
+    """Static weather class made to generate a weather for the simulation given a time"""
     weather='' #Sunny, Cloudy, Rain, Snow, Fog, Tornado, Sandstorm, Snowstorm
     climate='' #Tropical, Dry Cold, Dry Hot, Temperate, Continental, Polar, Desert
     weather_change_base = 70 #Base chance for weather to change

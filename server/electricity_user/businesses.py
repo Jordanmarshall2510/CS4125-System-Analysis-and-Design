@@ -1,11 +1,4 @@
-# Coded by Jordan Marshall - 18256716
-
-# To Do:
-#   
-#   put global constants in class and use self. / House. to access examples (vehicles.py: lines{28, 36, 66})
-#	
-#	***Extend electricity_users and import required functions (update & get_electricity_used)***
-
+# Coded by Jordan Marshall - 18256716 [Add yourself here if you did any meaningful work on this class]
 from datetime import datetime
 import random
 import json
@@ -16,6 +9,7 @@ from server.world.seasons import Seasons
 from server.world.weather import Weather
 
 class Business(ElectricityUser):
+    """Business class representing a business inside of the city"""
     
     #Initializing distribution object
     distribution = Distribution()
@@ -79,7 +73,9 @@ class Business(ElectricityUser):
     def to_string(self):
         return  "ID: " + str(self.business_id) + "\t\t\tTotal Electricity Usage: " + str(self.total_electricity_usage) + "kWh" + "\t\t\tProperty Value: EURO " + str(self.property_value) + "\t\t\tProperty Size: " + str(self.property_size) + "sqm" + "\t\t\tNumber of Occupants: " + str(self.number_of_occupants)
 
-    # TODO: Implement Update and ger_electricity_used
+    # TODO:increase complexity of update function with relation to the following:
+    # 1). Make power usage of heating change depending on the temperature instead of the season
+    # 2). Make power vary by business activity depending on season (maybe add a random type of business to the generate function and use it to make this aspect vary)
     def update(self, date: datetime) -> int:
         total_usage = self.total_electricity_usage
         # Weather

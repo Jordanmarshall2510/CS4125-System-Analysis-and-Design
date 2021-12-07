@@ -1,19 +1,4 @@
-# Coded by Eoin McDonough - 18241646
-
-
-
-
-# TODO:
-#   Distance Calculator
-#   Energy output based on distance and vehicle power needs
-#   Streetlights output day/night   1/2     DONE
-#   Traffic lights output           1/6     DONE
-#   Reduce power output of road in cold weather
-#   Streetlights power output calculator is currently one hour, must make daily add up all hours in the night
-#
-#   put global constants in class and use self. / House. to access examples (vehicles.py: lines{28, 36, 66})
-#	
-#	***Extend electricity_users and import required functions (update & get_electricity_used)***
+# Coded by Eoin McDonough - 18241646 [Add yourself here if you did any meaningful work on this class]
 import random
 import json
 import os
@@ -25,6 +10,7 @@ from server.world.seasons import Seasons
 from server.world.weather import Weather
 
 class Infrastructure(ElectricityUser):
+    """Infrastructure class representing the Infrastructure of the smart city including traffic and street lights"""
        
     #Initializing distribution object
     distribution = Distribution()
@@ -118,20 +104,19 @@ class Infrastructure(ElectricityUser):
     def to_string(self):
         return  "ID:" + self.infrastructure_id + "\t\t\tTotal Electricity Usage: " + str(self.total_electricity_usage) + "kWh" + "\t\t\tStreetLight?: " + str(self.has_street_light) + "\t\t\tTrafficLight?: " + str(self.has_traffic_light)
 
-    # TODO: implement update and get_electricity_used
+    # TODO: increase complexity of update function with relation to the following:
+    # 1) Make the energy vary based on temperature rather than season (unless there is a reason for season to affect infrastructure energy use)
     def update(self, date: datetime) -> int: 
         self.sum_electricity_usage_date(date)
         total_usage = self.total_electricity_usage
         total_usage += random.uniform(1, total_usage*self.weather_dictionary[Seasons.get_season()] + total_usage*self.weather_dictionary[Weather.get_weather()])
         self.distribution.output(total_usage,"kW")
         return total_usage
-        
 
     def get_electricity_used(self) -> int:
         
         return -1
 
-        
     def generate_users(number_of_infrastructure: int) -> list:    # NOTE: Will be dependent on number of houses in future
         infrastructure_data = []
         infrastructure_counter = 0
