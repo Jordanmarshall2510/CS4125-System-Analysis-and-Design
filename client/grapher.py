@@ -21,7 +21,7 @@ class Grapher:
         wind = (self.db.select_info("num_wind", session_id))[0][0]
         time = (self.db.select_info("session_current_time", session_id))[0][0]
 
-        return business, house, infrastructure, vehicles, solar, wind, time
+        return session_id, business, house, infrastructure, vehicles, solar, wind, time
 
     def create_df(self,inputs):
         result = []

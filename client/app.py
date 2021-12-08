@@ -76,6 +76,8 @@ class App():
 
                     html.H3(children='Session Information'),
                     html.Table([
+                        html.Tr([html.Td("Session id: "),
+                                html.Td(id='session_id')]),
                         html.Tr([html.Td("Business: "),
                                 html.Td(id='business')]),
                         html.Tr([html.Td("House: "), html.Td(id='house')]),
@@ -126,6 +128,7 @@ class App():
             Output("usage_selected", "children"),
             Output("total_generated", "children"),
             Output("total_usage", "children"),
+            Output("session_id", "children"),
             Output("business", "children"),
             Output("house", "children"),
             Output("infrastructure", "children"),
@@ -151,7 +154,7 @@ class App():
                 inputs)
             fig = px.line(sim_graph)
 
-            business, house, infrastructure, vehicles, solar, wind, time = graph.get_session_data()
+            session_id, business, house, infrastructure, vehicles, solar, wind, time = graph.get_session_data()
 
             fig.update_layout(
                 # plot_bgcolor=colors['background'],
@@ -166,7 +169,7 @@ class App():
                 )
             )
 
-            return fig, ", ".join(selected_generated), ", ".join(selected_usage), f"{int(total_generated):,}" + " kW", f"{int(total_usage):,}" + " kW", business, house, infrastructure, vehicles, solar, wind, time
+            return fig, ", ".join(selected_generated), ", ".join(selected_usage), f"{int(total_generated):,}" + " kW", f"{int(total_usage):,}" + " kW", session_id, business, house, infrastructure, vehicles, solar, wind, time
 
 
         if __name__ == '__main__':
