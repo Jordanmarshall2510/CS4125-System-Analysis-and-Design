@@ -46,7 +46,6 @@ class Session():
 		timestamp = datetime.strptime("2022-10-18 05:24:30", "%Y-%m-%d %H:%M:%S")
 
 		db.insert_session(session_id, num_businesses, num_houses, num_infrastructure, num_vehicles,num_solar, num_wind,session_current_time)
-		print(((db.select_info("session_id", session_id))[0][0]))
 
 		# Get info from database to build city
 
