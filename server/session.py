@@ -28,6 +28,8 @@ class Session():
 
 		db = Database(sqlite=True)
 
+		# Add city parameters to database
+
 		num_businesses = 100
 		num_houses = 500
 		num_infrastructure = 50
@@ -39,11 +41,8 @@ class Session():
 
 		db.insert_session(num_businesses, num_houses, num_infrastructure, num_vehicles,num_solar, num_wind,session_current_time)
 
-		# Read city parameters
-		with open(path, 'r') as json_file:
-			conf = json.load(json_file)
+		# Get info from database to build city
 
-		print((db.select_info("num_businesses"))[0][0])
 		builder.construct_businesses((db.select_info("num_businesses"))[0][0])
 		builder.construct_houses((db.select_info("num_houses"))[0][0])
 		builder.construct_infrastructure((db.select_info("num_infrastructure"))[0][0])
@@ -57,8 +56,12 @@ class Session():
 		# Remove builder
 		del builder		
 
+		# Open config file 
+
+		with open(path, 'r') as json_file:
+			conf = json.load(json_file)
+
 		# Initialise timer
-		print ((db.select_info("session_current_time")))
 		timestamp = datetime.strptime(((db.select_info("session_current_time"))[0][0]), "%Y-%m-%d %H:%M:%S")
 		for i in range(730):
 			#Update the weather
@@ -76,7 +79,6 @@ class Session():
 
 			# Progress time
 			timestamp += timedelta(hours=1)
-			print (timestamp)
 			# Update  database
 			db.update_time(timestamp)
 
