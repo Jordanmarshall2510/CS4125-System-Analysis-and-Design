@@ -70,24 +70,30 @@ class Database:
 		self.cur.execute("SELECT SUM(power_generated) AS total FROM generators GROUP BY time")
 		return self.cur.fetchall()
 
-	def select_info(self, type: str):
-    	
-			if type == 'num_businesses':
-				self.cur.execute("SELECT num_businesses  FROM session_info")
-			elif type == 'num_houses':
-				self.cur.execute("SELECT num_houses  FROM session_info")
-			elif type == 'num_infrastructure':
-				self.cur.execute("SELECT num_infrastructure  FROM session_info")
-			elif type == 'num_vehicles':
-				self.cur.execute("SELECT num_vehicles  FROM session_info")
-			elif type == 'num_solar':
-				self.cur.execute("SELECT num_solar  FROM session_info")
-			elif type == 'num_wind':
-				self.cur.execute("SELECT num_wind  FROM session_info")
-			elif type == 'session_current_time':
-				self.cur.execute("SELECT session_current_time  FROM session_info")
+	def select_info(self, type: str, id: int):
+		"""Get the number of 'type'
 
-			return self.cur.fetchall()
+		Return: number of 'type'
+		"""
+
+		if type == 'num_businesses':
+			self.cur.execute("SELECT num_businesses  FROM session_info WHERE id = ?;", (id,))
+		elif type == 'num_houses':
+			self.cur.execute("SELECT num_houses  FROM session_info WHERE id =  ?;", (id,))
+		elif type == 'num_infrastructure':
+			self.cur.execute("SELECT num_infrastructure  FROM session_info WHERE id = ?;", (id,))
+		elif type == 'num_vehicles':
+			self.cur.execute("SELECT num_vehicles  FROM session_info WHERE id = ?;", (id,))
+		elif type == 'num_solar':
+			self.cur.execute("SELECT num_solar  FROM session_info WHERE id = ?;", (id,))
+		elif type == 'num_wind':
+			self.cur.execute("SELECT num_wind  FROM session_info WHERE id = ?;", (id,))
+		elif type == 'session_current_time':
+			self.cur.execute("SELECT session_current_time  FROM session_info WHERE id = ?;", (id,))
+		elif type == 'session_id':
+			self.cur.execute("SELECT id  FROM session_info")
+
+		return self.cur.fetchall()
 
 
 	def __del__(self):
