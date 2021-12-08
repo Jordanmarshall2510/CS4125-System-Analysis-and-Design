@@ -2,6 +2,7 @@ from datetime import datetime
 import os
 
 import sqlite3
+from sqlite3.dbapi2 import Timestamp
 import mysql.connector
 from mysql.connector import errorcode
 
@@ -45,10 +46,10 @@ class Database:
             "CREATE TABLE IF NOT EXISTS users(id INT PRIMARY KEY, time DATETIME, user_type VARCHAR(14), power_used INT)")
         self.cur.execute(
             "CREATE TABLE IF NOT EXISTS generators(id INT PRIMARY KEY, time DATETIME, generator_type VARCHAR(14), power_generated INT)")
-        self.cur.execute("CREATE TABLE IF NOT EXISTS session_info(id INT PRIMARY KEY, num_businesses INT, num_houses INT , num_infrastructure INT , num_vehicles INT,num_solar INT, num_wind INT ,current_time DATETIME)")
+        self.cur.execute("CREATE TABLE IF NOT EXISTS session_info(id INT PRIMARY KEY, num_businesses INT, num_houses INT , num_infrastructure INT , num_vehicles INT,num_solar INT, num_wind INT ,session_current_time DATETIME)")
         self.con.commit()
 
-    def insert_session(self, num_businesses, num_houses, num_infrastructure, num_vehicles, num_solar, num_wind, current_time):
+    def insert_session(self, num_businesses, num_houses, num_infrastructure, num_vehicles, num_solar, num_wind, session_current_time):
         """Insert session data into the session table
 
         Arguments: 
@@ -57,8 +58,8 @@ class Database:
 
         session_dictionary -- python dictionary in format dict[type] = num_type
         """
-        self.cur.execute("INSERT INTO session_info (num_businesses, num_houses, num_infrastructure, num_vehicles, num_solar, num_wind, current_time) VALUES(" +
-                         f" '{num_businesses}' , '{num_houses}' ,  '{num_infrastructure}' ,  '{num_vehicles}' ,  '{num_solar}' , '{num_wind}' , '{current_time}')")
+        self.cur.execute("INSERT INTO session_info (num_businesses, num_houses, num_infrastructure, num_vehicles, num_solar, num_wind, session_current_time) VALUES(" +
+                         f" '{num_businesses}' , '{num_houses}' ,  '{num_infrastructure}' ,  '{num_vehicles}' ,  '{num_solar}' , '{num_wind}' , '{session_current_time}')")
 
         self.con.commit()
 
@@ -107,22 +108,27 @@ class Database:
         Return: number of 'type'
         """
 
-        if type.lower == 'num_businesses':
+        if type == 'num_businesses':
             self.cur.execute("SELECT num_businesses  FROM session_info")
-        elif type.lower == 'num_houses':
+        elif type == 'num_houses':
             self.cur.execute("SELECT num_houses  FROM session_info")
-        elif type.lower == 'num_infrastructure':
+        elif type == 'num_infrastructure':
             self.cur.execute("SELECT num_infrastructure  FROM session_info")
-        elif type.lower == 'num_vehicles':
+        elif type == 'num_vehicles':
             self.cur.execute("SELECT num_vehicles  FROM session_info")
-        elif type.lower == 'num_solar':
+        elif type == 'num_solar':
             self.cur.execute("SELECT num_solar  FROM session_info")
-        elif type.lower == 'num_wind':
+        elif type == 'num_wind':
             self.cur.execute("SELECT num_wind  FROM session_info")
-        elif type.lower == 'current_time':
-            self.cur.execute("SELECT current_time  FROM session_info")
+        elif type == 'session_current_time':
+            self.cur.execute("SELECT session_current_time  FROM session_info")
 
         return self.cur.fetchall()
+
+    def update_time(self, time: datetime) :
+        """Update time in session_info"""
+        self.cur.execute("UPDATE session_info SET session_current_time = ?", (time,))
+        self.con.commit()
 
     def __del__(self):
         """Delete database object & close the database"""

@@ -71,12 +71,23 @@ class Database:
 		return self.cur.fetchall()
 
 	def select_info(self, type: str):
-		"""Get the number of a certain type
+    	
+			if type == 'num_businesses':
+				self.cur.execute("SELECT num_businesses  FROM session_info")
+			elif type == 'num_houses':
+				self.cur.execute("SELECT num_houses  FROM session_info")
+			elif type == 'num_infrastructure':
+				self.cur.execute("SELECT num_infrastructure  FROM session_info")
+			elif type == 'num_vehicles':
+				self.cur.execute("SELECT num_vehicles  FROM session_info")
+			elif type == 'num_solar':
+				self.cur.execute("SELECT num_solar  FROM session_info")
+			elif type == 'num_wind':
+				self.cur.execute("SELECT num_wind  FROM session_info")
+			elif type == 'session_current_time':
+				self.cur.execute("SELECT session_current_time  FROM session_info")
 
-		Return: number of a certain type
-		"""
-		self.cur.execute("SELECT number_of_type FROM session_info WHERE type = ?", [type])
-		return self.cur.fetchall()
+			return self.cur.fetchall()
 
 
 	def __del__(self):
