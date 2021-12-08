@@ -30,22 +30,22 @@ class Session():
 
 		session_dictionary = {} 
 
-		session_dictionary["num_businesses"] = 100
-		session_dictionary["num_houses"] = 500
-		session_dictionary["num_infrastructure"] = 50
-		session_dictionary["num_vehicles"] = 200
-		session_dictionary["num_solar"] = 1000
-		session_dictionary["num_wind"] = 10
-		session_dictionary["current_time"] = datetime.strptime("2022-10-18 05:24:30", "%Y-%m-%d %H:%M:%S")
+		num_businesses = 100
+		num_houses = 500
+		num_infrastructure = 50
+		num_vehicles = 200
+		num_solar = 1000
+		num_wind = 10
+		current_time = datetime.strptime("2022-10-18 05:24:30", "%Y-%m-%d %H:%M:%S")
 		timestamp = datetime.strptime("2022-10-18 05:24:30", "%Y-%m-%d %H:%M:%S")
 
-		db.insert_session(timestamp,session_dictionary)
+		db.insert_session(num_businesses, num_houses, num_infrastructure, num_vehicles,num_solar, num_wind,current_time)
 
 		# Read city parameters
 		with open(path, 'r') as json_file:
 			conf = json.load(json_file)
 
-
+		print((db.select_info("num_businesses")))
 		builder.construct_businesses((db.select_info("num_businesses"))[0][0])
 		builder.construct_houses((db.select_info("num_houses"))[0][0])
 		builder.construct_infrastructure((db.select_info("num_infrastructure"))[0][0])
