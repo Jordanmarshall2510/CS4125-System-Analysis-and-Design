@@ -1,4 +1,7 @@
-{
+{   
+    "session_info": {
+        "id" : 0
+    },
     "electricity_generator": {
         "distribution": {
             "distribution_size": 30,
