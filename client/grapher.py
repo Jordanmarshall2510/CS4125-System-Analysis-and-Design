@@ -12,14 +12,13 @@ import itertools
 class Grapher:
     db = Database(sqlite=True)
     def get_session_data(self):
-
         business = (self.db.select_info("num_businesses"))[0][0]
         house = (self.db.select_info("num_houses"))[0][0]
         infrastructure = (self.db.select_info("num_infrastructure"))[0][0]
         vehicles = (self.db.select_info("num_vehicles"))[0][0]
         solar = (self.db.select_info("num_solar"))[0][0]
         wind = (self.db.select_info("num_wind"))[0][0]
-        time = (self.db.select_info("current_time"))[-1][-1]
+        time = (self.db.select_info("session_current_time"))[0][0]
 
         return business, house, infrastructure, vehicles, solar, wind, time
 

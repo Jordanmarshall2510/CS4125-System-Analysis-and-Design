@@ -28,24 +28,22 @@ class Session():
 
 		db = Database(sqlite=True)
 
-		session_dictionary = {} 
-
 		num_businesses = 100
 		num_houses = 500
 		num_infrastructure = 50
 		num_vehicles = 200
 		num_solar = 1000
 		num_wind = 10
-		current_time = datetime.strptime("2022-10-18 05:24:30", "%Y-%m-%d %H:%M:%S")
+		session_current_time = datetime.strptime("2022-10-18 05:24:30", "%Y-%m-%d %H:%M:%S")
 		timestamp = datetime.strptime("2022-10-18 05:24:30", "%Y-%m-%d %H:%M:%S")
 
-		db.insert_session(num_businesses, num_houses, num_infrastructure, num_vehicles,num_solar, num_wind,current_time)
+		db.insert_session(num_businesses, num_houses, num_infrastructure, num_vehicles,num_solar, num_wind,session_current_time)
 
 		# Read city parameters
 		with open(path, 'r') as json_file:
 			conf = json.load(json_file)
 
-		print((db.select_info("num_businesses")))
+		print((db.select_info("num_businesses"))[0][0])
 		builder.construct_businesses((db.select_info("num_businesses"))[0][0])
 		builder.construct_houses((db.select_info("num_houses"))[0][0])
 		builder.construct_infrastructure((db.select_info("num_infrastructure"))[0][0])
@@ -60,7 +58,8 @@ class Session():
 		del builder		
 
 		# Initialise timer
-		timestamp = datetime.strptime(((db.select_info("current_time"))[0][0]), "%Y-%m-%d %H:%M:%S")
+		print ((db.select_info("session_current_time")))
+		timestamp = datetime.strptime(((db.select_info("session_current_time"))[0][0]), "%Y-%m-%d %H:%M:%S")
 		for i in range(730):
 			#Update the weather
 			Weather.update_weather(conf['world']['weather']['weather'])
@@ -77,14 +76,9 @@ class Session():
 
 			# Progress time
 			timestamp += timedelta(hours=1)
-			
+			print (timestamp)
 			# Update  database
-			session_dictionary1 = {} 
-
-			session_dictionary1["current_time"] = timestamp.strftime( "%Y-%m-%d %H:%M:%S")
-			date = datetime.strptime("2022-10-18 05:24:30", "%Y-%m-%d %H:%M:%S")
-
-			db.insert_session(date,session_dictionary1)
+			db.update_time(timestamp)
 
 			# Update config file with weather
 			conf['world']['weather']['weather'] = Weather.get_weather()
