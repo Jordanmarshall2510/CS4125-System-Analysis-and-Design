@@ -11,7 +11,7 @@ class test_methods(unittest.TestCase):
     '''
     # Tests database creation on clientside.
     def test_database(self):
-        db = client.database.Database()
+        db = client.database.Database(sqlite=True)
         self.assertTrue(db)
         del db
 

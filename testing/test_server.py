@@ -126,7 +126,7 @@ class test_methods(unittest.TestCase):
 
     # Tests creation of database on serverside
     def test_database(self):
-        db = server.database.Database()
+        db = server.database.Database(sqlite=True)
         self.assertTrue(db)
         del db
 
