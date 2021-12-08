@@ -10,20 +10,7 @@ from server.electricity_generator.wind import Wind
 from server.world.weather import Weather
 import server.database
 
-from client.grapher import Grapher
-import client.database
-from client import app
-
 class test_methods(unittest.TestCase):
-
-    '''
-    database.py (Client) Unit Tests
-    '''
-    # Tests database creation on clientside.
-    def test_database(self):
-        db = client.database.Database()
-        self.assertTrue(db)
-        del db
 
     '''
     houses.py Unit Tests
