@@ -32,28 +32,28 @@ class Grapher:
                 pos = []
                 for j in value:
                     num = j[0]
-                    pos.append(num)
+                    pos.append(int(num))
                 result.append(pos)
             elif i == "Overall Usage":
                 value = self.db.select_total_used_power_history()
                 pos = []
                 for j in value:
                     num = j[0]
-                    pos.append(num)
+                    pos.append(int(num))
                 result.append(pos)
             elif i == "Solar" or i == "Wind":
                 value = self.db.select_generated_power_history(i)
                 pos = []
                 for j in value:
                     num = j[0]
-                    pos.append(num)
+                    pos.append(int(num))
                 result.append(pos)
             else:
                 value = self.db.select_used_power_history(i)
                 pos = []
                 for j in value:
                     num = j[0]
-                    pos.append(num)
+                    pos.append(int(num))
                 result.append(pos)
         result_dict = {result[i]: result[i + 1] for i in range(0, len(result), 2)}
         selected_generated, selected_usage, total_generated, total_usage = self.get_statistics(result_dict)
