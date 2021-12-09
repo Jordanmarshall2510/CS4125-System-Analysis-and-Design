@@ -4,12 +4,19 @@
 
 **Table of Contents**
 - [Smart City](#smart-city)
-  * [Narrative](#narrative)
-  * [Project Roles](#project-roles)
-  * [Project Plan](#project-plan)
-  * [Quickstart](#quickstart)
-  * [Setting up MySQL](#setting-up-database)
-  * [Running simulation remotely](#running-simulation-remotely)
+	- [Narrative](#narrative)
+	- [Project Roles](#project-roles)
+	- [Project Plan](#project-plan)
+	- [Coding Standard](#coding-standard)
+	- [References](#references)
+		- [Python](#python)
+		- [SQLite Database](#sqlite-database)
+		- [MySQL Database](#mysql-database)
+	- [Guides](#guides)
+		- [Quickstart](#quickstart)
+		- [Setting up database](#setting-up-database)
+		- [Running simulation remotely](#running-simulation-remotely)
+		- [Running unit test cases](#running-unit-test-cases)
 
 ## Narrative
 Smart City is a project that our team envisioned to simulate a futuristic smart city, a city in the near future where the majority of modes of transportation are electric and humanity is sourcing most of its power from renewable resources.
@@ -137,3 +144,17 @@ Our codebase follows the PEP-8 coding convention for Python. More can be learned
 3. To run the simulation use this command
 
 	`python3 session.py`
+
+### Running unit test cases
+
+To run unit tests on server components use this command:
+
+	`python3 testing/test_server.py`
+
+To run unit tests on client components use this command:
+
+	`python3 testing/test_client.py`
+
+To run all unit tests use this command:
+
+	`python3 -m unittest`
