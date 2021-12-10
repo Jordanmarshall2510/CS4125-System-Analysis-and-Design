@@ -12,7 +12,7 @@ import itertools
 class Grapher:
     db = Database(sqlite=True)
     def get_session_data(self):
-        session_id = ((self.db.select_info("session_id", 0))[0][0])
+        session_id = ((self.db.select_info("session_id", 1))[0][0])
         business = (self.db.select_info("num_businesses", session_id))[0][0]
         house = (self.db.select_info("num_houses", session_id))[0][0]
         infrastructure = (self.db.select_info("num_infrastructure", session_id))[0][0]
