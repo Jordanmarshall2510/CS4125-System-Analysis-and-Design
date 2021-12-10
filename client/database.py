@@ -91,7 +91,7 @@ class Database:
 		elif type == 'session_current_time':
 			self.cur.execute("SELECT session_current_time  FROM session_info WHERE id = ?;", (id,))
 		elif type == 'session_id':
-			self.cur.execute("SELECT id  FROM session_info")
+			self.cur.execute("SELECT id  FROM session_info WHERE id = ?;", (id,))
 
 		return self.cur.fetchall()
 

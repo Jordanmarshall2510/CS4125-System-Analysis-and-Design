@@ -24,9 +24,6 @@ class Session():
 		season.init()
 		weather.init()
 
-		# Connect to database
-
-		db = Database(sqlite=True)
 
 		# Open config file 
 
@@ -44,6 +41,10 @@ class Session():
 		session_id = (conf['session_info']['id'])
 		session_current_time = datetime.strptime("2022-10-18 05:24:30", "%Y-%m-%d %H:%M:%S")
 		timestamp = datetime.strptime("2022-10-18 05:24:30", "%Y-%m-%d %H:%M:%S")
+
+		# Connect to database
+
+		db = Database(sqlite=True)
 
 		db.insert_session(session_id, num_businesses, num_houses, num_infrastructure, num_vehicles,num_solar, num_wind,session_current_time)
 
@@ -75,8 +76,8 @@ class Session():
 			generation, usage = city.update(timestamp)
 
 			# Put data into database
-			db.insert_generation(timestamp, generation)
-			db.insert_usage(timestamp, usage)
+			db.insert_generation(timestamp, generation, session_id)
+			db.insert_usage(timestamp, usage, session_id)
 
 			# Progress time
 			timestamp += timedelta(hours=1)
