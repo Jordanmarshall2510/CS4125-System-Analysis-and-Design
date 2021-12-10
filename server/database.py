@@ -58,7 +58,7 @@ class Database:
 
         session_dictionary -- python dictionary in format dict[type] = num_type
         """
-        self.cur.execute("INSERT OR IGNORE INTO session_info (id, num_businesses, num_houses, num_infrastructure, num_vehicles, num_solar, num_wind, session_current_time) VALUES(" +
+        self.cur.execute("INSERT INTO session_info (id, num_businesses, num_houses, num_infrastructure, num_vehicles, num_solar, num_wind, session_current_time) VALUES(" +
                          f" '{session_id}' ,'{num_businesses}' , '{num_houses}' ,  '{num_infrastructure}' ,  '{num_vehicles}' ,  '{num_solar}' , '{num_wind}' , '{session_current_time}')")
 
         self.con.commit()

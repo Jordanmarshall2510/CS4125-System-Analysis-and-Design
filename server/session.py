@@ -46,7 +46,8 @@ class Session():
 
 		db = Database(sqlite=True)
 
-		db.insert_session(session_id, num_businesses, num_houses, num_infrastructure, num_vehicles,num_solar, num_wind,session_current_time)
+		if len(db.select_info("session_id", session_id)) == 0:
+			db.insert_session(session_id, num_businesses, num_houses, num_infrastructure, num_vehicles,num_solar, num_wind,session_current_time)
 
 		# Get info from database to build city
 
@@ -64,7 +65,7 @@ class Session():
 		del builder		
 
 		# Initialise timer
-		timestamp = datetime.strptime(((db.select_info("session_current_time", session_id))[0][0]), "%Y-%m-%d %H:%M:%S")
+		timestamp = datetime.strptime(str(db.select_info("session_current_time", session_id)[0][0]), "%Y-%m-%d %H:%M:%S")
 		for i in range(730):
 			#Update the weather
 			Weather.update_weather(conf['world']['weather']['weather'])
