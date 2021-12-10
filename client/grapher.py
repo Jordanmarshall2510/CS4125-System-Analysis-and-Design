@@ -7,25 +7,21 @@ import pandas as pd
 import numpy as np
 import re
 import os,json
+import itertools
 
 class Grapher:
     db = Database(sqlite=True)
     def get_session_data(self):
-        path = os.path.dirname(os.path.realpath(__file__)).split("client")[0] + "server/config.json"
+        session_id = ((self.db.select_info("session_id", 1))[0][0])
+        business = (self.db.select_info("num_businesses", session_id))[0][0]
+        house = (self.db.select_info("num_houses", session_id))[0][0]
+        infrastructure = (self.db.select_info("num_infrastructure", session_id))[0][0]
+        vehicles = (self.db.select_info("num_vehicles", session_id))[0][0]
+        solar = (self.db.select_info("num_solar", session_id))[0][0]
+        wind = (self.db.select_info("num_wind", session_id))[0][0]
+        time = (self.db.select_info("session_current_time", session_id))[0][0]
 
-        with open(path) as json_file:
-            conf = json.load(json_file)
-            business = conf["session"]["electricity_user"]["businesses"]
-            house = conf["session"]["electricity_user"]["houses"]
-            infrastructure = conf["session"]["electricity_user"]["infrastructure"]
-            vehicles = conf["session"]["electricity_user"]["vehicles"]
-
-            solar = conf["session"]["electricity_generator"]["solar"]
-            wind = conf["session"]["electricity_generator"]["wind"]
-
-            time = conf["session"]["time"]
-
-        return business, house, infrastructure, vehicles, solar, wind, time
+        return session_id, business, house, infrastructure, vehicles, solar, wind, time
 
     def create_df(self,inputs):
         result = []
