@@ -12,6 +12,19 @@ GRANT ALL PRIVILEGES ON smart_city.* TO "SimUser";
 FLUSH PRIVILEGES;
 
 -- create tables
+
+CREATE TABLE session_info (
+  id INT NOT NULL AUTO_INCREMENT,
+  num_businesses INT,
+  num_houses INT,
+  num_infrastructure INT,
+  num_vehicles INT,
+  num_solar INT,
+  num_wind INT,
+  session_current_time TIMESTAMP NOT NULL,
+  PRIMARY KEY(id)
+);
+
 CREATE TABLE users (
 	id INT NOT NULL AUTO_INCREMENT,
 	session_id INT NOT NULL,
@@ -32,13 +45,3 @@ CREATE TABLE generators (
 	FOREIGN KEY(session_id) REFERENCES session_info(id)
 );
 
-CREATE TABLE session_info (
-  id INT NOT NULL AUTO_INCREMENT,
-  num_businesses INT,
-  num_houses INT,
-  num_infrastructure INT,
-  num_vehicles INT,
-  num_solar INT,
-  num_wind INT,
-  session_current_time TIMESTAMP NOT NULL
-);

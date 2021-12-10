@@ -42,11 +42,11 @@ class Database:
 
     def setup_database(self):
         """Setup the database if it doesnt exist already"""
-        self.cur.execute(
-            "CREATE TABLE IF NOT EXISTS users(id INT PRIMARY KEY, time DATETIME, user_type VARCHAR(14), power_used INT)")
-        self.cur.execute(
-            "CREATE TABLE IF NOT EXISTS generators(id INT PRIMARY KEY, time DATETIME, generator_type VARCHAR(14), power_generated INT)")
         self.cur.execute("CREATE TABLE IF NOT EXISTS session_info(id INT PRIMARY KEY, num_businesses INT, num_houses INT , num_infrastructure INT , num_vehicles INT,num_solar INT, num_wind INT ,session_current_time DATETIME)")
+        self.cur.execute(
+            "CREATE TABLE IF NOT EXISTS users(session_id INT, time DATETIME, user_type VARCHAR(14), power_used INT,FOREIGN KEY(session_id) REFERENCES session_info(id) )")
+        self.cur.execute(
+            "CREATE TABLE IF NOT EXISTS generators(session_id INT,time DATETIME, generator_type VARCHAR(14), power_generated INT, FOREIGN KEY (session_id) REFERENCES session_info(id))")
         self.con.commit()
 
     def insert_session(self, session_id, num_businesses, num_houses, num_infrastructure, num_vehicles, num_solar, num_wind, session_current_time):
@@ -63,39 +63,43 @@ class Database:
 
         self.con.commit()
 
-    def insert_usage(self, timestamp: datetime, usage_dictionary: dict):
+    def insert_usage(self, timestamp: datetime, usage_dictionary: dict, session_id:int):
         """Insert user data into the user table
 
         Arguments: 
+
+        session_id -- foreign key referencing session_info(id)
 
         timestamp -- when the data was recorded (simulation time)
 
         usage_dictionary -- python dictionary in format dict[type] = power_used
         """
-        sql = "INSERT INTO users (time, user_type, power_used) VALUES"
+        sql = "INSERT INTO users (session_id, time, user_type, power_used) VALUES"
         comma = ""
         for key, value in usage_dictionary.items():
-            sql += f" {comma}('{timestamp}', '{key}', {int(value)})"
+            sql += f" {comma}('{session_id}','{timestamp}', '{key}', {int(value)})"
             comma = "," # So that we update it next time
 
         self.cur.execute(sql)
         self.con.commit()
         pass
 
-    def insert_generation(self, timestamp: datetime, generation_dictionary: dict):
+    def insert_generation(self, timestamp: datetime, generation_dictionary: dict, session_id:int):
         """Insert generator data into the generator table
 
         Arguments: 
+
+        session_id -- foreign key referencing session_info(id)
 
         timestamp -- when the data was recorded (simulation time)
 
         generation_dictionary -- python dictionary in format dict[type] = power_generated
         """
-        sql = "INSERT INTO generators (time, generator_type, power_generated) VALUES"
+        sql = "INSERT INTO generators (session_id, time, generator_type, power_generated) VALUES"
         comma = ""
         for key, value in generation_dictionary.items():
             # Temporary solution as int should be implied by update function
-            sql += f" {comma}('{timestamp}','{key}',{int(value)})"
+            sql += f" {comma}('{session_id}','{timestamp}','{key}',{int(value)})"
             comma = "," # So that we update it next time
 
         self.cur.execute(sql)
