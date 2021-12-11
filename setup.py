@@ -15,7 +15,6 @@ setup(  name='Smart City Simulation',
             'numpy',
             'pandas',
             'dash-bootstrap-components',
-            'traitlets',
             'mysql-connector-python'
         ],
 

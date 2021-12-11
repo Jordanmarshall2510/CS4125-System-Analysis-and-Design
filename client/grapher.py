@@ -1,6 +1,5 @@
 ## Where the graphing code will reside
 from pandas.core.base import DataError
-from traitlets.traitlets import Integer
 from client.database import Database
 from datetime import datetime
 import pandas as pd
@@ -10,7 +9,12 @@ import os,json
 import itertools
 
 class Grapher:
-    db = Database(sqlite=True)
+
+    db = None
+
+    def init_database(self, host=None, user=None, password=None, database=None, remote=False):
+        self.db = Database(host, user, password, database, sqlite=True)
+
     def get_session_data(self):
         session_id = ((self.db.select_info("session_id", 1))[0][0])
         business = (self.db.select_info("num_businesses", session_id))[0][0]

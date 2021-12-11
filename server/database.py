@@ -10,7 +10,7 @@ from mysql.connector import errorcode
 class Database:
     """Database class dealing with insert queries for the simulation"""
 
-    def __init__(self, sqlite: bool):
+    def __init__(self, host, user, password, database, sqlite: bool):
         """Initialze Database object & connect to database
 
         Arguments: sqlite -- Specifies if database is using mysql remotely or sqlite locally
@@ -22,10 +22,10 @@ class Database:
         else:
             try:
                 self.con = mysql.connector.connect(
-                    host="localhost",
-                    user="SimUser",
-                    password="!Sim_Password21",
-                    database="smart_city"
+                    host=host,
+                    user=user,
+                    password=password,
+                    database=database
                 )
             except mysql.connector.Error as err:
                 if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
