@@ -7,7 +7,6 @@ from server.world.seasons import Seasons
 class Weather:
     """Static weather class made to generate a weather for the simulation given a time"""
     weather='' #Sunny, Cloudy, Rain, Snow, Fog, Tornado, Sandstorm, Snowstorm
-    climate='' #Tropical, Dry Cold, Dry Hot, Temperate, Continental, Polar, Desert
     weather_change_base = 70 #Base chance for weather to change
     weather_change_rate = 1 #Rate of change for chance for weather
     counter = 0 #counter for increasing chance of weather change
@@ -19,8 +18,6 @@ class Weather:
         with open(path) as json_file:
             conf = json.load(json_file)
             Weather.weather=conf['world']['weather']['weather']
-            Weather.delay=conf['world']['weather']['weather']
-            Weather.weather_change=conf['world']['weather']['season']
 
     @staticmethod
     def get_weather():

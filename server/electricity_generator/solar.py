@@ -40,9 +40,6 @@ class Solar(ElectricityGenerator):
         self.distribution.input(total_generated,"kW")
         return total_generated
 
-    def get_electricity_generated(self) -> int:
-        return self.update()
-
     def generate_generators(number_of_generators: int) -> list:
         generated_array = []
         for x in range(number_of_generators):
