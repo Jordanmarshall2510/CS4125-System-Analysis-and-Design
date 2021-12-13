@@ -24,10 +24,11 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets,
 
 
 class App():
-
     
     @staticmethod
-    def init():
+    def init(host=None, user=None, password=None, database=None, remote=False):
+
+        graph.init_database(host, user, password, database, remote)
         
         colors = {
             'background': '#111111',
@@ -177,4 +178,4 @@ class App():
     
     @staticmethod
     def run():
-        app.run_server(debug=True)
+        app.run_server(debug=False)

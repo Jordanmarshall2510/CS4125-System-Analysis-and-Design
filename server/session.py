@@ -11,24 +11,18 @@ path = os.path.dirname(os.path.realpath(__file__)) + "//config.json"
 
 class Session():
 
+	# Open config file 
+
+	with open(path, 'r') as json_file:
+		conf = json.load(json_file)
+
+	session_id = conf['session_info']['id']
+	db = None
+	city = None
+	weather = None
 	
 	@staticmethod
-	def init():
-
-		# Prepare city builder
-		builder = CityBuilder()
-
-		# Initialze weather
-		weather = Weather()
-		season = Seasons()
-		season.init()
-		weather.init()
-
-
-		# Open config file 
-
-		with open(path, 'r') as json_file:
-			conf = json.load(json_file)
+	def init_database(host=None, user=None, password=None, database=None, remote=True):
 
 		# Add city parameters to database
 
@@ -38,56 +32,60 @@ class Session():
 		num_vehicles = 200
 		num_solar = 1000
 		num_wind = 10
-		session_id = (conf['session_info']['id'])
 		session_current_time = datetime.strptime("2022-10-18 05:24:30", "%Y-%m-%d %H:%M:%S")
-		timestamp = datetime.strptime("2022-10-18 05:24:30", "%Y-%m-%d %H:%M:%S")
 
-		# Connect to database
+		Session.db = Database(host, user, password, database, sqlite=remote)
 
-		db = Database(sqlite=True)
+		if len(Session.db.select_info("session_id", Session.session_id)) == 0:
+			Session.db.insert_session(Session.session_id, num_businesses, num_houses, num_infrastructure, num_vehicles,num_solar, num_wind,session_current_time)
 
-		if len(db.select_info("session_id", session_id)) == 0:
-			db.insert_session(session_id, num_businesses, num_houses, num_infrastructure, num_vehicles,num_solar, num_wind,session_current_time)
+	@staticmethod
+	def init_simulation():
+		# Prepare city builder
+		builder = CityBuilder()
 
+		# Initialze weather
+		weather = Weather()
+		season = Seasons()
+		season.init()
+		weather.init()
+		
 		# Get info from database to build city
 
-		builder.construct_businesses((db.select_info("num_businesses", session_id))[0][0])
-		builder.construct_houses((db.select_info("num_houses", session_id))[0][0])
-		builder.construct_infrastructure((db.select_info("num_infrastructure", session_id))[0][0])
-		builder.construct_vehicles((db.select_info("num_vehicles", session_id))[0][0])
-		builder.construct_solar_panels((db.select_info("num_solar", session_id))[0][0])
-		builder.construct_wind_turbines((db.select_info("num_wind", session_id))[0][0])
+		builder.construct_businesses((Session.db.select_info("num_businesses", Session.session_id))[0][0])
+		builder.construct_houses((Session.db.select_info("num_houses", Session.session_id))[0][0])
+		builder.construct_infrastructure((Session.db.select_info("num_infrastructure", Session.session_id))[0][0])
+		builder.construct_vehicles((Session.db.select_info("num_vehicles", Session.session_id))[0][0])
+		builder.construct_solar_panels((Session.db.select_info("num_solar", Session.session_id))[0][0])
+		builder.construct_wind_turbines((Session.db.select_info("num_wind", Session.session_id))[0][0])
 
 		# Build city
-		city = builder.build()
+		Session.city = builder.build()	
 
-		# Remove builder
-		del builder		
-
+	@staticmethod
+	def run():
 		# Initialise timer
-		timestamp = datetime.strptime(str(db.select_info("session_current_time", session_id)[0][0]), "%Y-%m-%d %H:%M:%S")
+		timestamp = datetime.strptime(str(Session.db.select_info("session_current_time", Session.session_id)[0][0]), "%Y-%m-%d %H:%M:%S")
 		for i in range(730):
 			#Update the weather
-			Weather.update_weather(conf['world']['weather']['weather'])
+			Weather.update_weather(Session.conf['world']['weather']['weather'])
 			
 			#Update the season
 			Seasons.update_season(timestamp)
 			
 			# Update City
-			generation, usage = city.update(timestamp)
+			generation, usage = Session.city.update(timestamp)
 
 			# Put data into database
-			db.insert_generation(timestamp, generation, session_id)
-			db.insert_usage(timestamp, usage, session_id)
+			Session.db.insert_generation(timestamp, generation, Session.session_id)
+			Session.db.insert_usage(timestamp, usage, Session.session_id)
 
 			# Progress time
 			timestamp += timedelta(hours=1)
 			# Update  database
-			db.update_time(timestamp, session_id)
+			Session.db.update_time(timestamp, Session.session_id)
 
 			# Update config file with weather
-			conf['world']['weather']['weather'] = Weather.get_weather()
+			Session.conf['world']['weather']['weather'] = Weather.get_weather()
 			with open(path, 'w') as json_file:
-				json.dump(conf, json_file)
-
-		del db
+				json.dump(Session.conf, json_file)
