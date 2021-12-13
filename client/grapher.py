@@ -13,7 +13,7 @@ class Grapher:
     db = None
 
     def init_database(self, host=None, user=None, password=None, database=None, remote=False):
-        self.db = Database(host, user, password, database, sqlite=True)
+        self.db = Database(host, user, password, database, sqlite=remote)
 
     def get_session_data(self):
         session_id = ((self.db.select_info("session_id", 1))[0][0])
