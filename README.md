@@ -89,10 +89,10 @@ Our codebase follows the PEP-8 coding convention for Python. More can be learned
 	`pip install .`
 2. To run the simulation enter the following command.
 
-	`python3 session.py`
+	`python3 main.py -s`
 3. To run the frontside grapher enter the following command.
 
-	`python3 app.py`
+	`python3 main.py -c`
 4. Open the generated IP address to see the frontend.
 
 ### Setting up database
@@ -143,7 +143,18 @@ Our codebase follows the PEP-8 coding convention for Python. More can be learned
 	`pip install .`
 3. To run the simulation use this command
 
-	`python3 session.py`
+	`python3 main.py -sr`
+
+### Running client with remote database
+
+1. Setup database using guide above
+
+2. Install the prerequisite dependencies to be able to run our project run
+
+	`pip install .`
+3. To run the simulation use this command
+
+	`python3 main.py -cr`
 
 ### Running unit test cases
 
