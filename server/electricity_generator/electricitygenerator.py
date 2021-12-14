@@ -2,15 +2,16 @@
 from abc import abstractmethod
 from datetime import datetime
 
-class ElectricityGenerator:
-	"""ElectricityGenerator interface used in the creation of ElectricityGenerator classes"""
-	@abstractmethod
-	def update(self, date: datetime) -> int:
-		'''Method to update the electricity generated at a specific date'''
-		pass
 
-	@staticmethod
-	@abstractmethod
-	def generate_generators(count: int) -> list:
-		'''Static method to generate a specific type of generator'''
-		pass
+class ElectricityGenerator:
+    """ElectricityGenerator interface used in the creation of ElectricityGenerator classes"""
+    @abstractmethod
+    def update(self, date: datetime) -> int:
+        '''Method to update the electricity generated at a specific date'''
+        pass
+
+    @staticmethod
+    @abstractmethod
+    def generate_generators(count: int) -> list:
+        '''Static method to generate a specific type of generator'''
+        pass
