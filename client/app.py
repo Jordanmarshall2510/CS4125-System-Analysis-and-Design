@@ -26,7 +26,7 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets,
 class App():
     
     @staticmethod
-    def init(host=None, user=None, password=None, database=None, remote=False):
+    def init(host=None, user=None, password=None, database=None, remote=True):
 
         graph.init_database(host, user, password, database, remote)
         

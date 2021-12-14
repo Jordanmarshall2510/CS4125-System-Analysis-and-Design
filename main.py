@@ -16,37 +16,37 @@ def main():
     parser.add_argument('--version', action='version', version='%(prog)s 1.0', help='Get version of program.')
 
     args = parser.parse_args()
-    
-    if args.session:
-        session = Session()
-        if args.remote:
-            print("mySQL Login")
-            print("----------------------")
-            hostname = input('Hostname: ')
-            username = input('Username: ')
-            password = getpass('Password: ')
-            database_name = input('Database Name: ')
-            print("----------------------")
-            session.init_database(hostname, username, password, database_name, False)
-        else:
-            session.init_database()
-        session.init_simulation()
-        session.run()
 
-    if args.client:
-        app = App()
-        if args.remote:
-            print("mySQL Login")
-            print("----------------------")
-            hostname = input('Hostname: ')
-            username = input('Username: ')
-            password = getpass('Password: ')
-            database_name = input('Database Name: ')
-            print("----------------------")
+    if args.remote:
+        print("mySQL Login")
+        print("----------------------")
+        hostname = input('Hostname: ')
+        username = input('Username: ')
+        password = getpass('Password: ')
+        database_name = input('Database Name: ')
+        print("----------------------")
+
+        if args.session:
+            session = Session()
+            session.init_database(hostname, username, password, database_name, False)
+            session.init_simulation()
+            session.run()
+
+        if args.client:
+            app = App()
             app.init(hostname, username, password, database_name, False)
-        else:
+            app.run()
+    else:
+        if args.session:
+            session = Session()
+            session.init_database()
+            session.init_simulation()
+            session.run()
+
+        if args.client:
+            app = App()
             app.init()
-        app.run()
+            app.run()
 
 if __name__ == '__main__':
     main()

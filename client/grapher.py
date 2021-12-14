@@ -12,7 +12,7 @@ class Grapher:
 
     db = None
 
-    def init_database(self, host=None, user=None, password=None, database=None, remote=False):
+    def init_database(self, host=None, user=None, password=None, database=None, remote=True):
         self.db = Database(host, user, password, database, sqlite=remote)
 
     def get_session_data(self):
