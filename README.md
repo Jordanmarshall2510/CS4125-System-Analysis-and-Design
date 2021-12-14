@@ -147,7 +147,7 @@ Our codebase follows the PEP-8 coding convention for Python. More can be learned
 
 ### Running client with remote database
 
-1. 1. Setup database using guide above
+1. Setup database using guide above
 
 2. Install the prerequisite dependencies to be able to run our project run
 
