@@ -58,7 +58,7 @@ class Vehicle(ElectricityUser):
 		self.battery_capacity = battery_capacity
 		self.max_range = range
 		self.number_of_new_passengers = number_of_new_passengers
-		self.realRange = int(self.max_range - (self.max_range * self.average_new_passenger_range_cost * self.number_of_new_passengers))
+		self.real_range = int(self.max_range - (self.max_range * self.average_new_passenger_range_cost * self.number_of_new_passengers))
 
 	# TODO: increase complexity of update function with relation to the following:
 	# 1.) Driving in cold / snowy conditions can decrease the efficiency of the battery by up to 19% on Average
@@ -95,14 +95,14 @@ class Vehicle(ElectricityUser):
 		"""Change vehicle battery capacity"""
 		self.battery_capacity = new_capacity
 
-	def setVehicleRange(self, new_range: int):
+	def set_vehicle_range(self, new_range: int):
 		"""Change vehicle range"""
 		self.max_range = new_range
 	
 	def set_number_of_new_passengers(self, new_new_passengers: int):
 		"""Change number of occupants"""
 		self.number_of_new_passengers = new_new_passengers
-		self.realRange = int(self.max_range - (self.max_range * (self.average_new_passenger_range_cost * self.number_of_new_passengers)))
+		self.real_range = int(self.max_range - (self.max_range * (self.average_new_passenger_range_cost * self.number_of_new_passengers)))
 
 	def generate_users(number_of_vehicles: int) -> list:
 		vehicle_data = []
@@ -125,7 +125,7 @@ class Vehicle(ElectricityUser):
 
 	def to_string(self) -> str:
 		"""Return vehicle as a string"""
-		return  "Vehicle: " + self.id + "\tVehicle Value: €" + str(self.vehicle_value) + "\tTotal Battery Capacity: " + str(self.battery_capacity) + "kWh" + "\tMax vehicle range: " + str(self.max_range) + "KM" + "\tReal vehicle range: " + str(self.realRange) + "KM" + "\tNumber of passengers: " + str(self.number_of_new_passengers)
+		return  "Vehicle: " + self.id + "\tVehicle Value: €" + str(self.vehicle_value) + "\tTotal Battery Capacity: " + str(self.battery_capacity) + "kWh" + "\tMax vehicle range: " + str(self.max_range) + "KM" + "\tReal vehicle range: " + str(self.real_range) + "KM" + "\tNumber of passengers: " + str(self.number_of_new_passengers)
 
 # List outside of class for importing
 generate_vehicles = Vehicle.generate_users
