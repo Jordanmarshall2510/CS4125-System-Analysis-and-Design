@@ -18,10 +18,10 @@ class Database:
 		else:
 			try:
 				self.con = mysql.connector.connect(
-                    host=host,
-                    user=user,
-                    password=password,
-                    database=database
+					host=host,
+					user=user,
+					password=password,
+					database=database
 				)
 			except mysql.connector.Error as err:
 				if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
@@ -41,7 +41,7 @@ class Database:
 
 		Return: list of power_used sorted by time
 		"""
-		self.cur.execute(f"SELECT power_used FROM users WHERE user_type = '{type}' ORDER BY time")
+		self.cur.execute(f"SELECT {type.lower()} FROM users ORDER BY time")
 		return self.cur.fetchall()
 
 	def select_generated_power_history(self, type: str):
@@ -51,7 +51,7 @@ class Database:
 
 		Return: list of power_generated sorted by time
 		"""
-		self.cur.execute(f"SELECT power_generated FROM generators WHERE generator_type = '{type}' ORDER BY time")
+		self.cur.execute(f"SELECT {type.lower()} FROM generators ORDER BY time")
 		return self.cur.fetchall()
 		
 	def select_total_used_power_history(self):
@@ -59,7 +59,7 @@ class Database:
 
 		Return: list of total power_used sorted by time
 		"""
-		self.cur.execute("SELECT SUM(power_used) AS total FROM users GROUP BY time")
+		self.cur.execute("SELECT (SUM(business) + SUM(infrastructure) + SUM(house) + SUM(vehicle)) AS total FROM users GROUP BY time")
 		return self.cur.fetchall()
 
 	def select_total_generated_power_history(self):
@@ -67,7 +67,7 @@ class Database:
 
 		Return: list of total power_generated sorted by time
 		"""
-		self.cur.execute("SELECT SUM(power_generated) AS total FROM generators GROUP BY time")
+		self.cur.execute("SELECT (SUM(solar) + SUM(wind)) AS total FROM generators GROUP BY time")
 		return self.cur.fetchall()
 
 	def select_info(self, type: str, id: int):
