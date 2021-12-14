@@ -86,9 +86,6 @@ class Business(ElectricityUser):
         self.distribution.output(total_usage,"kW")
         return total_usage
 
-    def get_electricity_used(self) -> int:
-        return -1
-
     def generate_users(number_of_businesses: int) -> list:
         business_data = []
         business_counter = 0
