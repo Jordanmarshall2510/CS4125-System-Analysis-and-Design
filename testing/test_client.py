@@ -1,8 +1,7 @@
 import unittest
+from client import database
 
-from client.grapher import Grapher
-import client.database
-from client import app
+from client.database import Database
 
 class test_methods(unittest.TestCase):
 
@@ -11,9 +10,8 @@ class test_methods(unittest.TestCase):
     '''
     # Tests database creation on clientside.
     def test_database(self):
-        db = client.database.Database(sqlite=True)
+        db = Database(None, None, None, None, True)
         self.assertTrue(db)
-        del db
 
 # Main function
 if __name__ == '__main__':
