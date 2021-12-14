@@ -7,6 +7,7 @@ from server.electricity_user.vehicles import Vehicle
 from server.electricity_generator.distribution import Distribution
 from server.electricity_generator.solar import Solar
 from server.electricity_generator.wind import Wind
+from server.session import Session
 from server.world.weather import Weather
 import server.database
 
@@ -119,16 +120,6 @@ class test_methods(unittest.TestCase):
         data = Vehicle.generate_users(100)
         for x in data:
             self.assertTrue(0 <= x.number_of_new_passengers)
-
-    '''
-    database.py (Server) Unit Tests
-    '''
-
-    # Tests creation of database on serverside
-    def test_database(self):
-        db = server.database.Database(sqlite=True)
-        self.assertTrue(db)
-        del db
 
     '''
     solar.py Unit Tests
