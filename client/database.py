@@ -6,7 +6,7 @@ from mysql.connector import errorcode
 
 class Database:
 	"""Database class dealing with select queries for the frontend"""
-	def __init__(self, sqlite: bool):
+	def __init__(self, host, user, password, database, sqlite: bool):
 		"""Initialze Database object & connect to database
 		
 		Arguments: sqlite -- Specifies if database is using mysql remotely or sqlite locally
