@@ -5,6 +5,7 @@ import random
 from server.electricity_generator.electricitygenerator import ElectricityGenerator
 from server.electricity_generator.distribution import Distribution
 from datetime import datetime
+from server.world.weather import Weather
 
 class Solar(ElectricityGenerator):
     """Solar class representing a solar panel in the city"""
@@ -30,13 +31,17 @@ class Solar(ElectricityGenerator):
         if(current_time<6 or current_time>20):
             total_generated = 0
         elif(current_time<=12):
-            a=random.uniform(0,0.00014)
-            b=random.uniform(0,0.0014)
+            a=random.uniform(0,0.56)
+            b=random.uniform(0,5.6)
             total_generated = (self.wattage+a)+(b*current_time)
         elif(current_time>12):
-            a=random.uniform(0,0.00014)
-            b=random.uniform(0,0.0014)
+            a=random.uniform(0,0.56)
+            b=random.uniform(0,5.6)
             total_generated = (self.wattage+a)+(b*(24-current_time))
+        if(Weather.get_weather() == 'rain'):
+            total_generated = total_generated*0.75
+        elif(Weather.get_weather() == 'cloudy'):
+            total_generated = total_generated*0.5    
         self.distribution.input(total_generated,"kW")
         return total_generated
 
