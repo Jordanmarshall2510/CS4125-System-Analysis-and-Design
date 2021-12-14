@@ -4,19 +4,20 @@
 
 **Table of Contents**
 - [Smart City](#smart-city)
-	- [Narrative](#narrative)
-	- [Project Roles](#project-roles)
-	- [Project Plan](#project-plan)
-	- [Coding Standard](#coding-standard)
-	- [References](#references)
-		- [Python](#python)
-		- [SQLite Database](#sqlite-database)
-		- [MySQL Database](#mysql-database)
-	- [Guides](#guides)
-		- [Quickstart](#quickstart)
-		- [Setting up database](#setting-up-database)
-		- [Running simulation remotely](#running-simulation-remotely)
-		- [Running unit test cases](#running-unit-test-cases)
+  - [Narrative](#narrative)
+  - [Project Roles](#project-roles)
+  - [Project Plan](#project-plan)
+  - [Coding Standard](#coding-standard)
+  - [References](#references)
+    - [Python](#python)
+    - [SQLite Database](#sqlite-database)
+    - [MySQL Database](#mysql-database)
+  - [Guides](#guides)
+    - [Quickstart](#quickstart)
+    - [Setting up database](#setting-up-database)
+    - [Running simulation remotely](#running-simulation-remotely)
+    - [Running client with remote database](#running-client-with-remote-database)
+    - [Running unit test cases](#running-unit-test-cases)
 
 ## Narrative
 Smart City is a project that our team envisioned to simulate a futuristic smart city, a city in the near future where the majority of modes of transportation are electric and humanity is sourcing most of its power from renewable resources.
@@ -25,6 +26,10 @@ The goal of our project is to allow the user to change the amounts of renewables
 
 The user will be able to change multiple conditions for the simulation, that would include conditions like weather, time, season, average energy spent by one family home and more.
 This will allow the user to play around with the simulation and see how that impacts the simulated city.
+
+The results will be displayed in a graph form where the user can see how the electricity consumption and generation change over time. They will be able to visualize only certain energy consumption and generators if needed.
+
+We will be developing our project on Windows and Mac platforms and these will be officially supported by our team.
 
 ## Project Roles
 | Role | Description  | Designated Team Member |
@@ -95,7 +100,7 @@ Our codebase follows the PEP-8 coding convention for Python. More can be learned
 	`python3 main.py -c`
 4. Open the generated IP address to see the frontend.
 
-### Setting up database
+### Setting up database (only do this if you want to run a remote database)
 
 1. Make sure MySQL is installed and running on your system (Use MySQL references for support)
 
@@ -115,7 +120,7 @@ Our codebase follows the PEP-8 coding convention for Python. More can be learned
 	`
 6. Create user and generators tables using the following queries
 
-	`
+	
 	
 		CREATE TABLE users (
 			id INT NOT NULL AUTO_INCREMENT,
@@ -132,7 +137,7 @@ Our codebase follows the PEP-8 coding convention for Python. More can be learned
 			time TIMESTAMP,
 			PRIMARY KEY(id)
 		);
-	`
+	
 
 ### Running simulation remotely
 
