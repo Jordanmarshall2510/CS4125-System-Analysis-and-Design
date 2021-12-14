@@ -1,7 +1,6 @@
 from server.session import Session
 from client.app import App
 import argparse
-import sys
 from getpass import getpass
 
 # sqlite bool true or false, hostname, username, password, database

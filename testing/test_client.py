@@ -1,5 +1,4 @@
 import unittest
-from client import database
 
 from client.database import Database
 

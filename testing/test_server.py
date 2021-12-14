@@ -4,12 +4,9 @@ from server.electricity_user.businesses import Business
 from server.electricity_user.houses import House
 from server.electricity_user.infrastrucure import Infrastructure
 from server.electricity_user.vehicles import Vehicle
-from server.electricity_generator.distribution import Distribution
 from server.electricity_generator.solar import Solar
 from server.electricity_generator.wind import Wind
-from server.session import Session
 from server.world.weather import Weather
-import server.database
 
 
 class test_methods(unittest.TestCase):

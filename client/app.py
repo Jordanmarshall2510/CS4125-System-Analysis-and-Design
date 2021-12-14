@@ -4,13 +4,10 @@
 # visit http://127.0.0.1:8050/ in your web browser.
 
 import dash
-from dash.dcc.Graph import Graph
 from dash.dependencies import Input, Output
-import dash_bootstrap_components as dbc
 from dash import dcc
 from dash import html
 import plotly.express as px
-import pandas as pd
 from client.grapher import Grapher
 
 graph = Grapher()

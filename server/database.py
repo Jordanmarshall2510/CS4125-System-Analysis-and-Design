@@ -2,7 +2,6 @@ from datetime import datetime
 import os
 
 import sqlite3
-from sqlite3.dbapi2 import Timestamp
 import mysql.connector
 from mysql.connector import errorcode
 

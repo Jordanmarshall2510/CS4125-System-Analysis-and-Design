@@ -1,13 +1,7 @@
 # Where the graphing code will reside
-from pandas.core.base import DataError
 from client.database import Database
-from datetime import datetime
 import pandas as pd
 import numpy as np
-import re
-import os
-import json
-import itertools
 
 
 class Grapher:
