@@ -9,11 +9,6 @@ class ElectricityUser:
 		'''Method to update the electricity usage of a specific user'''
 		pass
 
-	@abstractmethod
-	def get_electricity_used(self) -> int:
-		'''Method to get the total electricity used by the user'''
-		pass
-
 	@staticmethod
 	@abstractmethod
 	def generate_users(count: int) -> list:

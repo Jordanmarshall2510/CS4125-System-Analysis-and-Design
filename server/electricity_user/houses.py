@@ -110,9 +110,6 @@ class House(ElectricityUser):
         self.distribution.output(total_usage,"kW")
         return total_usage
 
-    def get_electricity_used(self) -> int:
-        return -1
-
     def generate_users(number_of_houses: int) -> list:
         house_data = []
         for x in range(number_of_houses):

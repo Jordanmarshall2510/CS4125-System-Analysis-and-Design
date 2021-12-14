@@ -113,10 +113,6 @@ class Infrastructure(ElectricityUser):
         self.distribution.output(total_usage,"kW")
         return total_usage
 
-    def get_electricity_used(self) -> int:
-        
-        return -1
-
     def generate_users(number_of_infrastructure: int) -> list:    # NOTE: Will be dependent on number of houses in future
         infrastructure_data = []
         infrastructure_counter = 0

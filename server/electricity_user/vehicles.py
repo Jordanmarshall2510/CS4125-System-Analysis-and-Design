@@ -80,9 +80,6 @@ class Vehicle(ElectricityUser):
 		self.distribution.output(total_usage,"kW")
 		return total_usage
 
-	def get_electricity_used(self) -> int:
-		return -1
-
 	def set_vehicle_id(self, new_id: int):
 		"""Change vehicle ID"""
 		self.vehicle_id = new_id
