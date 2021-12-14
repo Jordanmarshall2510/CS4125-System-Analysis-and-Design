@@ -28,10 +28,10 @@ class Session():
 
 		num_businesses = 100
 		num_houses = 500
-		num_infrastructure = 50
+		num_infrastructure = 200
 		num_vehicles = 200
-		num_solar = 1000
-		num_wind = 10
+		num_solar = 500
+		num_wind = 100
 		session_current_time = datetime.strptime("2022-10-18 05:24:30", "%Y-%m-%d %H:%M:%S")
 
 		Session.db = Database(host, user, password, database, sqlite=remote)
