@@ -4,12 +4,10 @@ from server.electricity_user.businesses import Business
 from server.electricity_user.houses import House
 from server.electricity_user.infrastrucure import Infrastructure
 from server.electricity_user.vehicles import Vehicle
-from server.electricity_generator.distribution import Distribution
 from server.electricity_generator.solar import Solar
 from server.electricity_generator.wind import Wind
-from server.session import Session
 from server.world.weather import Weather
-import server.database
+
 
 class test_methods(unittest.TestCase):
 
@@ -26,7 +24,7 @@ class test_methods(unittest.TestCase):
     def test_house_id(self):
         data = House.generate_users(1)
         self.assertIs(type(data[0].home_id), int)
-    
+
     # Tests number of occupants in house
     def test_house_number_of_occupants(self):
         data = House.generate_users(100)
@@ -64,7 +62,7 @@ class test_methods(unittest.TestCase):
     def test_business_id(self):
         data = Business.generate_users(1)
         self.assertIs(type(data[0].business_id), str)
-    
+
     # Tests number of occupants in business
     def test_business_number_of_occupants(self):
         data = Business.generate_users(100)
@@ -82,7 +80,7 @@ class test_methods(unittest.TestCase):
         data = Business.generate_users(100)
         for x in data:
             self.assertTrue(0 <= x.property_size)
-    
+
     # Tests electricity usage of a business
     def test_business_electricity_usage(self):
         data = Business.generate_users(100)
@@ -107,6 +105,7 @@ class test_methods(unittest.TestCase):
     vehicles.py Unit Tests
     '''
     # Tests generation of vehicle objects
+
     def test_vehicle_generation(self):
         data = Vehicle.generate_users(100)
         self.assertEqual(len(data), 100)
@@ -114,7 +113,7 @@ class test_methods(unittest.TestCase):
     # Tests on vehicle ID type
     def test_vehicle_id(self):
         data = Vehicle.generate_users(1)
-        self.assertIs(type(data[0].vehicle_id), str) 
+        self.assertIs(type(data[0].vehicle_id), str)
 
     def test_vehicle_number_of_passengers(self):
         data = Vehicle.generate_users(100)
@@ -124,7 +123,7 @@ class test_methods(unittest.TestCase):
     '''
     solar.py Unit Tests
     '''
-    
+
     # Tests generation of solar objects
     def test_solar_generation(self):
         data = Solar.generate_generators(100)
@@ -144,7 +143,7 @@ class test_methods(unittest.TestCase):
     '''
     wind.py Unit Tests
     '''
-    
+
     # Tests generation of wind objects
     def test_wind_generation(self):
         data = Wind.generate_generators(100)
@@ -165,16 +164,18 @@ class test_methods(unittest.TestCase):
     weather.py Unit Tests
     '''
     # Tests set weather function
+
     def test_set_weather(self):
         weather = Weather()
         weather.set_weather('RAIN')
-        self.assertEqual(weather.weather,'rain')
+        self.assertEqual(weather.weather, 'rain')
 
     # Tests get weather function
     def test_get_weather(self):
         weather = Weather()
         weather.set_weather('SUNNY')
-        self.assertEqual(weather.get_weather(),'sunny')
+        self.assertEqual(weather.get_weather(), 'sunny')
+
 
 # Main function
 if __name__ == '__main__':

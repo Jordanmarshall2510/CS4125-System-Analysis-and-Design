@@ -1,23 +1,25 @@
-#Coded by Jakub Pazej - 18260179 [Add yourself here if you did any meaningful work on this class]
+# Coded by Jakub Pazej - 18260179 [Add yourself here if you did any meaningful work on this class]
 import json
 import os
 import random
 from server.world.seasons import Seasons
 
+
 class Weather:
     """Static weather class made to generate a weather for the simulation given a time"""
-    weather='' #Sunny, Cloudy, Rain, Snow, Fog, Tornado, Sandstorm, Snowstorm
-    weather_change_base = 70 #Base chance for weather to change
-    weather_change_rate = 1 #Rate of change for chance for weather
-    counter = 0 #counter for increasing chance of weather change
+    weather = ''  # Sunny, Cloudy, Rain, Snow, Fog, Tornado, Sandstorm, Snowstorm
+    weather_change_base = 70  # Base chance for weather to change
+    weather_change_rate = 1  # Rate of change for chance for weather
+    counter = 0  # counter for increasing chance of weather change
 
     @staticmethod
     def init():
-        path = os.path.dirname(os.path.realpath(__file__)).split("world")[0] + "config.json"
+        path = os.path.dirname(os.path.realpath(__file__)).split("world")[
+            0] + "config.json"
 
         with open(path) as json_file:
             conf = json.load(json_file)
-            Weather.weather=conf['world']['weather']['weather']
+            Weather.weather = conf['world']['weather']['weather']
 
     @staticmethod
     def get_weather():
@@ -26,13 +28,13 @@ class Weather:
     @staticmethod
     def set_weather(string):
         if (string.lower() == 'sunny' or 'cloudy' or 'rain' or 'snow' or 'fog' or 'tornado' or 'sandstorm' or 'snowstorm'):
-            Weather.weather=string.lower()
+            Weather.weather = string.lower()
 
     @staticmethod
     def get_weather_change(current_weather):
         future_weather = current_weather
-        x=random.randint(0,100)
-      
+        x = random.randint(0, 100)
+
         if (Seasons.get_season == 'summer'):
             if (x == 2):
                 future_weather = 'tornado'
@@ -79,6 +81,3 @@ class Weather:
     @staticmethod
     def update_weather(current_weather):
         Weather.set_weather(Weather.get_weather_change(current_weather))
-
-
-

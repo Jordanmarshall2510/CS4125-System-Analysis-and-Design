@@ -1,4 +1,4 @@
-#Coded by Jakub Pazej - 18260179 [Add yourself here if you did any meaningful work on this class]
+# Coded by Jakub Pazej - 18260179 [Add yourself here if you did any meaningful work on this class]
 import json
 import os
 import random
@@ -7,20 +7,22 @@ from server.electricity_generator.distribution import Distribution
 from datetime import datetime
 from server.world.weather import Weather
 
+
 class Solar(ElectricityGenerator):
     """Solar class representing a solar panel in the city"""
-        
-    #Initializing distribution object
+
+    # Initializing distribution object
     distribution = Distribution()
 
-    wattage=0
+    wattage = 0
     generator_id = 0
 
     def __init__(self):
-        path = os.path.dirname(os.path.realpath(__file__)).split("electricity_generator")[0] + "config.json"
+        path = os.path.dirname(os.path.realpath(__file__)).split(
+            "electricity_generator")[0] + "config.json"
         with open(path) as json_file:
             conf = json.load(json_file)
-            self.wattage=conf["electricity_generator"]["solar"]["output"]
+            self.wattage = conf["electricity_generator"]["solar"]["output"]
 
     def set_generator_id(self, new_id):
         self.generator_id = new_id
@@ -28,21 +30,21 @@ class Solar(ElectricityGenerator):
     def update(self, date: datetime) -> int:
         current_time = int(date.strftime("%H"))
         total_generated = 0
-        if(current_time<6 or current_time>20):
+        if(current_time < 6 or current_time > 20):
             total_generated = 0
-        elif(current_time<=12):
-            a=random.uniform(0,0.56)
-            b=random.uniform(0,5.6)
+        elif(current_time <= 12):
+            a = random.uniform(0, 0.56)
+            b = random.uniform(0, 5.6)
             total_generated = (self.wattage+a)+(b*current_time)
-        elif(current_time>12):
-            a=random.uniform(0,0.56)
-            b=random.uniform(0,5.6)
+        elif(current_time > 12):
+            a = random.uniform(0, 0.56)
+            b = random.uniform(0, 5.6)
             total_generated = (self.wattage+a)+(b*(24-current_time))
         if(Weather.get_weather() == 'rain'):
             total_generated = total_generated*0.75
         elif(Weather.get_weather() == 'cloudy'):
-            total_generated = total_generated*0.5    
-        self.distribution.input(total_generated,"kW")
+            total_generated = total_generated*0.5
+        self.distribution.input(total_generated, "kW")
         return total_generated
 
     def generate_generators(number_of_generators: int) -> list:
@@ -52,6 +54,7 @@ class Solar(ElectricityGenerator):
             generator.set_generator_id(x + 1)
             generated_array.append(generator)
         return generated_array
+
 
 # List outside of class for importing
 generate_solar_panels = Solar.generate_generators

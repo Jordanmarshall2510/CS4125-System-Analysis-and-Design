@@ -4,32 +4,29 @@
 # visit http://127.0.0.1:8050/ in your web browser.
 
 import dash
-from dash.dcc.Graph import Graph
 from dash.dependencies import Input, Output
-import dash_bootstrap_components as dbc
 from dash import dcc
 from dash import html
 import plotly.express as px
-import pandas as pd
 from client.grapher import Grapher
 
 graph = Grapher()
 
 external_stylesheets = [
-            'https://codepen.io/chriddyp/pen/bWLwgP.css',
-            ]
+    'https://codepen.io/chriddyp/pen/bWLwgP.css',
+]
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets,
-                    title='Smart City Simulation')
+                title='Smart City Simulation')
 
 
 class App():
-    
+
     @staticmethod
     def init(host=None, user=None, password=None, database=None, remote=True):
 
         graph.init_database(host, user, password, database, remote)
-        
+
         colors = {
             'background': '#111111',
             'text': '#7FDBFF'
@@ -45,9 +42,9 @@ class App():
                     dcc.Checklist(
                         options=[
                             {'label': 'Overall Generation',
-                            'value': 'Overall Generation'},
+                             'value': 'Overall Generation'},
                             {'label': 'Overall Usage',
-                            'value': 'Overall Usage'},
+                             'value': 'Overall Usage'},
                         ],
                         id="overall"
                     ),
@@ -69,7 +66,7 @@ class App():
                             {'label': 'Business', 'value': 'Business'},
                             {'label': 'House', 'value': 'House'},
                             {'label': 'Infrastructure',
-                            'value': 'Infrastructure'},
+                             'value': 'Infrastructure'},
                             {'label': 'Vehicle', 'value': 'Vehicle'}
                         ],
                         id="users"
@@ -122,7 +119,6 @@ class App():
             ], className='row'),
         ])
 
-
         @app.callback(
             Output('graph', 'figure'),
             Output("generated_selected", "children"),
@@ -172,10 +168,9 @@ class App():
 
             return fig, ", ".join(selected_generated), ", ".join(selected_usage), f"{int(total_generated):,}" + " kW", f"{int(total_usage):,}" + " kW", session_id, business, house, infrastructure, vehicles, solar, wind, time
 
-
         if __name__ == '__main__':
             app.run_server(debug=True)
-    
+
     @staticmethod
     def run():
         app.run_server(debug=False)

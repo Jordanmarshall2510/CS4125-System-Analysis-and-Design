@@ -2,7 +2,6 @@ from datetime import datetime
 import os
 
 import sqlite3
-from sqlite3.dbapi2 import Timestamp
 import mysql.connector
 from mysql.connector import errorcode
 
@@ -63,7 +62,7 @@ class Database:
 
         self.con.commit()
 
-    def insert_usage(self, timestamp: datetime, usage_dictionary: dict, session_id:int):
+    def insert_usage(self, timestamp: datetime, usage_dictionary: dict, session_id: int):
         """Insert user data into the user table
 
         Arguments: 
@@ -88,7 +87,7 @@ class Database:
         self.con.commit()
         pass
 
-    def insert_generation(self, timestamp: datetime, generation_dictionary: dict, session_id:int):
+    def insert_generation(self, timestamp: datetime, generation_dictionary: dict, session_id: int):
         """Insert generator data into the generator table
 
         Arguments: 
@@ -120,27 +119,35 @@ class Database:
         """
 
         if type == 'num_businesses':
-            self.cur.execute("SELECT num_businesses  FROM session_info WHERE id = (" +f" '{id}' )")
+            self.cur.execute(
+                "SELECT num_businesses  FROM session_info WHERE id = (" + f" '{id}' )")
         elif type == 'num_houses':
-            self.cur.execute("SELECT num_houses  FROM session_info WHERE id = (" +f" '{id}' )")
+            self.cur.execute(
+                "SELECT num_houses  FROM session_info WHERE id = (" + f" '{id}' )")
         elif type == 'num_infrastructure':
-            self.cur.execute("SELECT num_infrastructure  FROM session_info WHERE id = (" +f" '{id}' )")
+            self.cur.execute(
+                "SELECT num_infrastructure  FROM session_info WHERE id = (" + f" '{id}' )")
         elif type == 'num_vehicles':
-            self.cur.execute("SELECT num_vehicles  FROM session_info WHERE id = (" +f" '{id}' )")
+            self.cur.execute(
+                "SELECT num_vehicles  FROM session_info WHERE id = (" + f" '{id}' )")
         elif type == 'num_solar':
-            self.cur.execute("SELECT num_solar  FROM session_info WHERE id = (" +f" '{id}' )")
+            self.cur.execute(
+                "SELECT num_solar  FROM session_info WHERE id = (" + f" '{id}' )")
         elif type == 'num_wind':
-            self.cur.execute("SELECT num_wind  FROM session_info WHERE id = (" +f" '{id}' )")
+            self.cur.execute(
+                "SELECT num_wind  FROM session_info WHERE id = (" + f" '{id}' )")
         elif type == 'session_current_time':
-            self.cur.execute("SELECT session_current_time  FROM session_info WHERE id = (" +f" '{id}' )")
+            self.cur.execute(
+                "SELECT session_current_time  FROM session_info WHERE id = (" + f" '{id}' )")
         elif type == 'session_id':
             self.cur.execute("SELECT id  FROM session_info")
 
         return self.cur.fetchall()
 
-    def update_time(self, time: datetime, id: int) :
+    def update_time(self, time: datetime, id: int):
         """Update time in session_info"""
-        self.cur.execute("UPDATE session_info SET session_current_time = (" +f" '{time}' ) WHERE id = (" +f" '{id}');")
+        self.cur.execute("UPDATE session_info SET session_current_time = (" +
+                         f" '{time}' ) WHERE id = (" + f" '{id}');")
         self.con.commit()
 
     def __del__(self):
